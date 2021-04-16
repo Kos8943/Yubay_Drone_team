@@ -10,32 +10,54 @@
     <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="JQuery/jquery-3.6.0.min.js"></script>
     <style>
-        html,body,#form1, .headerArea, .secondArea{
-            height:100%;
+        html, body, #form1, .headerArea, .secondArea {
+            height: 100%;
         }
 
-        .headerHight{
-            height:15%;
+        .headerHight {
+            height: 15%;
         }
 
-        .LogoArea{
-            background-color:antiquewhite;
+        .LogoArea {
+            background-color: antiquewhite;
         }
 
-        .TableName{
-            background-color:aquamarine;
+        .TableName {
+            background-color: aquamarine;
         }
 
-        .secondArea{
-            height:85%;
+        .secondArea {
+            height: 85%;
         }
 
-        .titles{
-            background-color:orange;
+        .titles {
+            background-color: orange;
         }
 
-        .tableArea{
-            background-color:thistle;
+        .tableArea {
+            background-color: thistle;
+        }
+
+
+        /* md - Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .tableArea {
+                background-color: pink;
+            }
+        }
+
+        /* lg - Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            .tableArea {
+                background-color: orange;
+            }
+        }
+
+        /* xl - Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            .tableArea {
+                background-color: blue;
+            }
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
