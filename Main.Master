@@ -10,8 +10,12 @@
     <link href="Bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="JQuery/jquery-3.6.0.min.js"></script>
     <style>
+        html,body,#form1, .headerArea, .secondArea{
+            height:100%;
+        }
+
         .headerHight{
-            height:150px;
+            height:15%;
         }
 
         .LogoArea{
@@ -23,7 +27,7 @@
         }
 
         .secondArea{
-            height:819px;
+            height:85%;
         }
 
         .titles{
