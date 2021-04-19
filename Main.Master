@@ -47,14 +47,14 @@
         }
 
         /* lg - Large devices (desktops, 992px and up) */
-        @media (min-width: 992px) and (max-width: 1199.98px) {
+        @media (min-width: 992px) and (max-width: 1399.98px) {
             .tableArea {
                 background-color: orange;
             }
         }
 
         /* xl - Extra large devices (large desktops, 1200px and up) */
-        @media (min-width: 1200px) {
+        @media (min-width: 1440px) {
             .tableArea {
                 background-color: blue;
             }
