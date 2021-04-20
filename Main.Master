@@ -20,6 +20,15 @@
 
         .LogoArea {
             background-color: antiquewhite;
+            position:relative;
+            background-color: rgb(52, 58, 70);
+        }
+
+        .LogoImg{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
         }
 
         .TableName {
@@ -31,11 +40,27 @@
         }
 
         .titles {
-            background-color: orange;
+            background-color: rgb(43,50,60);
+            padding-top:25px;
         }
 
         .tableArea {
             background-color: thistle;
+        }
+
+        .titleArea{
+            margin-bottom:15px;
+            border-bottom: 3px solid rgb(41,55,65);
+            padding-left:22%;
+        }
+
+        .titlePadding{
+            padding:0 8%;
+        }
+
+        .tableLink{
+            text-decoration: none;
+            color: rgb(238,238,238);
         }
 
 
@@ -52,6 +77,10 @@
             .tableArea {
                 background-color: blue;
             }
+
+            .tableLink{
+                font-size:20px;
+            }
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -61,17 +90,30 @@
     <form id="form1" runat="server">
         <div class="container-fluid headerArea">
             <div class="row headerHight">
-                <div class="col-2 LogoArea">LOGO</div>
-                <div class="col-10 TableName">標題</div>
+                <div class="col-2 LogoArea">
+                    <img class="LogoImg" src="Imgs/news20171201_001.png" />
+                </div>
+                <div runat="server" class="col-10 TableName">標題</div>
             </div>
             <div class="row secondArea">
-                <div class="col-2 titles">無人機管理</div>
+                <div class="col-2 titles">
+                    <div class="row titlePadding">
+                        <div class="titleArea col-12"><a class="tableLink" href="#">無人機管理</a></div>
+                        <div class="titleArea col-12"><a class="tableLink" href="#">無人機維修紀錄</a></div>
+                        <div class="titleArea col-12"><a class="tableLink" href="#">客戶資料管理</a></div>
+                        <div class="titleArea col-12"><a class="tableLink" href="#">電池管理</a></div>
+                        <div class="titleArea col-12"><a class="tableLink" href="#">無人機出勤紀錄</a></div>
+                        <div class="titleArea col-12"><a class="tableLink" href="#">使用者管理</a></div>
+                    </div>
+                </div>
                 <div class="col-10 tableArea">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
             </div>
         </div>
+
+
 
     </form>
 </body>
