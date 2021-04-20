@@ -81,6 +81,8 @@
     <Content Include="Imgs\iconfinder_Safety01_928417.svg" />
     <Content Include="Imgs\iconfinder_User_5431752.svg" />
     <Content Include="Imgs\news20171201_001.png" />
+    <Content Include="Imgs\plus.svg" />
+    <Content Include="Imgs\search.svg" />
     <Content Include="JQuery\jquery-3.6.0.min.js" />
     <Content Include="User_Account.aspx" />
     <Content Include="Web.config" />

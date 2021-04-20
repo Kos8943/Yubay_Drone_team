@@ -38,16 +38,17 @@
 
         .TableName {
             position: absolute;
-            top:50%;
-            transform:translateY(-50%);
+            top: 50%;
+            left:3.5%;
+            transform: translateY(-50%);
         }
 
         #LogoutBtn {
             height: 30px;
             position: absolute;
-            top:50%;
-            left:95%;
-            transform:translateY(-50%);
+            top: 50%;
+            left: 93.5%;
+            transform: translateY(-50%);
         }
 
         .secondArea {
@@ -61,7 +62,7 @@
 
         .tableArea {
             background-color: rgb(243,244,248);
-            padding:1%;
+            padding: 2% 1%;
         }
 
         .titleArea {
@@ -79,9 +80,12 @@
             color: rgb(238,238,238);
         }
 
-        .TableSize{
-            height:90%;
-            
+        .TableSize {
+            height: 90%;
+        }
+
+        .PagingArea{
+            text-align:center;
         }
 
 
@@ -91,12 +95,12 @@
             .tableArea {
             }
 
-            .TableName{
-                font-size:32px; 
+            .TableName {
+                font-size: 32px;
             }
 
-            .titleArea{
-                padding-left:18%;
+            .titleArea {
+                padding-left: 18%;
             }
         }
 
@@ -105,8 +109,8 @@
             .tableArea {
             }
 
-            .TableName{
-                font-size:40px;
+            .TableName {
+                font-size: 40px;
             }
 
             .tableLink {
@@ -141,11 +145,13 @@
                     </div>
                 </div>
                 <div class="col-10 tableArea">
-                    <div class="TableSize">
+                    <div class="TableSize d-flex justify-content-center">
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    </asp:ContentPlaceHolder>
+                        </asp:ContentPlaceHolder>
                     </div>
-                    <div style="font-size:22px; margin-top:-10px">首頁</div>
+                    <div class="PagingArea">
+                        <a href="#" style="font-size: 22px; margin-top: -10px">首頁</a>
+                    </div>
                 </div>
             </div>
         </div>
