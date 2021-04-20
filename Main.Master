@@ -20,19 +20,34 @@
 
         .LogoArea {
             background-color: antiquewhite;
-            position:relative;
+            position: relative;
             background-color: rgb(52, 58, 70);
         }
 
-        .LogoImg{
-            position:absolute;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
+        .LogoImg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .TableNameArea {
+            position: relative;
+            background-color: rgb(254,254,254);
         }
 
         .TableName {
-            background-color: aquamarine;
+            position: absolute;
+            top:50%;
+            transform:translateY(-50%);
+        }
+
+        #LogoutBtn {
+            height: 30px;
+            position: absolute;
+            top:50%;
+            left:95%;
+            transform:translateY(-50%);
         }
 
         .secondArea {
@@ -41,26 +56,32 @@
 
         .titles {
             background-color: rgb(43,50,60);
-            padding-top:25px;
+            padding-top: 25px;
         }
 
         .tableArea {
-            background-color: thistle;
+            background-color: rgb(243,244,248);
+            padding:1%;
         }
 
-        .titleArea{
-            margin-bottom:15px;
+        .titleArea {
+            margin-bottom: 15px;
             border-bottom: 3px solid rgb(41,55,65);
-            padding-left:22%;
+            padding-left: 22%;
         }
 
-        .titlePadding{
-            padding:0 8%;
+        .titlePadding {
+            padding: 0 8%;
         }
 
-        .tableLink{
+        .tableLink {
             text-decoration: none;
             color: rgb(238,238,238);
+        }
+
+        .TableSize{
+            height:90%;
+            
         }
 
 
@@ -68,18 +89,28 @@
         /* lg - Large devices (desktops, 992px and up) */
         @media (max-width: 1281.98px) {
             .tableArea {
-                background-color: orange;
+            }
+
+            .TableName{
+                font-size:32px; 
+            }
+
+            .titleArea{
+                padding-left:18%;
             }
         }
 
         /* xl - Extra large devices (large desktops, 1200px and up) */
         @media (min-width: 1282px) {
             .tableArea {
-                background-color: blue;
             }
 
-            .tableLink{
-                font-size:20px;
+            .TableName{
+                font-size:40px;
+            }
+
+            .tableLink {
+                font-size: 20px;
             }
         }
     </style>
@@ -93,7 +124,10 @@
                 <div class="col-2 LogoArea">
                     <img class="LogoImg" src="Imgs/news20171201_001.png" />
                 </div>
-                <div runat="server" class="col-10 TableName">標題</div>
+                <div runat="server" class="col-10 TableNameArea">
+                    <span class="TableName">無人機管理</span>
+                    <asp:Button ID="LogoutBtn" runat="server" Text="登出" />
+                </div>
             </div>
             <div class="row secondArea">
                 <div class="col-2 titles">
@@ -107,8 +141,11 @@
                     </div>
                 </div>
                 <div class="col-10 tableArea">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    <div class="TableSize">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
+                    </div>
+                    <div style="font-size:22px; margin-top:-10px">首頁</div>
                 </div>
             </div>
         </div>
