@@ -13,5 +13,18 @@ namespace Yubay_Drone_team
         {
 
         }
+
+     
+        protected void Btn_Create_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Btn_Delete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
