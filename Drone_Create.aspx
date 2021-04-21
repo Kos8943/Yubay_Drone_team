@@ -23,8 +23,10 @@
         }
 
 
-            .Btn_create{
-                margin-right;
+            .Btn_Create{
+
+                margin-right:50px;
+
 
             }
 
@@ -70,7 +72,7 @@
 
     <%--新增/修改按鈕--%>
 
-    <asp:Button ID="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
+    <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
 
      <asp:Button ID="Btn_Delete" runat="server" Text="取消" OnClick="Btn_Delete_Click" />
 
