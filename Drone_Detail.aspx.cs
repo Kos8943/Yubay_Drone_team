@@ -17,7 +17,7 @@ namespace Yubay_Drone_team
         protected void Add_Click(object sender, EventArgs e)
         {
             //網頁轉跳至.aspx
-            Response.Redirect("WebForm1.aspx");
+            Response.Redirect("Drone_Create.aspx");
         }
     }
 }
