@@ -21,13 +21,13 @@ namespace Yubay_Drone_team.Models
 
         public string Updater { get; set; }
 
-        public int UpdateDate { get; set; }
+        public DateTime UpdateDate { get; set; }
 
-        public int IsDelete { get; set; }
+        public bool IsDelete { get; set; }
 
         public string Deleter { get; set; }
 
-        public int DeleteDate { get; set; }
+        public DateTime DeleteDate { get; set; }
         //Sid 
         //Account 
         //Password    
