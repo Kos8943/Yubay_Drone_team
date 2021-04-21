@@ -46,12 +46,12 @@ namespace Yubay_Drone_team.Helpers
 
 
             // Keep status
-            //HttpContext.Current.Session[_sessionKey] = new LoginInfo()
-            //{
-            //    Sid = model.Sid,
-            //    Name = model.Name,
-            //    Level = (UserLevel)model.Level
-            //};
+            HttpContext.Current.Session[_sessionKey] = new LoginInfo()
+            {
+                Sid = model.Sid,
+                UserName = model.UserName,
+                AccountLevel = (UserLevel)model.AccountLevel
+            };
 
             return true;
         }

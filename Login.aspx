@@ -54,9 +54,9 @@
             font-family: 'Segoe UI',Arial,'Microsoft Jhenghei',sans-serif;
         }
 
-            .InputSize:focus {
-                outline: none;
-            }
+        .InputSize:focus {
+            outline: none;
+        }
 
         .Line {
             width: 100%;
