@@ -32,13 +32,12 @@
             </button>--%>
             <%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="./Imgs/plus.svg"/>--%>
             <asp:DropDownList ID="DropDownList1" runat="server" CssClass="ToolMagin">
-                <asp:ListItem Value="Date" Text="出勤日期"></asp:ListItem>
-                <asp:ListItem Value="Staff" Text="出勤人員"></asp:ListItem>
-                <asp:ListItem Value="Drone_ID" Text="使用無人機"></asp:ListItem>
-                <asp:ListItem Value="Battery_Count" Text="攜帶電池數量"></asp:ListItem>
-                <asp:ListItem Value="Cumstomer_Name" Text="客戶名稱"></asp:ListItem>
-                <asp:ListItem Value="Tel" Text="客戶電話"></asp:ListItem>
-                <asp:ListItem Value="Address" Text="客戶地址"></asp:ListItem>
+                <asp:ListItem Value="Drone_ID" Text="無人機編號"></asp:ListItem>
+                <asp:ListItem Value="Manufacturer" Text="製造商"></asp:ListItem>
+                <asp:ListItem Value="WeightLoad" Text="最大起飛重量"></asp:ListItem>
+                <asp:ListItem Value="Status" Text="使用狀態"></asp:ListItem>
+                <asp:ListItem Value="StopReason" Text="停用原因"></asp:ListItem>
+                <asp:ListItem Value="operator" Text="負責人員"></asp:ListItem>
             </asp:DropDownList>
             <asp:TextBox ID="TextSearch" runat="server" CssClass="ToolMagin"></asp:TextBox>
             <%--<asp:Button ID="BtnSearch" runat="server" Text="查詢" CssClass="ToolMagin"/>--%>
