@@ -7,5 +7,6 @@ namespace Yubay_Drone_team.Managers
 {
     public class DroneManager
     {
+        
     }
 }

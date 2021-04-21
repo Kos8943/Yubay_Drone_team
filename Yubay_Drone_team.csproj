@@ -128,6 +128,7 @@
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\DroneManager.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\DroneMedel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User_Account.aspx.cs">
       <DependentUpon>User_Account.aspx</DependentUpon>
