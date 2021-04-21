@@ -26,7 +26,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="TableListArea">
         <div class="ToolArea d-flex bd-highlight mb-3">
-            <asp:Button ID="BtnCreate" class="mr-auto bd-highlight btn btn-info" runat="server" Text="＋新增" />
+            <asp:Button ID="BtnCreate" class="mr-auto bd-highlight btn btn-info" runat="server" Text="＋新增" OnClick="Add_Click"/>
             <%--<button class="mr-auto bd-highlight">
                 <img  src="Imgs/plus1.svg" style="width:18px; height:18px;"/>新增
             </button>--%>
