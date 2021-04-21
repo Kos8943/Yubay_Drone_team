@@ -92,7 +92,7 @@
             }
 
             .TableName{
-                font-size:32px; 
+                font-size:26px; 
             }
 
             .titleArea{
@@ -145,7 +145,7 @@
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                     </div>
-                    <div style="font-size:22px; margin-top:-10px">首頁</div>
+                    <div style="font-size:16px; margin-top:-10px">首頁</div>
                 </div>
             </div>
         </div>
