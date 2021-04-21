@@ -18,9 +18,13 @@
             font-family: 'Segoe UI',Arial,'Microsoft Jhenghei',sans-serif;
         }
 
+        #form1{
+            padding-top:247px;
+        }
+
         .LoginArea {
             width: 320px;
-            height: 236px;
+            height: 250px;
             margin: auto;
             padding-top: 16px;
             background-color: rgba(89,167,225,.6);
@@ -54,9 +58,9 @@
             font-family: 'Segoe UI',Arial,'Microsoft Jhenghei',sans-serif;
         }
 
-            .InputSize:focus {
-                outline: none;
-            }
+        .InputSize:focus {
+            outline: none;
+        }
 
         .Line {
             width: 100%;
@@ -93,22 +97,22 @@
 </head>
 <body>
     <form id="form1" runat="server" class="">
-        <div style="width: 100%;margin-top:247px;">
+        <div style="width: 100%;">
             <div class="tittle">YUBAY</div>
             <div class="LoginArea">
                 <div class="d-flex justify-content-center inputAreaStyle">
                     <img src="Imgs/iconfinder_User_5431752.svg" class="UserImg" />
-                    <asp:TextBox ID="TextAccount" runat="server" CssClass="InputSize"></asp:TextBox>
+                    <asp:TextBox ID="TextAccount" runat="server" CssClass="InputSize" autocomplete="off"></asp:TextBox>
                 </div>
                 <div class="Line"></div>
 
                 <div class="d-flex justify-content-center inputAreaStyle">
                     <img src="Imgs/iconfinder_Safety01_928417.svg" class="UserImg" />
-                    <asp:TextBox ID="TextPassword" runat="server" CssClass="InputSize"></asp:TextBox>
+                    <asp:TextBox ID="TextPassword" TextMode="Password" runat="server" CssClass="InputSize" autocomplete="off"></asp:TextBox>
                 </div>
                 <div class="Line"></div>
                 <div class="BtnLoginArea">
-                    <asp:Button ID="btnLogin" runat="server" Text="登入" CssClass="btnLogin" />
+                    <asp:Button ID="btnLogin" runat="server" Text="登入" CssClass="btnLogin" OnClick="btnLogin_Click"/>
                     <asp:Label ID="ltErrorMsg" class="errorMsg" runat="server" Text="" Visible="false"></asp:Label>
                 </div>
 
