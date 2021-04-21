@@ -77,6 +77,7 @@
     <Content Include="Bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Bootstrap\js\bootstrap.js" />
     <Content Include="Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Drone_Detail.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Imgs\iconfinder_Safety01_928417.svg" />
     <Content Include="Imgs\iconfinder_User_5431752.svg" />
@@ -88,6 +89,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drone_Detail.aspx.cs">
+      <DependentUpon>Drone_Detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Drone_Detail.aspx.designer.cs">
+      <DependentUpon>Drone_Detail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
