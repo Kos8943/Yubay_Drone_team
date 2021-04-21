@@ -18,6 +18,10 @@
             font-family: 'Segoe UI',Arial,'Microsoft Jhenghei',sans-serif;
         }
 
+        #form1{
+            padding-top:247px;
+        }
+
         .LoginArea {
             width: 320px;
             height: 250px;
@@ -93,7 +97,7 @@
 </head>
 <body>
     <form id="form1" runat="server" class="">
-        <div style="width: 100%;margin-top:247px;">
+        <div style="width: 100%;">
             <div class="tittle">YUBAY</div>
             <div class="LoginArea">
                 <div class="d-flex justify-content-center inputAreaStyle">
