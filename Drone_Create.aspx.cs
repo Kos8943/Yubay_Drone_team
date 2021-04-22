@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,29 @@ namespace Yubay_Drone_team
 {
     public partial class Drone_Create : System.Web.UI.Page
     {
+        protected void Page_init(object sender, EventArgs e)
+        {
+            string querryString = Request.QueryString["Sid"];
+            if (string.IsNullOrEmpty(querryString))
+            {
+                return;
+
+            }
+
+            DataTable data = ConnectionDB.UpdateOnlyoneDroneDetail(querryString);
+
+            this.Text_Number.Text = data.Rows[0]["Drone_ID"].ToString();
+            this.Text_Manufacturer.Text = data.Rows[0]["Manufacturer"].ToString();
+            this.Text_Weight.Text = data.Rows[0]["WeightLoad"].ToString();
+            this.DropDownList_Status.SelectedValue = data.Rows[0]["Status"].ToString();
+            this.Text_Deactive.Text = data.Rows[0]["StopReason"].ToString();
+            this.DropDownList_Operator.SelectedValue = data.Rows[0]["operator"].ToString();
+
+            this.CreateDrone.Text = "修改無人機";
+            this.Btn_Create.Text = "修改";
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -19,25 +43,44 @@ namespace Yubay_Drone_team
 
         protected void Btn_Create_Click(object sender, EventArgs e)
         {
-            if (this.Text_Number.Text != string.Empty && this.Text_Manufacturer.Text != string.Empty && this.Text_Weight.Text != string.Empty && 
+            string querryString = Request.QueryString["Sid"];
+
+            DroneMedel model = new DroneMedel();
+            model.Drone_ID = this.Text_Number.Text;
+            model.Manufacturer = this.Text_Manufacturer.Text;
+            model.WeightLoad = this.Text_Weight.Text;
+            model.Status = this.DropDownList_Status.SelectedValue;
+            model.StopReason = this.Text_Deactive.Text;
+            model.Operator = this.DropDownList_Operator.SelectedValue;
+
+            ConnectionDB ConnectionDB = new ConnectionDB();
+
+
+            if (this.Text_Number.Text != string.Empty && this.Text_Manufacturer.Text != string.Empty && this.Text_Weight.Text != string.Empty &&
                 this.DropDownList_Status.Text != string.Empty &&
                 this.DropDownList_Operator.Text != string.Empty)
             {
-                DroneMedel model = new DroneMedel();
-                model.Drone_ID = this.Text_Number.Text;
-                model.Manufacturer = this.Text_Manufacturer.Text;
-                model.WeightLoad = this.Text_Weight.Text;
-                model.Status = this.DropDownList_Status.SelectedValue;
-                model.StopReason = this.Text_Deactive.Text;
-                model.Operator = this.DropDownList_Operator.SelectedValue;
 
+                if (string.IsNullOrEmpty(querryString))
+                {
+                    
 
+                    ConnectionDB.Drone_Detail_Create(model);
 
-                ConnectionDB ConnectionDB = new ConnectionDB();
+                    this.Literal1.Visible = true;
 
-                ConnectionDB.Drone_Detail_Create(model);
+                }
+                else
+                {
+                    model.Sid = Convert.ToInt32(querryString);
+                    ConnectionDB.Drone_Detail_Update(model);
 
-                this.Literal1.Visible = true;
+                    this.Literal1.Text = "修改成功!";
+                    this.Literal1.Visible = true;
+                    
+                }
+
+                
             }
             else
             {
@@ -46,10 +89,6 @@ namespace Yubay_Drone_team
                 return;
 
             }
-
-
-
-
 
         }
 

@@ -20,16 +20,7 @@ namespace Yubay_Drone_team.Managers
 
             //建立連線
 
-                    //開始連線
 
-            //轉換成SQL可讀懂的語法
-            //SqlCommand command = new SqlCommand(queryString, connection);
-            //command.Parameters.AddWithValue("@Drone_ID", Drone_ID);
-            //command.Parameters.AddWithValue("@Manufacturer", Manufacturer);
-            //command.Parameters.AddWithValue("@WeightLoad", WeightLoad);
-            //command.Parameters.AddWithValue("@Status", Status);
-            //command.Parameters.AddWithValue("@StopReason", StopReason);
-            //command.Parameters.AddWithValue("@Operator", Operator);
             List<SqlParameter> parameters = new List<SqlParameter>()
 
                 {
@@ -43,11 +34,39 @@ namespace Yubay_Drone_team.Managers
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
-            
+                      
+        }
 
 
-             
+        public void Drone_Detail_Update(DroneMedel Model)
+        {
+
+            //使用的SQL語法
+            //string queryString = $@" INSERT INTO Drone_Detail (Drone_ID, Manufacturer, WeightLoad, Status, StopReason, Operator)
+            //                            VALUES (@Drone_ID, @Manufacturer, @WeightLoad, @Status, @StopReason, @Operator);";
+
+            string queryString = $@"UPDATE Drone_Detail SET  
+                 Drone_ID = @Drone_ID, Manufacturer = @Manufacturer, WeightLoad = @WeightLoad, Status = @Status, 
+                 StopReason= @StopReason, Operator = @Operator Where Sid = @Sid";
+
             
+       
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Drone_ID", Model.Drone_ID),
+                   new SqlParameter("@Manufacturer",Model.Manufacturer),
+                   new SqlParameter("@WeightLoad",Model.WeightLoad),
+                   new SqlParameter("@Status",Model.Status),
+                   new SqlParameter("@StopReason", Model.StopReason),
+                   new SqlParameter("@Operator", Model.Operator),
+                   new SqlParameter("@Sid",Model.Sid)
+
+
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+
         }
 
 
@@ -215,5 +234,50 @@ namespace Yubay_Drone_team.Managers
             }
         }
         #endregion
+        public static DataTable UpdateOnlyoneDroneDetail(string sid)
+        {
+            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+
+            //使用的SQL語法
+            string queryString = $@" SELECT * FROM Drone_Detail Where Sid=@Sid;";
+
+            //建立連線
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //轉譯成SQL看得懂的語法
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Sid", sid);
+
+                try
+                {
+                    //開始連線
+                    connection.Open();
+
+                    //從資料庫中讀取資料
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    //在記憶體中創新的空表
+                    DataTable dt = new DataTable();
+
+                    //把值塞進空表
+                    dt.Load(reader);
+
+                    reader.Close();
+
+                    //回傳dt
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+
+               
+            }
+        }
+       
     }
+    
 }
