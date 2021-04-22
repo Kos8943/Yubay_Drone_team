@@ -24,22 +24,31 @@ namespace Yubay_Drone_team
         protected global::System.Web.UI.WebControls.Button BtnCreate;
 
         /// <summary>
-        /// DropDownList1 控制項。
+        /// DropDownListSearch 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListSearch;
 
         /// <summary>
-        /// TextSearch 控制項。
+        /// textKeyWord 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextSearch;
+        protected global::System.Web.UI.WebControls.TextBox textKeyWord;
+
+        /// <summary>
+        /// btnSearch 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
 
         /// <summary>
         /// repInvoice 控制項。
