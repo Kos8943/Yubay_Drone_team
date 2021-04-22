@@ -115,12 +115,10 @@ namespace Yubay_Drone_team.Managers
             string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
             //使用的SQL語法
-            string queryString = $@"DELETE FROM Drone_Destination WHERE Drone_Detail = @Sid";
+            string queryString = $@"DELETE FROM Drone_Detail WHERE Sid = @Sid";
             //DELETE FROM TestTable_1 WHERE ID
 
 
-            //建立一個JS語法的字串,此字串內容為刷新本頁
-            string js = "<script language=javascript>window.location.href=window.location.href;</script>";
 
             //建立連線
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -141,11 +139,9 @@ namespace Yubay_Drone_team.Managers
 
                     //受影響的資料筆數(沒有使用)
                     int totalChangRows = command.ExecuteNonQuery();
-                    HttpContext.Current.Response.Write("Total chang" + totalChangRows + " Rows.");
+                    //HttpContext.Current.Response.Write("Total chang" + totalChangRows + " Rows.");
                     //Console.WriteLine("Total chang" + totalChangRows + " Rows.");
 
-                    //刷新頁面
-                    HttpContext.Current.Response.Write(js);
                 }
                 catch (Exception ex)
                 {
