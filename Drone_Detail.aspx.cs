@@ -40,6 +40,12 @@ namespace Yubay_Drone_team
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
             }
+            if ("UpDateItem" == cmdName)
+            {
+                string targetUrl = "~/Drone_Create.aspx?Sid=" + cmdArgu;
+
+                Response.Redirect(targetUrl);
+            }
         }
     }
 }

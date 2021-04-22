@@ -69,7 +69,7 @@
                             <td><%# Eval("Status") %></td>
                             <td><%# Eval("StopReason") %></td>
                             <td><%# Eval("Operator") %></td>
-                            <td><asp:Button runat="server" Text="修改" OnClick="Add_Click"/></td>
+                            <td><asp:Button runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
                             <td><asp:Button runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' /></td>
                         </tr>
                     </ItemTemplate>
