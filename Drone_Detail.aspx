@@ -31,7 +31,7 @@
                 <img  src="Imgs/plus1.svg" style="width:18px; height:18px;"/>新增
             </button>--%>
             <%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="./Imgs/plus.svg"/>--%>
-            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="ToolMagin">
+            <asp:DropDownList ID="DropDownListSearch" runat="server" CssClass="ToolMagin">
                 <asp:ListItem Value="Drone_ID" Text="無人機編號"></asp:ListItem>
                 <asp:ListItem Value="Manufacturer" Text="製造商"></asp:ListItem>
                 <asp:ListItem Value="WeightLoad" Text="最大起飛重量"></asp:ListItem>
@@ -39,12 +39,9 @@
                 <asp:ListItem Value="StopReason" Text="停用原因"></asp:ListItem>
                 <asp:ListItem Value="operator" Text="負責人員"></asp:ListItem>
             </asp:DropDownList>
-            <asp:TextBox ID="TextSearch" runat="server" CssClass="ToolMagin"></asp:TextBox>
+            <asp:TextBox ID="textKeyWord" runat="server" CssClass="ToolMagin"></asp:TextBox>
             <%--<asp:Button ID="BtnSearch" runat="server" Text="查詢" CssClass="ToolMagin"/>--%>
-            <button class="btn btn-light ToolMagin" style="border: 1px solid gray">
-                <img src="Imgs/search.svg" style="width: 20px; height: 15px;" />
-                <span>查詢</span>
-            </button>
+            <asp:Button ID="btnSearch" runat="server" Text="查詢" CssClass="ToolMagin" OnClick="btnSearch_Click" class="btn btn-light ToolMagin" style="border: 1px solid gray" />
         </div>
         <table class="table table-hover" style="font-size: 18px;">
             <thead>
@@ -70,7 +67,7 @@
                             <td><%# Eval("StopReason") %></td>
                             <td><%# Eval("Operator") %></td>
                             <td><asp:Button runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
-                            <td><asp:Button runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' /></td>
+                            <td><asp:Button runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' OnClientClick="javascript:return confirm('確定刪除?')"/></td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
