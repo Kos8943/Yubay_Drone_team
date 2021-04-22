@@ -20,6 +20,7 @@ namespace Yubay_Drone_team.Managers
 
             //建立連線
 
+                    //開始連線
 
             //轉換成SQL可讀懂的語法
             //SqlCommand command = new SqlCommand(queryString, connection);
