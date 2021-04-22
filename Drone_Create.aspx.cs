@@ -16,22 +16,42 @@ namespace Yubay_Drone_team
 
         }
 
-     
+
         protected void Btn_Create_Click(object sender, EventArgs e)
         {
+            if (this.Text_Number.Text != string.Empty && this.Text_Manufacturer.Text != string.Empty && this.Text_Weight.Text != string.Empty && 
+                this.DropDownList_Status.Text != string.Empty &&
+                this.DropDownList_Operator.Text != string.Empty)
+            {
+                DroneMedel model = new DroneMedel();
+                model.Drone_ID = this.Text_Number.Text;
+                model.Manufacturer = this.Text_Manufacturer.Text;
+                model.WeightLoad = this.Text_Weight.Text;
+                model.Status = this.DropDownList_Status.SelectedValue;
+                model.StopReason = this.Text_Deactive.Text;
+                model.Operator = this.DropDownList_Operator.SelectedValue;
 
-            DroneMedel model = new DroneMedel();
-            model.Drone_ID = this.Text_Number.Text;
-            model.Manufacturer = this.Text_Manufacturer.Text;
-            model.WeightLoad = this.Text_Weight.Text;
-            model.Status = this.DropDownList_Status.SelectedValue;
-            model.StopReason = this.Text_Deactive.Text;
-            model.Operator = this.DropDownList_Operator.SelectedValue;
 
-            ConnectionDB ConnectionDB = new ConnectionDB();
 
-            ConnectionDB.Drone_Detail_Create(model.Drone_ID, model.Manufacturer, model.WeightLoad, model.Status, model.StopReason, model.Operator);
-        } 
+                ConnectionDB ConnectionDB = new ConnectionDB();
+
+                ConnectionDB.Drone_Detail_Create(model);
+
+                this.Literal1.Visible = true;
+            }
+            else
+            {
+                this.Literal1.Text = "不可空白或輸入重複";
+                this.Literal1.Visible = true;
+                return;
+
+            }
+
+
+
+
+
+        }
 
         protected void Btn_Cancel_Click(object sender, EventArgs e)
         {
@@ -39,6 +59,8 @@ namespace Yubay_Drone_team
 
         }
 
-        
+
+
+
     }
 }

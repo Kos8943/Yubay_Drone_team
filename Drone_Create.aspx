@@ -68,6 +68,8 @@
             <asp:ListItem Text ="停用" Value="停用"></asp:ListItem>
             <asp:ListItem Text ="故障" Value="故障"></asp:ListItem>
 
+
+            
         </asp:DropDownList>
 
     </div>
@@ -84,18 +86,20 @@
 
         </asp:DropDownList>
 
-
+        
     </div>
     </div>
 </div>
 
     <%--新增/修改按鈕--%>
-
+        
+         
     <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
 
-     <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" />
+     <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" /><br/><br />
 
-
+   <asp:Literal ID="Literal1" runat="server" Text="新增成功!" Visible="false"></asp:Literal>
 </div>
+   
 
 </asp:Content>
