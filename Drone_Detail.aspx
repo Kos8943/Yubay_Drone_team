@@ -17,6 +17,14 @@
             margin-left: 5px;
         }
 
+        td{
+            padding:9px!important;
+        }
+
+        .tdHeight{
+            padding:10px;
+        }
+
         /*#BtnCreate{
             width:50px;
         }*/
@@ -25,7 +33,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="TableListArea">
-        <div class="ToolArea d-flex bd-highlight mb-3">
+        <div class="ToolArea d-flex bd-highlight mb-2">
             <asp:Button ID="BtnCreate" class="mr-auto bd-highlight btn btn-info" runat="server" Text="＋新增" OnClick="Add_Click"/>
             <%--<button class="mr-auto bd-highlight">
                 <img  src="Imgs/plus1.svg" style="width:18px; height:18px;"/>新增
@@ -45,7 +53,7 @@
         </div>
         <table class="table table-hover" style="font-size: 18px;">
             <thead>
-                <tr class="table-primary">
+                <tr class="table-primary tdHeight">
                     <th scope="col">無人機編號</th>
                     <th scope="col">製造商</th>
                     <th scope="col">最大起飛重量</th>
