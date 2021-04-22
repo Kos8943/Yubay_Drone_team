@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,7 +13,9 @@ namespace Yubay_Drone_team
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            DataTable dt = ConnectionDB.ReadDroneDetail();
+            this.repInvoice.DataSource = dt;
+            this.repInvoice.DataBind();
         }
 
         protected void Add_Click(object sender, EventArgs e)
@@ -21,9 +24,15 @@ namespace Yubay_Drone_team
             Response.Redirect("Drone_Create.aspx");
         }
 
-        protected void repInvoice_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
+            string cmdName = e.CommandName;
+            string cmdArgu = e.CommandArgument.ToString();
 
+            if ("DeleItem" == cmdName)
+            {
+            ConnectionDB.DelectDroneDetail(cmdArgu);
+            }
         }
     }
 }

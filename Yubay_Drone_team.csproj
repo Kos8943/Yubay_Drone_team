@@ -80,6 +80,8 @@
     <Content Include="Drone_Create.aspx" />
     <Content Include="Drone_Detail.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Imgs\delete.png" />
+    <Content Include="Imgs\edit-button.png" />
     <Content Include="Imgs\iconfinder_Safety01_928417.svg" />
     <Content Include="Imgs\iconfinder_User_5431752.svg" />
     <Content Include="Imgs\news20171201_001.png" />

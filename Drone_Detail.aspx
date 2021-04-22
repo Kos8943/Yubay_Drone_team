@@ -60,127 +60,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>宥錡航太1號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-
-                    <td>宥錡航太2號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太3號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太4號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太5號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太6號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太7號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太8號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太9號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
-                <tr>
-                    <td>宥錡航太10號機</td>
-                    <td>極飛</td>
-                    <td>28kg</td>
-                    <td>正常</td>
-                    <td></td>
-                    <td>王小明</td>
-                    <td>
-                        <button>修改</button></td>
-                    <td>
-                        <button>刪除</button></td>
-                </tr>
+                <asp:Repeater ID="repInvoice" runat="server" OnItemCommand="repInvoice_ItemCommand1">
+                    <ItemTemplate>
+                        <tr>
+                            <td><%# Eval("Drone_ID") %></td>
+                            <td><%# Eval("Manufacturer") %></td>
+                            <td><%# Eval("WeightLoad") %></td>
+                            <td><%# Eval("Status") %></td>
+                            <td><%# Eval("StopReason") %></td>
+                            <td><%# Eval("Operator") %></td>
+                            <td><asp:Button ID="btnUpData" runat="server" Text="修改" CommandName="UpdateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
+                            <td><asp:Button ID="btnDelData"  runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' /></td>
+                        </tr>
+                    </ItemTemplate>
+                </asp:Repeater>
 
             </tbody>
         </table>
