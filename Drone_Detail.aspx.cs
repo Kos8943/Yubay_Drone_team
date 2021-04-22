@@ -13,9 +13,12 @@ namespace Yubay_Drone_team
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataTable dt = ConnectionDB.ReadDroneDetail();
-            this.repInvoice.DataSource = dt;
-            this.repInvoice.DataBind();
+            if (!IsPostBack)
+            {
+                DataTable dt = ConnectionDB.ReadDroneDetail();
+                this.repInvoice.DataSource = dt;
+                this.repInvoice.DataBind();
+            }
         }
 
         protected void Add_Click(object sender, EventArgs e)
@@ -32,6 +35,10 @@ namespace Yubay_Drone_team
             if ("DeleItem" == cmdName)
             {
             ConnectionDB.DelectDroneDetail(cmdArgu);
+
+                DataTable dt = ConnectionDB.ReadDroneDetail();
+                this.repInvoice.DataSource = dt;
+                this.repInvoice.DataBind();
             }
         }
     }
