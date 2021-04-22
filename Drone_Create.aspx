@@ -45,7 +45,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <%--用Div作為輸出欄位,span為標題--%>
     <div style="border:4px #000 solid;">
-       <div style="text-align:center;"><h3>新增無人機</h3>
+       <div style="text-align:center;">
+           <asp:Label ID="CreateDrone" runat="server" Text="新增無人機"></asp:Label>
     <div>
         <div>
             <span>編號</span>
