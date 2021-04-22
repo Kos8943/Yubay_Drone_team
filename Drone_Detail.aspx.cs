@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Yubay_Drone_team.Managers;
 
 namespace Yubay_Drone_team
 {
@@ -18,6 +19,11 @@ namespace Yubay_Drone_team
         {
             //網頁轉跳至.aspx
             Response.Redirect("Drone_Create.aspx");
+        }
+
+        protected void repInvoice_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
         }
     }
 }
