@@ -25,10 +25,15 @@
 
             .Btn_Create{
 
-                margin-right:50px;
+                margin-right:80px;
+                 margin-left:40px;
+
+               
 
 
             }
+
+          
 
     </style>
     
@@ -56,7 +61,15 @@
     </div>
     <div>
             <span>使用狀態</span>
-        <asp:TextBox ID="Text_Status" runat="server"></asp:TextBox>
+    
+    
+        <asp:DropDownList ID="DropDownList_Status" runat="server">
+            <asp:ListItem Text ="啟用" Value="啟用"></asp:ListItem>
+            <asp:ListItem Text ="停用" Value="停用"></asp:ListItem>
+            <asp:ListItem Text ="故障" Value="故障"></asp:ListItem>
+
+        </asp:DropDownList>
+
     </div>
     <div>
         <span>停用原因</span>
@@ -64,7 +77,13 @@
     </div>
     <div>
         <span>負責人員</span>
-        <asp:TextBox ID="Text_Person" runat="server"></asp:TextBox>
+        <asp:DropDownList ID="DropDownList_Operator" runat="server">
+            <asp:ListItem Text ="Stella" Value="Stella"></asp:ListItem>
+            <asp:ListItem Text ="Tom" Value="Tom"></asp:ListItem>
+            <asp:ListItem Text ="Sandy" Value="Sandy"></asp:ListItem>
+
+        </asp:DropDownList>
+
 
     </div>
     </div>
@@ -74,7 +93,7 @@
 
     <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
 
-     <asp:Button ID="Btn_Delete" runat="server" Text="取消" OnClick="Btn_Delete_Click" />
+     <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" />
 
 
 </div>
