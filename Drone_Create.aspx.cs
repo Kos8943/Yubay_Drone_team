@@ -67,7 +67,7 @@ namespace Yubay_Drone_team
 
                     ConnectionDB.Drone_Detail_Create(model);
 
-                    this.Literal1.Visible = true;
+                    this.Label1.Visible = true;
 
                 }
                 else
@@ -75,8 +75,8 @@ namespace Yubay_Drone_team
                     model.Sid = Convert.ToInt32(querryString);
                     ConnectionDB.Drone_Detail_Update(model);
 
-                    this.Literal1.Text = "修改成功!";
-                    this.Literal1.Visible = true;
+                    this.Label1.Text = "修改成功!";
+                    this.Label1.Visible = true;
                     
                 }
 
@@ -84,8 +84,8 @@ namespace Yubay_Drone_team
             }
             else
             {
-                this.Literal1.Text = "不可空白或輸入重複";
-                this.Literal1.Visible = true;
+                this.Label1.Text = "不可空白或輸入重複";
+                this.Label1.Visible = true;
                 return;
 
             }

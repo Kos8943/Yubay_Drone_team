@@ -1,106 +1,125 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Drone_Create.aspx.cs" Inherits="Yubay_Drone_team.Drone_Create" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .Number{
-             width:50px;
-            text-align:left;
-        }
-         .Manufacturer{
-             width:50px;
-            text-align:left;
-        }
-          .Weight{
-             width:50px;
-            text-align:left;
-        }
-          .Deactive{
-             width:50px;
-            text-align:left;
-        }
-            .Person{
-             width:50px;
-            text-align:left;
+        .FormArea {
+            width: 40%;
+            border: 1px #000 solid;
+            padding: 0 5%;
         }
 
+        .inputsize {
+            width: 180px;
+            height: 30px;
+        }
 
-            .Btn_Create{
+        .inputmarin {
+            margin-bottom: 7px;
+        }
 
-                margin-right:80px;
-                 margin-left:40px;
+        .titleAreaMargin {
+            margin: 15px 0;
+        }
 
-               
+        .title {
+            font-size: 25px;
+        }
 
+        .Number {
+            width: 50px;
+            text-align: left;
+        }
 
-            }
+        .Manufacturer {
+            width: 50px;
+            text-align: left;
+        }
 
-          
+        .Weight {
+            width: 50px;
+            text-align: left;
+        }
 
+        .Deactive {
+            width: 50px;
+            text-align: left;
+        }
+
+        .Person {
+            width: 50px;
+            text-align: left;
+        }
+
+        .buttonArea{
+            margin-top:40px;
+
+        }
+
+        .Btn_Create {
+            margin-right: 120px;
+            /*margin-left: 40px;*/
+        }
+
+        .errMsg{
+            color:red;
+        }
     </style>
-    
+
 
 </asp:Content>
 
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <%--用Div作為輸出欄位,span為標題--%>
-    <div style="border:4px #000 solid;">
-       <div style="text-align:center;">
-           <asp:Label ID="CreateDrone" runat="server" Text="新增無人機"></asp:Label>
-    <div>
-        <div>
-            <span>編號</span>
-            <asp:TextBox ID="Text_Number" runat="server"></asp:TextBox>
+    <%--用Div作為輸出欄位,span為標題--%>
+
+    <div class="FormArea">
+        <div class="titleAreaMargin" style="text-align: center;">
+            <asp:Label ID="CreateDrone" CssClass="title" runat="server" Text="新增無人機"></asp:Label>
         </div>
-        <div>
-            <span>製造商</span>
-            <asp:TextBox ID="Text_Manufacturer" runat="server"></asp:TextBox>
+
+
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_Text_Number">編號</label>
+            <asp:TextBox ID="Text_Number" CssClass="inputsize" runat="server"></asp:TextBox>
         </div>
-    <div>
-            <span>最大起飛重量</span>
-            <asp:TextBox ID="Text_Weight" runat="server"></asp:TextBox>
-    </div>
-    <div>
-            <span>使用狀態</span>
-    
-    
-        <asp:DropDownList ID="DropDownList_Status" runat="server">
-            <asp:ListItem Text ="啟用" Value="啟用"></asp:ListItem>
-            <asp:ListItem Text ="停用" Value="停用"></asp:ListItem>
-            <asp:ListItem Text ="故障" Value="故障"></asp:ListItem>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_Text_Manufacturer">製造商</label>
+            <asp:TextBox ID="Text_Manufacturer" CssClass="inputsize" runat="server"></asp:TextBox>
+        </div>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_Text_Weight">最大起飛重量</label>
+            <asp:TextBox ID="Text_Weight" CssClass="inputsize" runat="server"></asp:TextBox>
+        </div>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_DropDownList_Status">使用狀態</label>
+            <asp:DropDownList ID="DropDownList_Status" CssClass="inputsize" runat="server">
+                <asp:ListItem Text="啟用" Value="啟用"></asp:ListItem>
+                <asp:ListItem Text="停用" Value="停用"></asp:ListItem>
+                <asp:ListItem Text="故障" Value="故障"></asp:ListItem>
+            </asp:DropDownList>
 
+        </div>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_Text_Deactive">停用原因</label>
+            <asp:TextBox ID="Text_Deactive" CssClass="inputsize" runat="server"></asp:TextBox>
+        </div>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_DropDownList_Operator">負責人員</label>
+            <asp:DropDownList ID="DropDownList_Operator" CssClass="inputsize" runat="server">
+                <asp:ListItem Text="Stella" Value="Stella"></asp:ListItem>
+                <asp:ListItem Text="Tom" Value="Tom"></asp:ListItem>
+                <asp:ListItem Text="Sandy" Value="Sandy"></asp:ListItem>
 
-            
-        </asp:DropDownList>
-
+            </asp:DropDownList>
+        </div>
+        <div class="d-flex justify-content-center buttonArea">
+        <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
+        <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" />
+        </div>
+        <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>
+        <%--<asp:Literal ID="Literal1" runat="server" Text="新增成功!"  Visible="false"></asp:Literal>--%>
     </div>
-    <div>
-        <span>停用原因</span>
-        <asp:TextBox ID="Text_Deactive" runat="server"></asp:TextBox>
-    </div>
-    <div>
-        <span>負責人員</span>
-        <asp:DropDownList ID="DropDownList_Operator" runat="server">
-            <asp:ListItem Text ="Stella" Value="Stella"></asp:ListItem>
-            <asp:ListItem Text ="Tom" Value="Tom"></asp:ListItem>
-            <asp:ListItem Text ="Sandy" Value="Sandy"></asp:ListItem>
-
-        </asp:DropDownList>
-
-        
-    </div>
-    </div>
-</div>
 
     <%--新增/修改按鈕--%>
-        
-         
-    <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
-
-     <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" /><br/><br />
-
-   <asp:Literal ID="Literal1" runat="server" Text="新增成功!" Visible="false"></asp:Literal>
-</div>
-   
-
 </asp:Content>

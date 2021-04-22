@@ -150,7 +150,7 @@
                         </asp:ContentPlaceHolder>
                     </div>
                     <div class="PagingArea">
-                        <a href="#" style="font-size: 22px; margin-top: -10px">首頁</a>
+                       <%-- <a href="#" style="font-size: 22px; margin-top: -10px">首頁</a>--%>
                     </div>
                 </div>
             </div>
