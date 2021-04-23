@@ -18,7 +18,7 @@
         }
 
         td{
-            padding:9px!important;
+            padding:10px!important;
         }
 
         .tdHeight{
