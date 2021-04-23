@@ -142,5 +142,4 @@
         <%--<asp:Literal ID="Literal1" runat="server" Text="新增成功!"  Visible="false"></asp:Literal>--%>
     </div>
 
-    <%--新增/修改按鈕--%>
 </asp:Content>
