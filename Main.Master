@@ -44,7 +44,7 @@
         }
 
         #LogoutBtn {
-            height: 30px;
+            height: 35px;
             position: absolute;
             top: 50%;
             left: 93.5%;
@@ -161,7 +161,7 @@
                 </div>
                 <div runat="server" class="col-10 TableNameArea">
                     <span class="TableName">無人機管理</span>
-                    <button class="btn btn-outline-success btn-sm logout-btn" runat="server" id="LogoutBtn" onserverclick="LogoutBtn_Click">
+                    <button class="btn btn-outline-success  logout-btn" runat="server" id="LogoutBtn" onserverclick="LogoutBtn_Click">
                         
                         登出
                         <%--<img src="Imgs/exit.svg" style="width:15px;height:15px;"/>--%>
@@ -192,7 +192,6 @@
                 </div>
             </div>
         </div>
-
 
 
     </form>

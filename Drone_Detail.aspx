@@ -21,9 +21,6 @@
             padding:10px!important;
         }
 
-        .tdHeight{
-            padding:10px;
-        }
 
         /*#BtnCreate{
             width:50px;
@@ -49,7 +46,12 @@
             </asp:DropDownList>
             <asp:TextBox ID="textKeyWord" runat="server" CssClass="ToolMagin"></asp:TextBox>
             <%--<asp:Button ID="BtnSearch" runat="server" Text="查詢" CssClass="ToolMagin"/>--%>
-            <asp:Button ID="btnSearch" runat="server" Text="查詢" CssClass="ToolMagin" OnClick="btnSearch_Click" class="btn btn-light ToolMagin" style="border: 1px solid gray" />
+
+            <button runat="server" onserverclick="btnSearch_Click" class="btn btn-light ToolMagin" style="border:1px solid gray">
+                <img src="Imgs/search.svg" style="width:20px; height:15px;"/>
+                <span>查詢</span>
+            </button>
+           <%-- <asp:Button ID="btnSearch" runat="server" Text="查詢" CssClass="ToolMagin" OnClick="btnSearch_Click" class="btn btn-light ToolMagin" style="border: 1px solid gray" />--%>
         </div>
         <table class="table table-hover" style="font-size: 18px;">
             <thead>
