@@ -74,7 +74,10 @@
                             <td><%# Eval("Status") %></td>
                             <td><%# Eval("StopReason") %></td>
                             <td><%# Eval("Operator") %></td>
-                            <td><asp:Button CssClass="btn btn-outline-warning btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
+                            <%--<td>
+                                <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
+                            </td>--%>
+                            <td><asp:Button CssClass="btn btn-outline-secondary btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
                             <td><asp:Button CssClass="btn btn-outline-danger btn-sm" runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' OnClientClick="javascript:return confirm('確定刪除?')"/></td>
                         </tr>
                     </ItemTemplate>
