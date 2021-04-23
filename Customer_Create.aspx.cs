@@ -13,5 +13,10 @@ namespace Yubay_Drone_team
         {
 
         }
+
+        protected void BtnCustomer_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
