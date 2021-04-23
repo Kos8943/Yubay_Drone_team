@@ -14,6 +14,8 @@ namespace Yubay_Drone_team
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Main.TableTitle = "無人機管理";
+
             if (!IsPostBack)
             {
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
