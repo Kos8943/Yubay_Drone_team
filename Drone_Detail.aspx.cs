@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Input;
 using Yubay_Drone_team.Managers;
 
 namespace Yubay_Drone_team
@@ -15,6 +16,7 @@ namespace Yubay_Drone_team
         {
             if (!IsPostBack)
             {
+                textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
                 DataTable dt = ConnectionDB.ReadDroneDetail();
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
@@ -57,5 +59,7 @@ namespace Yubay_Drone_team
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();
         }
+
+
     }
 }
