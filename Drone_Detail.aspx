@@ -2,24 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .ToolArea {
-            height: 35px;
-        }
-
-        .TableListArea {
-            width: 95%;
-            background-color: white;
-            border-radius: 10px;
-            padding: 2% 3%;
-        }
-
-        .ToolMagin {
-            margin-left: 5px;
-        }
-
-        td{
-            padding:10px!important;
-        }
+        
 
 
         /*#BtnCreate{
