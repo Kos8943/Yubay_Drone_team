@@ -13,7 +13,7 @@ namespace Yubay_Drone_team
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Main.TableTitle = "無人機出勤紀錄";
+            Main.TableTitle = "使用者管理";
 
             if (!IsPostBack)
             {
