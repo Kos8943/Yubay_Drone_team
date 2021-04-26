@@ -2,12 +2,87 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .ToolArea {
-            height: 35px;
+          .FormArea {
+            width: 40%;
+            border: 2px #000 solid;
+            padding: 0 5%;
         }
-        .
+
+        .inputsize {
+            width: 180px;
+            height: 30px;
+        }
+
+        .inputmarin {
+            margin-bottom: 7px;
+        }
+
+        .titleAreaMargin {
+            margin: 15px 0;
+        }
+
+        .title {
+            font-size: 25px;
+        }
+
+        .Number {
+            width: 50px;
+            text-align: left;
+        }
+
+        .Manufacturer {
+            width: 50px;
+            text-align: left;
+        }
+
+        .Weight {
+            width: 50px;
+            text-align: left;
+        }
+
+        .Deactive {
+            width: 50px;
+            text-align: left;
+        }
+
+        .Person {
+            width: 50px;
+            text-align: left;
+        }
+
+        .buttonArea {
+            margin-top: 40px;
+        }
+
+        .Btn_Create {
+            margin-right: 120px;
+            /*margin-left: 40px;*/
+        }
+
+        .errMsg {
+            color: red;
+        }
 
 
+        /* xl - Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1282px) {
+
+            .FormArea {
+                padding: 0 10%;
+            }
+
+            .title {
+                font-size: 30px;
+            }
+
+            .titleAreaMargin {
+            margin: 30px 0;
+        }
+
+            .inputmarin {
+            margin-bottom: 20px;
+        }
+        }
 
 
     </style>

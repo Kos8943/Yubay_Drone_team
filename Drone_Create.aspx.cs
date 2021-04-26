@@ -14,7 +14,7 @@ namespace Yubay_Drone_team
     {
         protected void Page_init(object sender, EventArgs e)
         {
-            string querryString = Request.QueryString["Sid"];
+            string querryString = Request.QueryString["Sid"]; //取得網址上的內容並存成字串
             if (string.IsNullOrEmpty(querryString))
             {
                 return;
