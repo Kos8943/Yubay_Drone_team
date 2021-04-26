@@ -1,10 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Customer_Create.aspx.cs" Inherits="Yubay_Drone_team.CustomerCreate" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .ToolArea{
-            height:35px;
+        .ToolArea {
+            height: 35px;
         }
-        
+        .
+
+
+
 
     </style>
 
@@ -17,9 +21,9 @@
             <asp:ListItem Value="Name" Text="姓名"></asp:ListItem>
             <asp:ListItem Value="Address" Text="地址"></asp:ListItem>
             <asp:ListItem Value="Phone" Text="電話"></asp:ListItem>
-             <asp:ListItem Value="Crop" Text="農作物"></asp:ListItem>
-             <asp:ListItem Value="Area" Text="土地面積"></asp:ListItem>
-              <asp:ListItem Value="Farm_" Text="地號"></asp:ListItem>
+            <asp:ListItem Value="Crop" Text="農作物"></asp:ListItem>
+            <asp:ListItem Value="Area" Text="土地面積"></asp:ListItem>
+            <asp:ListItem Value="Farm_Address" Text="地號"></asp:ListItem>
 
         </asp:DropDownList>
 
