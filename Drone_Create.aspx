@@ -128,10 +128,6 @@
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Operator">負責人員</label>
             <asp:DropDownList ID="DropDownList_Operator" CssClass="inputsize" runat="server">
-                <asp:ListItem Text="Stella" Value="Stella"></asp:ListItem>
-                <asp:ListItem Text="Tom" Value="Tom"></asp:ListItem>
-                <asp:ListItem Text="Sandy" Value="Sandy"></asp:ListItem>
-
             </asp:DropDownList>
         </div>
         <div class="d-flex justify-content-center buttonArea">
