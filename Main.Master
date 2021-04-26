@@ -1,5 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="Yubay_Drone_team.Main" %>
 
+<%@ Register Src="~/ChangePages.ascx" TagPrefix="uc1" TagName="ChangePages" %>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -144,7 +147,15 @@
         }
         /*-----表格共用CSS樣式-----*/
 
+        .LinkStyle{
+            margin-right:10px;
+            font-size:22px;
+        }
 
+        .PageArea{
+            text-align:center;
+            /*background-color:aqua;*/
+        }
 
         /* lg - Large devices (desktops, 992px and up) */
         @media (max-width: 1281.98px) {
@@ -212,7 +223,7 @@
                         </asp:ContentPlaceHolder>
                     </div>
                     <div class="PagingArea">
-                        <%-- <a href="#" style="font-size: 22px; margin-top: -10px">首頁</a>--%>
+                        <uc1:ChangePages runat="server" id="ChangePages" />
                     </div>
                 </div>
             </div>
