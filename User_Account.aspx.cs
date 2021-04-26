@@ -20,9 +20,9 @@ namespace Yubay_Drone_team
 
             if (!IsPostBack)
             {
-                ConnectionDB DB = new ConnectionDB();
+                ConnectionDB ReadUserAccountTable = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
-                DataTable dt = DB.ReadUserAccount();
+                DataTable dt = ReadUserAccountTable.ReadUserAccount();
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
             }
@@ -49,9 +49,10 @@ namespace Yubay_Drone_team
 
                 Response.Redirect(targetUrl);
             }
-            ConnectionDB DB = new ConnectionDB();
 
-            DataTable dt = DB.ReadUserAccount();
+            ConnectionDB ReadUserAccountTable = new ConnectionDB();
+
+            DataTable dt = ReadUserAccountTable.ReadUserAccount();
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();
         }

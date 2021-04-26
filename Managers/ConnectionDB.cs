@@ -283,8 +283,6 @@ namespace Yubay_Drone_team.Managers
         public DataTable ReadUserAccount()
         {
 
-            //string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
             string queryString = $@" SELECT * FROM UserAccount;";
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
@@ -292,40 +290,7 @@ namespace Yubay_Drone_team.Managers
             var dt = this.GetDataTable(queryString, dbParameters);
 
             return dt;
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    //轉譯成SQL看得懂的語法
-            //    SqlCommand command = new SqlCommand(queryString, connection);
-            //    //command.Parameters.AddWithValue("@NumberCol", "2");
 
-            //    try
-            //    {
-            //        //開始連線
-            //        connection.Open();
-
-            //        //從資料庫中讀取資料
-            //        SqlDataReader reader = command.ExecuteReader();
-
-            //        //在記憶體中創新的空表
-            //        DataTable dt = new DataTable();
-
-            //        //把值塞進空表
-            //        dt.Load(reader);
-
-
-            //        //關閉資料庫連線
-            //        reader.Close();
-
-            //        //回傳dt
-            //        return dt;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine(ex.Message);
-            //        return null;
-            //    }
-
-            //}
         }
 
     }
