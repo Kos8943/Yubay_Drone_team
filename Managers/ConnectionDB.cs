@@ -9,11 +9,11 @@ using Yubay_Drone_team.Helpers;
 
 namespace Yubay_Drone_team.Managers
 {
-    public class ConnectionDB:CreateHelper
+    public class ConnectionDB : CreateHelper
     {
         public void Drone_Detail_Create(DroneMedel Model)
         {
-            
+
             //使用的SQL語法
             string queryString = $@" INSERT INTO Drone_Detail (Drone_ID, Manufacturer, WeightLoad, Status, StopReason, Operator)
                                         VALUES (@Drone_ID, @Manufacturer, @WeightLoad, @Status, @StopReason, @Operator);";
@@ -34,7 +34,7 @@ namespace Yubay_Drone_team.Managers
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
-                      
+
         }
 
 
@@ -49,8 +49,8 @@ namespace Yubay_Drone_team.Managers
                  Drone_ID = @Drone_ID, Manufacturer = @Manufacturer, WeightLoad = @WeightLoad, Status = @Status, 
                  StopReason= @StopReason, Operator = @Operator Where Sid = @Sid";
 
-            
-       
+
+
             List<SqlParameter> parameters = new List<SqlParameter>()
 
                 {
@@ -274,10 +274,60 @@ namespace Yubay_Drone_team.Managers
                     return null;
                 }
 
-               
+
             }
         }
-       
+
+
+
+        public DataTable ReadUserAccount()
+        {
+
+            //string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+
+            string queryString = $@" SELECT * FROM UserAccount;";
+
+            List<SqlParameter> dbParameters = new List<SqlParameter>();
+
+            var dt = this.GetDataTable(queryString, dbParameters);
+
+            return dt;
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    //轉譯成SQL看得懂的語法
+            //    SqlCommand command = new SqlCommand(queryString, connection);
+            //    //command.Parameters.AddWithValue("@NumberCol", "2");
+
+            //    try
+            //    {
+            //        //開始連線
+            //        connection.Open();
+
+            //        //從資料庫中讀取資料
+            //        SqlDataReader reader = command.ExecuteReader();
+
+            //        //在記憶體中創新的空表
+            //        DataTable dt = new DataTable();
+
+            //        //把值塞進空表
+            //        dt.Load(reader);
+
+
+            //        //關閉資料庫連線
+            //        reader.Close();
+
+            //        //回傳dt
+            //        return dt;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //        return null;
+            //    }
+
+            //}
+        }
+
     }
-    
+
 }

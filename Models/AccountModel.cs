@@ -28,16 +28,6 @@ namespace Yubay_Drone_team.Models
         public string Deleter { get; set; }
 
         public DateTime DeleteDate { get; set; }
-        //Sid 
-        //Account 
-        //Password    
-        //SuperAccount   
-        //UserName 
-        //AccountLevel    
-        //Updater 
-        //UpdateDate  
-        //IsDelete 
-        //Deleter 
-        //DeleteDate  
+ 
     }
 }

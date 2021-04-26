@@ -37,6 +37,7 @@ namespace Yubay_Drone_team.Managers
                         model.Account = (string)reader["Account"];
                         model.Password = (string)reader["Password"];
                         model.AccountLevel = (int)reader["AccountLevel"];
+                        model.UserName = (string)reader["UserName"];
                     }
 
                     reader.Close();

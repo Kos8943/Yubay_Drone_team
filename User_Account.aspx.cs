@@ -15,10 +15,14 @@ namespace Yubay_Drone_team
         {
             Main.TableTitle = "使用者管理";
 
+            var Session = HttpContext.Current.Session["IsLogined"];
+            
+
             if (!IsPostBack)
             {
+                ConnectionDB DB = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
-                DataTable dt = ConnectionDB.ReadDroneDetail();
+                DataTable dt = DB.ReadUserAccount();
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
             }
@@ -37,11 +41,7 @@ namespace Yubay_Drone_team
 
             if ("DeleItem" == cmdName)
             {
-                ConnectionDB.DelectDroneDetail(cmdArgu);
-
-                DataTable dt = ConnectionDB.ReadDroneDetail();
-                this.repInvoice.DataSource = dt;
-                this.repInvoice.DataBind();
+                ConnectionDB.DelectDroneDetail(cmdArgu);             
             }
             if ("UpDateItem" == cmdName)
             {
@@ -49,6 +49,11 @@ namespace Yubay_Drone_team
 
                 Response.Redirect(targetUrl);
             }
+            ConnectionDB DB = new ConnectionDB();
+
+            DataTable dt = DB.ReadUserAccount();
+            this.repInvoice.DataSource = dt;
+            this.repInvoice.DataBind();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
