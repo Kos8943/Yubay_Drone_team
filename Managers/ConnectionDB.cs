@@ -280,6 +280,7 @@ namespace Yubay_Drone_team.Managers
 
 
 
+        #region 讀取管理者
         public DataTable ReadUserAccount()
         {
 
@@ -291,7 +292,8 @@ namespace Yubay_Drone_team.Managers
 
             return dt;
 
-        }
+        } 
+        #endregion
 
 
         #region 下拉式選單(負責人員)
@@ -352,6 +354,22 @@ namespace Yubay_Drone_team.Managers
             }
         }
         #endregion
+
+
+        public int GetUserLevel(int Sid)
+        {
+            string queryString = $@" SELECT AccountLevel FROM UserAccount WHERE Sid = @Sid;";
+
+            List<SqlParameter> dbParameters = new List<SqlParameter>() 
+            {
+                new SqlParameter("@Sid", Sid),
+            };
+
+            
+            var dt =Convert.ToInt32( this.GetScale(queryString, dbParameters));
+
+            return dt;
+        }
     }
 
 }

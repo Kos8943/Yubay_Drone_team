@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 
 namespace Yubay_Drone_team
@@ -15,8 +16,11 @@ namespace Yubay_Drone_team
         {
             Main.TableTitle = "使用者管理";
 
-            var Session = HttpContext.Current.Session["IsLogined"];
-            
+            LoginInfo GetUserLevel = (LoginInfo)Session["IsLogined"];
+
+            var UserLevel = GetUserLevel.AccountLevel.ToString();
+            this.HiddenSid.InnerText = GetUserLevel.Sid.ToString();
+
 
             if (!IsPostBack)
             {

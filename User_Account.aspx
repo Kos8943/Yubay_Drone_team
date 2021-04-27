@@ -17,6 +17,9 @@
             margin-left: 5px;
         }
 
+        .HiddenSid{
+            /*visibility:hidden;*/
+        }
         /*#BtnCreate{
             width:50px;
         }*/
@@ -24,6 +27,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="TableListArea">
+
         <div class="ToolArea d-flex bd-highlight mb-2">
             <asp:Button ID="BtnCreate" class="mr-auto bd-highlight btn btn-info" runat="server" Text="＋新增" OnClick="Add_Click" />
             <%--<button class="mr-auto bd-highlight">
@@ -49,11 +53,11 @@
                     <tr class="table-primary tdHeight row">
                         <th class="col-2">帳號</th>
                         <th class="col-2">名稱</th>
-                        <th class="col-1"></th>
-                        <th class="col-1"></th>
+                        <th class="col-1 HiddenSid" id="HiddenSid" runat="server"></th>
+                        <%--<th class="col-1"></th>--%>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody runat="server" id="TablaBody">
                     <asp:Repeater ID="repInvoice" runat="server" OnItemCommand="repInvoice_ItemCommand1">
                         <ItemTemplate>
                             <tr class="row">
@@ -63,9 +67,15 @@
                                 <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
                             </td>--%>
                                 <td class="col-1">
-                                    <asp:Button CssClass="btn btn-outline-secondary btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
-                                <td class="col-1">
-                                    <asp:Button ID="BtnDel" CssClass="btn btn-outline-danger btn-sm" runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' OnClientClick="javascript:return confirm('確定刪除?')" /></td>
+                                    <asp:Button CssClass="btn btn-outline-secondary btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' />
+                                </td>
+
+
+                                <td class="col-1 DelCol">
+                                    <asp:Button runat="server" Text="刪除" CssClass="btn btn-outline-danger btn-sm BtnDel" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' OnClientClick="javascript:return confirm('確定刪除?')" />
+                                </td>
+
+
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>

@@ -231,5 +231,31 @@
 
 
     </form>
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            let Sid = $("#ContentPlaceHolder1_HiddenSid").text();
+            
+            $.ajax({
+                method: "POST",
+                url: "API/GetUserLevel.ashx",
+                type: "JSON",
+                data: { Sid: Sid }
+            }).done(function (responseData) {
+
+                if (responseData == 2) {
+                    $(".BtnDel").css("visibility","visible");
+                } else {
+                    $(".BtnDel").css("visibility", "hidden");
+                }
+            });
+        });
+    </script>
+
+
+
 </body>
 </html>
