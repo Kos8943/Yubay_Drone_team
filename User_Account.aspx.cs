@@ -16,17 +16,20 @@ namespace Yubay_Drone_team
         {
             Main.TableTitle = "使用者管理";
 
-            LoginInfo GetUserLevel = (LoginInfo)Session["IsLogined"];
+            string currentPage = Request.QueryString["Page"];  
 
-            var UserLevel = GetUserLevel.AccountLevel.ToString();
-            //this.HiddenSid.InnerText = GetUserLevel.Sid.ToString();
-
+            if (string.IsNullOrWhiteSpace(currentPage))
+            {
+                currentPage = "1";
+            }
 
             if (!IsPostBack)
             {
                 ConnectionDB ReadUserAccountTable = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
-                DataTable dt = ReadUserAccountTable.ReadUserAccount();
+                int TotalSize;
+                DataTable dt = ReadUserAccountTable.ReadUserAccount(out TotalSize, Convert.ToInt32(currentPage));
+                ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
             }
@@ -35,7 +38,7 @@ namespace Yubay_Drone_team
         protected void Add_Click(object sender, EventArgs e)
         {
             //網頁轉跳至.aspx
-            Response.Redirect("Drone_Create.aspx");
+            Response.Redirect("UserAccount_Create.aspx");
         }
 
         protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
@@ -49,16 +52,16 @@ namespace Yubay_Drone_team
             }
             if ("UpDateItem" == cmdName)
             {
-                string targetUrl = "~/Drone_Create.aspx?Sid=" + cmdArgu;
+                string targetUrl = "~/UserAccount_Create.aspx?Sid=" + cmdArgu;
 
                 Response.Redirect(targetUrl);
             }
 
             ConnectionDB ReadUserAccountTable = new ConnectionDB();
 
-            DataTable dt = ReadUserAccountTable.ReadUserAccount();
-            this.repInvoice.DataSource = dt;
-            this.repInvoice.DataBind();
+            //DataTable dt = ReadUserAccountTable.ReadUserAccount();
+            //this.repInvoice.DataSource = dt;
+            //this.repInvoice.DataBind();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

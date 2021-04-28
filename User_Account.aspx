@@ -53,7 +53,8 @@
                     <tr class="table-primary tdHeight row">
                         <th class="col-2">帳號</th>
                         <th class="col-2">名稱</th>
-                        <th class="col-1 HiddenSid" id="HiddenSid" runat="server"></th>
+                        <th class="col-8">刪除資料權限</th>
+                        <%--<th class="col-1 HiddenSid" id="HiddenSid" runat="server"></th>--%>
                         <%--<th class="col-1"></th>--%>
                     </tr>
                 </thead>
@@ -62,7 +63,8 @@
                         <ItemTemplate>
                             <tr class="row">
                                 <td class="col-2"><%# Eval("Account") %></td>
-                                <td class="col-8"><%# Eval("UserName") %></td>
+                                <td class="col-2"><%# Eval("UserName") %></td>
+                                <td class="col-6"><%# ((int)Eval("AccountLevel") == 2) ? "有" : "-" %> </td>
                                 <%--<td>
                                 <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
                             </td>--%>
