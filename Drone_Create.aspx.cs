@@ -39,7 +39,7 @@ namespace Yubay_Drone_team
         {
             DataTable dt = ConnectionDB.DropDownListRead();
             DropDownList_Operator.DataSource = dt;
-            DropDownList_Operator.DataTextField = "Account";
+            DropDownList_Operator.DataTextField = "UserName";
             DropDownList_Operator.DataBind();
 
         }
