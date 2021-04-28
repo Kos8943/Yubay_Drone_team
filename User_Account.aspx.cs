@@ -19,7 +19,7 @@ namespace Yubay_Drone_team
             LoginInfo GetUserLevel = (LoginInfo)Session["IsLogined"];
 
             var UserLevel = GetUserLevel.AccountLevel.ToString();
-            this.HiddenSid.InnerText = GetUserLevel.Sid.ToString();
+            //this.HiddenSid.InnerText = GetUserLevel.Sid.ToString();
 
 
             if (!IsPostBack)
