@@ -286,7 +286,7 @@ namespace Yubay_Drone_team.Managers
 
             string queryString = $@" SELECT TOP 10 * FROM 
                                         (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid]) AS ROWSID FROM UserAccount)
-                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND IsDelete IS NULL";
+                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND (IsDelete IS NULL OR IsDelete = 'false');";
 
             string countQuery =
                 $@" SELECT 
@@ -369,20 +369,36 @@ namespace Yubay_Drone_team.Managers
         #endregion
 
 
-        public int GetUserLevel(int Sid)
+        //public int GetUserLevel(int Sid)
+        //{
+        //    string queryString = $@" SELECT AccountLevel FROM UserAccount WHERE Sid = @Sid;";
+
+        //    List<SqlParameter> dbParameters = new List<SqlParameter>() 
+        //    {
+        //        new SqlParameter("@Sid", Sid),
+        //    };
+
+
+        //    var dt =Convert.ToInt32( this.GetScale(queryString, dbParameters));
+
+        //    return dt;
+        //}
+
+
+        public void DeleteUserAccount(int Sid)
         {
-            string queryString = $@" SELECT AccountLevel FROM UserAccount WHERE Sid = @Sid;";
 
-            List<SqlParameter> dbParameters = new List<SqlParameter>() 
-            {
-                new SqlParameter("@Sid", Sid),
-            };
+            string queryString = $@"UPDATE UserAccount SET IsDelete = 'true' Where Sid = @Sid";
 
-            
-            var dt =Convert.ToInt32( this.GetScale(queryString, dbParameters));
+            List<SqlParameter> parameters = new List<SqlParameter>()
+                {
+                   new SqlParameter("@Sid", Sid),
+                };
 
-            return dt;
+            this.ExecuteNonQuery(queryString, parameters);
+
         }
+
     }
 
 }

@@ -25,10 +25,10 @@ namespace Yubay_Drone_team
 
             if (!IsPostBack)
             {
-                ConnectionDB ReadUserAccountTable = new ConnectionDB();
+                ConnectionDB DBbase = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
                 int TotalSize;
-                DataTable dt = ReadUserAccountTable.ReadUserAccount(out TotalSize, Convert.ToInt32(currentPage));
+                DataTable dt = DBbase.ReadUserAccount(out TotalSize, Convert.ToInt32(currentPage));
                 ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
@@ -46,9 +46,11 @@ namespace Yubay_Drone_team
             string cmdName = e.CommandName;
             string cmdArgu = e.CommandArgument.ToString();
 
+            ConnectionDB DBbase = new ConnectionDB();
+
             if ("DeleItem" == cmdName)
             {
-                ConnectionDB.DelectDroneDetail(cmdArgu);             
+                DBbase.DeleteUserAccount( Convert.ToInt32(cmdArgu));
             }
             if ("UpDateItem" == cmdName)
             {
@@ -57,11 +59,15 @@ namespace Yubay_Drone_team
                 Response.Redirect(targetUrl);
             }
 
-            ConnectionDB ReadUserAccountTable = new ConnectionDB();
+            string currentPage = Request.QueryString["Page"];
 
-            //DataTable dt = ReadUserAccountTable.ReadUserAccount();
-            //this.repInvoice.DataSource = dt;
-            //this.repInvoice.DataBind();
+            
+
+            int TotalSize;
+            DataTable dt = DBbase.ReadUserAccount(out TotalSize, Convert.ToInt32(currentPage));
+            ChangePages.TotalSize = TotalSize;
+            this.repInvoice.DataSource = dt;
+            this.repInvoice.DataBind();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
