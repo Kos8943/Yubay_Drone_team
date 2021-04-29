@@ -71,6 +71,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Battery.aspx" />
+    <Content Include="Battery_Create.aspx" />
     <Content Include="Bootstrap\css\bootstrap-grid.css" />
     <Content Include="Bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Bootstrap\css\bootstrap-reboot.css" />
@@ -103,6 +105,20 @@
   <ItemGroup>
     <Compile Include="API\GetUserLevel.ashx.cs">
       <DependentUpon>GetUserLevel.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Battery.aspx.cs">
+      <DependentUpon>Battery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Battery.aspx.designer.cs">
+      <DependentUpon>Battery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Battery_Create.aspx.cs">
+      <DependentUpon>Battery_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Battery_Create.aspx.designer.cs">
+      <DependentUpon>Battery_Create.aspx</DependentUpon>
     </Compile>
     <Compile Include="ChangePages.ascx.cs">
       <DependentUpon>ChangePages.ascx</DependentUpon>
