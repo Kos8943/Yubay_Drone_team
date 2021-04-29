@@ -281,21 +281,37 @@ namespace Yubay_Drone_team.Managers
 
 
         #region 讀取管理者
-        public DataTable ReadUserAccount(out int TotalSize, int currentPage = 1, int pageSize = 10)
+        public DataTable ReadUserAccount(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
         {
+
+            string keyWordSearchString;
+
+            if(!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+            }
+            else
+            {
+                keyWordSearchString = string.Empty;
+            }
 
             string queryString = $@" SELECT TOP 10 * FROM 
                                         (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid]) AS ROWSID FROM UserAccount)
-                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND (IsDelete IS NULL OR IsDelete = 'false');";
+                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
             string countQuery =
                 $@" SELECT 
                         COUNT(Sid)
                     FROM UserAccount
-                    WHERE SuperAccount = 'False' AND IsDelete IS NULL";
+                    WHERE SuperAccount = 'False' AND IsDelete IS NULL {keyWordSearchString};";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
+
+            if(!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
+            }
 
             var dt = this.GetDataTable(queryString, dbParameters);
 

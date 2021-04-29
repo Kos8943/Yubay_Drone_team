@@ -28,7 +28,7 @@ namespace Yubay_Drone_team
                 ConnectionDB DBbase = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
                 int TotalSize;
-                DataTable dt = DBbase.ReadUserAccount(out TotalSize, Convert.ToInt32(currentPage));
+                DataTable dt = DBbase.ReadUserAccount(out TotalSize, "", "", Convert.ToInt32(currentPage));
                 ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
@@ -61,10 +61,14 @@ namespace Yubay_Drone_team
 
             string currentPage = Request.QueryString["Page"];
 
-            
+            if (string.IsNullOrWhiteSpace(currentPage))
+            {
+                currentPage = "1";
+            }
+
 
             int TotalSize;
-            DataTable dt = DBbase.ReadUserAccount(out TotalSize, Convert.ToInt32(currentPage));
+            DataTable dt = DBbase.ReadUserAccount(out TotalSize, "", "", Convert.ToInt32(currentPage));
             ChangePages.TotalSize = TotalSize;
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();
@@ -74,10 +78,23 @@ namespace Yubay_Drone_team
         {
             string WantSearch = this.DropDownListSearch.SelectedValue;
             string KeyWord = this.textKeyWord.Text;
+            ConnectionDB DBbase = new ConnectionDB();
 
-            DataTable dt = ConnectionDB.KeyWordSearchDroneDestination(WantSearch, KeyWord);
-            this.repInvoice.DataSource = dt;
-            this.repInvoice.DataBind();
+            string currentPage = Request.QueryString["Page"];
+
+            if (string.IsNullOrWhiteSpace(currentPage))
+            {
+                currentPage = "1";
+            }
+
+            Response.Redirect($"User_Account.aspx?{WantSearch}={KeyWord}");
+
+            //int TotalSize;
+
+            //DataTable dt = DBbase.ReadUserAccount(out TotalSize, WantSearch, KeyWord, Convert.ToInt32(currentPage));
+            //ChangePages.TotalSize = TotalSize;
+            //this.repInvoice.DataSource = dt;
+            //this.repInvoice.DataBind();
         }
     }
 }
