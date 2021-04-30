@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Input;
 using Yubay_Drone_team.Managers;
+using Yubay_Drone_team.Models;
 
 namespace Yubay_Drone_team
 {
@@ -33,12 +34,13 @@ namespace Yubay_Drone_team
 
         protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            string cmdName = e.CommandName;
-            string cmdArgu = e.CommandArgument.ToString();
-
+            var cmdName = e.CommandName;
+            DroneMedel cmdArgu = new DroneMedel();
+             cmdArgu = (DroneMedel)e.CommandArgument;
+            ConnectionDB CDB = new ConnectionDB();
             if ("DeleItem" == cmdName)
             {
-            ConnectionDB.DelectDroneDetail(cmdArgu);
+                CDB.DelectDroneDetail(cmdArgu);
 
                 DataTable dt = ConnectionDB.ReadDroneDetail();
                 this.repInvoice.DataSource = dt;

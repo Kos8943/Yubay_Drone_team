@@ -77,7 +77,7 @@ namespace Yubay_Drone_team.Managers
             string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
             //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail;";
+            string queryString = $@" SELECT * FROM Drone_Detail WHERE Deleter IS NULL;";
 
             //建立連線
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -129,48 +129,73 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
         #region 刪除無人機資料的Method
-        public static void DelectDroneDetail(string Sid)
+        public void DelectDroneDetail(DroneMedel Model)
+
         {
-
-            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            //使用的SQL語法
-            string queryString = $@"DELETE FROM Drone_Detail WHERE Sid = @Sid";
-            //DELETE FROM TestTable_1 WHERE ID
-
-
-
-            //建立連線
-            using (SqlConnection connection = new SqlConnection(connectionString))
             {
 
-                //轉譯成SQL看得懂的語法
-                SqlCommand command = new SqlCommand(queryString, connection);
+                //使用的SQL語法
+                //string queryString = $@" INSERT INTO Drone_Detail (Drone_ID, Manufacturer, WeightLoad, Status, StopReason, Operator)
+                //                            VALUES (@Drone_ID, @Manufacturer, @WeightLoad, @Status, @StopReason, @Operator, Deleter = @Deleter, DeleteDate = @DeleteDate );";
 
-                //將值丟進相對應的位子
-                command.Parameters.AddWithValue("@Sid", Sid);
+                string queryString = $@"UPDATE Drone_Detail SET  
+                 Drone_ID = @Drone_ID, Manufacturer = @Manufacturer, WeightLoad = @WeightLoad, Status = @Status, 
+                 StopReason= @StopReason, Operator = @Operator, Deleter = @Deleter, DeleteDate = @DeleteDate Where Sid = @Sid";
 
 
 
-                try
+                List<SqlParameter> parameters = new List<SqlParameter>()
+
                 {
-                    //開始連線
-                    connection.Open();
+                   new SqlParameter("Deleter",Model.Deleter),
+                   new SqlParameter("DeleteDate",Model.DeleteDate)
+                };
 
-                    //受影響的資料筆數(沒有使用)
-                    int totalChangRows = command.ExecuteNonQuery();
-                    //HttpContext.Current.Response.Write("Total chang" + totalChangRows + " Rows.");
-                    //Console.WriteLine("Total chang" + totalChangRows + " Rows.");
-
-                }
-                catch (Exception ex)
-                {
-                    HttpContext.Current.Response.Write(ex);
-                    //Console.WriteLine(ex);
-                }
+                this.ExecuteNonQuery(queryString, parameters);
 
             }
+
+
+
+            ////建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+            //string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+
+            ////使用的SQL語法
+            //string queryString = $@"DELETE FROM Drone_Detail WHERE Sid = @Sid";
+            ////DELETE FROM TestTable_1 WHERE ID
+
+
+
+            ////建立連線
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+
+            //    //轉譯成SQL看得懂的語法
+            //    SqlCommand command = new SqlCommand(queryString, connection);
+
+            //    //將值丟進相對應的位子
+            //    command.Parameters.AddWithValue("@Sid", Sid);
+
+
+
+            //    try
+            //    {
+            //        //開始連線
+            //        connection.Open();
+
+            //        //受影響的資料筆數(沒有使用)
+            //        int totalChangRows = command.ExecuteNonQuery();
+            //        //HttpContext.Current.Response.Write("Total chang" + totalChangRows + " Rows.");
+            //        //Console.WriteLine("Total chang" + totalChangRows + " Rows.");
+
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        HttpContext.Current.Response.Write(ex);
+            //        //Console.WriteLine(ex);
+            //    }
+
+            //}
         }
         #endregion
         #region 關鍵字模糊查詢

@@ -26,7 +26,7 @@ namespace Yubay_Drone_team.Models
 
         public bool IsDelete { get; set; }
 
-        public string Delete { get; set; }
+        public string Deleter { get; set; }
 
         public DateTime DeleteDate { get; set; }
     }
