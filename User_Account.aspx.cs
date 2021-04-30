@@ -59,17 +59,18 @@ namespace Yubay_Drone_team
         protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             string cmdName = e.CommandName;
-            string cmdArgu = e.CommandArgument.ToString();
+            string cmdArguSid = e.CommandArgument.ToString().Split(',')[0].Trim();
+            string cmdArguAccount = e.CommandArgument.ToString().Split(',')[1].Trim();
 
             ConnectionDB DBbase = new ConnectionDB();
 
             if ("DeleItem" == cmdName)
             {
-                DBbase.DeleteUserAccount( Convert.ToInt32(cmdArgu));
+                DBbase.DeleteUserAccount(Convert.ToInt32(cmdArguSid), cmdArguAccount);
             }
             if ("UpDateItem" == cmdName)
             {
-                string targetUrl = "~/UserAccount_Create.aspx?Sid=" + cmdArgu;
+                string targetUrl = "~/UserAccount_Create.aspx?Sid=" + cmdArguSid;
 
                 Response.Redirect(targetUrl);
             }

@@ -93,12 +93,27 @@
     <div class="ToolArea d-flex bd-highlight mb-2">
         <asp:Button ID="BtnCustomer" class="mr-auto bd-highlight btn btn-info" runat="server" Text="+新增" OnClick="BtnCustomer_Click" />
         <asp:DropDownList ID="DropDownList1" runat="server">
-            <asp:ListItem Value="Name" Text="姓名"></asp:ListItem>
-            <asp:ListItem Value="Address" Text="地址"></asp:ListItem>
-            <asp:ListItem Value="Phone" Text="電話"></asp:ListItem>
-            <asp:ListItem Value="Crop" Text="農作物"></asp:ListItem>
-            <asp:ListItem Value="Area" Text="土地面積"></asp:ListItem>
-            <asp:ListItem Value="Farm_Address" Text="地號"></asp:ListItem>
+            <div>
+                <label for="ContentPlaceHolder1_Text_Name">姓名</label>
+                <asp:TextBox ID="Text_Name" Cssclass="intputsize" runat="server"></asp:TextBox>
+            </div>
+            <div>
+                <label for="ContentPlaceHolder1_Text_Address">電話</label>
+                <asp:TextBox ID="Text_Address" Cssclass="intputsize" runat="server"></asp:TextBox>
+            </div>
+            <div>
+                <label for="ContentPlaceHolder1_Text_Crop">農作物</label>
+                <asp:TextBox ID="Text_Crop" Cssclass="intputsize" runat="server"></asp:TextBox>
+            </div>
+            <div>
+                <label for="ContentPlaceHolder1_Text_Area">土地面積</label>
+                <asp:TextBox ID="Text_Area" Cssclass="intputsize" runat="server"></asp:TextBox>
+            </div>
+            <div>
+                <label for="ContentPlaceHolder1_Text_Manufacturer">地號</label>
+                <asp:TextBox ID="TextBox4" Cssclass="intputsize" runat="server"></asp:TextBox>
+            </div>
+         
 
         </asp:DropDownList>
 

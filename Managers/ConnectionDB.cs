@@ -426,14 +426,15 @@ namespace Yubay_Drone_team.Managers
         //}
 
 
-        public void DeleteUserAccount(int Sid)
+        public void DeleteUserAccount(int Sid, string Account)
         {
 
-            string queryString = $@"UPDATE UserAccount SET IsDelete = 'true' Where Sid = @Sid";
+            string queryString = $@"UPDATE UserAccount SET Account = @Account, IsDelete = 'true' Where Sid = @Sid";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
                 {
                    new SqlParameter("@Sid", Sid),
+                   new SqlParameter("@Account", $"{Account}_Deleted_{Sid}")
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
