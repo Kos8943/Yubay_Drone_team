@@ -4,8 +4,9 @@
     <style>
         .FormArea {
             width: 40%;
-            border: 2px #000 solid;
+            border: 1px #111 solid;
             padding: 0 5%;
+            background-color:rgb(254,254,254);
         }
 
         .inputsize {

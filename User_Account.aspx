@@ -69,15 +69,15 @@
                                 <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
                             </td>--%>
                                 <td class="col-1">
-                                    <asp:Button CssClass="btn btn-outline-secondary btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' />
+                                    <asp:Button CssClass="btn btn-outline-secondary btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'/>
                                 </td>
 
 
                                 <td class="col-1 DelCol">
-                                    <asp:Button runat="server" Text="刪除" CssClass="btn btn-outline-danger btn-sm BtnDel" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' OnClientClick="javascript:return confirm('確定刪除?')" />
+                                    <asp:Button runat="server" Text="刪除" CssClass="btn btn-outline-danger btn-sm BtnDel" CommandName="DeleItem" CommandArgument='<%# Eval("Sid")+","+ Eval("Account") %>' OnClientClick="javascript:return confirm('確定刪除?')" />
                                 </td>
 
-
+                               <%-- CommandArgument=' <%#Eval("id")+","+Eval("name") %>' ><%#Eval("name") %>--%>
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>
