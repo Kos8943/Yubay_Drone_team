@@ -16,9 +16,14 @@ namespace Yubay_Drone_team
         public static int TotalSize { get; set; } = 10;
 
         public string Url { get; set; }
+
+        public static string SearchType { get; set; }
+
+        public static string SearchKeyWord { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             int currentPageIndex = Convert.ToInt32(Request.QueryString["Page"]);
+            
             if (currentPageIndex == 0)
             {
                 currentPageIndex = 1;
@@ -31,8 +36,17 @@ namespace Yubay_Drone_team
                 pages = TotalSize / PageSize;
             }
 
-            this.aLinkFristPage.HRef = this.BuildPagingUrl(1);
-            this.aLinkLastPage.HRef = this.BuildPagingUrl(pages);
+            string SearchLink = string.Empty;
+            string SearchType = Request.QueryString["SearchType"];
+            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+
+            if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                SearchLink = $"&{SearchType}={SearchKeyWord}&SearchType={SearchType}";
+            }
+
+            this.aLinkFristPage.HRef = this.BuildPagingUrl(1, SearchType, SearchKeyWord);
+            this.aLinkLastPage.HRef = this.BuildPagingUrl(pages, SearchType, SearchKeyWord);
             for (int i = currentPageIndex - 3; i <= currentPageIndex + 3; i++)
             {
                 //不讓頁數為負數
@@ -61,7 +75,7 @@ namespace Yubay_Drone_team
                     {
                         ID = $"btn{i}",
                         Text = $"{i}",
-                        NavigateUrl = $"{Url}?Page={i}",
+                        NavigateUrl = $"{Url}?Page={i}" + (!string.IsNullOrWhiteSpace(SearchLink) ? SearchLink : string.Empty),
                         CssClass = "LinkStyle",
                         ForeColor = System.Drawing.Color.Black
                     });
@@ -75,7 +89,7 @@ namespace Yubay_Drone_team
                     {
                         ID = $"btn{i}",
                         Text = $"{i}",
-                        NavigateUrl = $"{Url}?Page={i}",
+                        NavigateUrl = $"{Url}?Page={i}" + (!string.IsNullOrWhiteSpace(SearchLink) ? SearchLink : string.Empty),
                         CssClass = "LinkStyle"
                     });
 
@@ -83,9 +97,17 @@ namespace Yubay_Drone_team
             }
         }
 
-        string BuildPagingUrl(int pageIndex)
+        string BuildPagingUrl(int pageIndex, string SearchType, string SearchKeyWord)
         {
-            return $"{Url}?Page={pageIndex}";
+            if(!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                return $"{Url}?Page={pageIndex}&{SearchType}={SearchKeyWord}&SearchType={SearchType}";
+            }
+            else
+            {
+                return $"{Url}?Page={pageIndex}";
+            }
+            
         }
     }
 }

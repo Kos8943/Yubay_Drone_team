@@ -16,22 +16,37 @@ namespace Yubay_Drone_team
         {
             Main.TableTitle = "使用者管理";
 
-            string currentPage = Request.QueryString["Page"];  
+            string currentPage = Request.QueryString["Page"];
+            string SearchType = Request.QueryString["SearchType"];
+            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
             {
                 currentPage = "1";
             }
 
+            if (string.IsNullOrWhiteSpace(SearchType) || string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                SearchType = string.Empty;
+                SearchKeyWord = string.Empty;
+            }
+            else
+            {
+                ChangePages.SearchType = SearchType;
+                ChangePages.SearchKeyWord = SearchKeyWord;
+            }
+
+
             if (!IsPostBack)
             {
                 ConnectionDB DBbase = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
                 int TotalSize;
-                DataTable dt = DBbase.ReadUserAccount(out TotalSize, "", "", Convert.ToInt32(currentPage));
+                DataTable dt = DBbase.ReadUserAccount(out TotalSize, SearchType, SearchKeyWord, Convert.ToInt32(currentPage));
                 ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
+                this.SaveInserVal();
             }
         }
 
@@ -87,14 +102,27 @@ namespace Yubay_Drone_team
                 currentPage = "1";
             }
 
-            Response.Redirect($"User_Account.aspx?{WantSearch}={KeyWord}");
+            if(!string.IsNullOrWhiteSpace(WantSearch) && !string.IsNullOrWhiteSpace(KeyWord))
+            {
+                Response.Redirect($"User_Account.aspx?Page={currentPage}&{WantSearch}={KeyWord}&SearchType={WantSearch}");
+            }
+            else
+            {
+                Response.Redirect($"User_Account.aspx?Page={currentPage}");
+            }  
 
-            //int TotalSize;
+        }
 
-            //DataTable dt = DBbase.ReadUserAccount(out TotalSize, WantSearch, KeyWord, Convert.ToInt32(currentPage));
-            //ChangePages.TotalSize = TotalSize;
-            //this.repInvoice.DataSource = dt;
-            //this.repInvoice.DataBind();
+        private void SaveInserVal()
+        {
+            string SearchType = Request.QueryString["SearchType"];
+            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+
+            if(!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                this.DropDownListSearch.SelectedValue = SearchType;
+                this.textKeyWord.Text = SearchKeyWord;
+            }
         }
     }
 }
