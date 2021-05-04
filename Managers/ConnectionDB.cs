@@ -305,18 +305,21 @@ namespace Yubay_Drone_team.Managers
 
 
 
-        #region 讀取管理者
+        #region 讀取管理者 
+        
         public DataTable ReadUserAccount(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
-        {
+        {                                   //總筆數        //搜尋條件         //關鍵字              //當前點選頁數           //一頁幾筆資料             
 
             string keyWordSearchString;
-
+            //如果搜尋條件、關鍵字不是空值或是空白
             if(!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
+                //去找輸入搜尋條件的值
                 keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
             }
             else
             {
+                //就不做搜尋
                 keyWordSearchString = string.Empty;
             }
 
@@ -440,6 +443,51 @@ namespace Yubay_Drone_team.Managers
             this.ExecuteNonQuery(queryString, parameters);
 
         }
+        public static DataTable ReadCustomerDetail()
+        {
+            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+
+            //使用的SQL語法
+            string queryString = $@" SELECT * FROM Customer WHERE Deleter IS NULL;";
+
+            //建立連線
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //轉譯成SQL看得懂的語法
+                SqlCommand command = new SqlCommand(queryString, connection);
+               
+
+                try
+                {
+                    //開始連線
+                    connection.Open();
+
+                    //從資料庫中讀取資料
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    //在記憶體中創新的空表
+                    DataTable dt = new DataTable();
+
+                    //把值塞進空表
+                    dt.Load(reader);
+             
+                    //關閉資料庫連線
+                    reader.Close();
+
+                    //回傳dt
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+
+              
+            }
+        }
+
 
     }
 

@@ -85,6 +85,7 @@
     <Content Include="Bootstrap\js\bootstrap.min.js" />
     <Content Include="ChangePages.ascx" />
     <Content Include="Customer_Create.aspx" />
+    <Content Include="Customer_Detail.aspx" />
     <Content Include="Drone_Create.aspx" />
     <Content Include="Drone_Detail.aspx" />
     <Content Include="Global.asax" />
@@ -133,6 +134,13 @@
     </Compile>
     <Compile Include="Customer_Create.aspx.designer.cs">
       <DependentUpon>Customer_Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_Detail.aspx.cs">
+      <DependentUpon>Customer_Detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Customer_Detail.aspx.designer.cs">
+      <DependentUpon>Customer_Detail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Drone_Create.aspx.cs">
       <DependentUpon>Drone_Create.aspx</DependentUpon>
