@@ -19,7 +19,6 @@ namespace Yubay_Drone_team.API
             //context.Response.ContentType = "text/plain";
             //context.Response.Write(context.Request["IsLogined"]);
 
-            var level = context.Session["IsLogined"];
 
             //string Sid = context.Request.Form["Sid"];
 
@@ -31,7 +30,10 @@ namespace Yubay_Drone_team.API
 
             //var UserLevel = GetSession.AccountLevel.ToString();
 
-            if (String.IsNullOrWhiteSpace("123"))
+            var level = context.Session["IsLogined"];
+            string retText = Newtonsoft.Json.JsonConvert.SerializeObject(level);
+
+            if (String.IsNullOrWhiteSpace(retText))
             {
                 context.Response.StatusCode = 400;
                 context.Response.Write(" Sid is required.");
@@ -44,7 +46,7 @@ namespace Yubay_Drone_team.API
 
                 //var levle = DB.GetUserLevel(Convert.ToInt32(Sid));
 
-                string retText = Newtonsoft.Json.JsonConvert.SerializeObject(level);
+                
                 context.Response.ContentType = "text/json";
                 context.Response.Write(retText);
             }

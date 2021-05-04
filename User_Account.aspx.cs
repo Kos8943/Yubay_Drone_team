@@ -60,12 +60,13 @@ namespace Yubay_Drone_team
         {
             string cmdName = e.CommandName;
             string cmdArguSid = e.CommandArgument.ToString().Split(',')[0].Trim();
-            string cmdArguAccount = e.CommandArgument.ToString().Split(',')[1].Trim();
+            
 
             ConnectionDB DBbase = new ConnectionDB();
 
             if ("DeleItem" == cmdName)
             {
+                string cmdArguAccount = e.CommandArgument.ToString().Split(',')[1].Trim();
                 DBbase.DeleteUserAccount(Convert.ToInt32(cmdArguSid), cmdArguAccount);
             }
             if ("UpDateItem" == cmdName)
