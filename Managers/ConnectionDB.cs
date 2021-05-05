@@ -36,6 +36,48 @@ namespace Yubay_Drone_team.Managers
             this.ExecuteNonQuery(queryString, parameters);
 
         }
+        public DataTable ID_Checker(string Drone_ID)
+        {
+
+            //使用的SQL語法
+            string queryString = $@" SELECT * FROM Drone_Detail WHERE Drone_ID = @Sid";
+            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+            //建立連線
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Sid", Drone_ID);
+
+                try
+                {
+                    //開始連線
+                    connection.Open();
+
+                    //從資料庫中讀取資料
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    //在記憶體中創新的空表
+                    DataTable dt = new DataTable();
+
+                    //把值塞進空表
+                    dt.Load(reader);
+
+                    reader.Close();
+
+                    //回傳dt
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+            }
+
+         
+
+        }
+
 
 
         public void Drone_Detail_Update(DroneMedel Model)
@@ -99,15 +141,7 @@ namespace Yubay_Drone_team.Managers
 
                     //把值塞進空表
                     dt.Load(reader);
-                    //foreach (DataRow dr in dt.Rows)
-                    //{
-                    //    Console.WriteLine(
-                    //        "\t{0}\t{1}\t{2}",
-                    //        dr["ID"],
-                    //        dr["Birthday"],
-                    //        dr["Name"]
-                    //    );
-                    //}
+                   
 
                     //關閉資料庫連線
                     reader.Close();
