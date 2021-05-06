@@ -432,6 +432,7 @@ namespace Yubay_Drone_team.Managers
             this.ExecuteNonQuery(queryString, parameters);
 
         }
+        #endregion
         public static DataTable ReadCustomerDetail()
         {
             //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
