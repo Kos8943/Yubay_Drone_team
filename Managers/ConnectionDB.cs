@@ -119,7 +119,7 @@ namespace Yubay_Drone_team.Managers
             string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
             //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail WHERE Deleter IS NULL;";
+            string queryString = $@" SELECT * FROM Drone_Detail WHERE DeleteDate IS NULL;";
 
             //建立連線
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -163,18 +163,17 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
         #region 刪除無人機資料的Method
-        public static void DelectDroneDetail(string Sid,string Deleter)
+        public static void DelectDroneDetail(string Sid)
 
         {
+
+            DateTime dateTime = DateTime.Now; 
             {
 
-                //使用的SQL語法
-                //string queryString = $@" INSERT INTO Drone_Detail (Drone_ID, Manufacturer, WeightLoad, Status, StopReason, Operator)
-                //                            VALUES (@Drone_ID, @Manufacturer, @WeightLoad, @Status, @StopReason, @Operator, Deleter = @Deleter, DeleteDate = @DeleteDate );";
+                //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+                string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
-                string queryString = $@"UPDATE Drone_Detail SET  
-                 Drone_ID = @Drone_ID, Manufacturer = @Manufacturer, WeightLoad = @WeightLoad, Status = @Status, 
-                 StopReason= @StopReason, Operator = @Operator, Deleter = @Deleter, DeleteDate = @DeleteDate Where Sid = @Sid";
+                string queryString = $@"UPDATE Drone_Detail SET DeleteDate = @DeleteDate Where Sid = @Sid";
 
 
 
@@ -188,10 +187,10 @@ namespace Yubay_Drone_team.Managers
                     SqlCommand command = new SqlCommand(queryString, connection);
 
                     //將值丟進相對應的位子
-                    command.Parameters.AddWithValue("@DroneDetail_ID", Sid);
-                    command.Parameters.AddWithValue("@DroneName", DroneName);
-                    
-
+                    command.Parameters.AddWithValue("@Sid", Sid);
+                    //command.Parameters.AddWithValue("@Deleter", Deleter);
+                    command.Parameters.AddWithValue("@DeleteDate", dateTime);
+                        
 
                     try
                     {
@@ -213,6 +212,7 @@ namespace Yubay_Drone_team.Managers
 
                 }
             }
+        }
             #endregion
             #region 關鍵字模糊查詢
             public static DataTable KeyWordSearchDroneDestination(string WantSearch, string KeyWord)
