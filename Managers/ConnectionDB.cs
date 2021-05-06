@@ -129,7 +129,7 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
         #region 刪除無人機資料的Method
-        public void DelectDroneDetail(DroneMedel Model)
+        public static void DelectDroneDetail(string Sid,string Deleter)
 
         {
             {
@@ -144,351 +144,333 @@ namespace Yubay_Drone_team.Managers
 
 
 
-                List<SqlParameter> parameters = new List<SqlParameter>()
+                //建立一個JS語法的字串,此字串內容為刷新本頁
+                string js = "<script language=javascript>window.location.href=window.location.href;</script>";
 
+                //建立連線
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                   new SqlParameter("Deleter",Model.Deleter),
-                   new SqlParameter("DeleteDate",Model.DeleteDate)
-                };
+                    //轉譯成SQL看得懂的語法
+                    SqlCommand command = new SqlCommand(queryString, connection);
 
-                this.ExecuteNonQuery(queryString, parameters);
+                    //將值丟進相對應的位子
+                    command.Parameters.AddWithValue("@DroneDetail_ID", Sid);
+                    command.Parameters.AddWithValue("@DroneName", DroneName);
+                    
 
+
+                    try
+                    {
+                        //開始連線
+                        connection.Open();
+
+                        //受影響的資料筆數(沒有使用)
+                        int totalChangRows = command.ExecuteNonQuery();
+                        Console.WriteLine("Total chang" + totalChangRows + " Rows.");
+
+                        //刷新頁面
+                        HttpContext.Current.Response.Write(js);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+
+                }
             }
-
-
-
-            ////建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            //string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            ////使用的SQL語法
-            //string queryString = $@"DELETE FROM Drone_Detail WHERE Sid = @Sid";
-            ////DELETE FROM TestTable_1 WHERE ID
-
-
-
-            ////建立連線
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-
-            //    //轉譯成SQL看得懂的語法
-            //    SqlCommand command = new SqlCommand(queryString, connection);
-
-            //    //將值丟進相對應的位子
-            //    command.Parameters.AddWithValue("@Sid", Sid);
-
-
-
-            //    try
-            //    {
-            //        //開始連線
-            //        connection.Open();
-
-            //        //受影響的資料筆數(沒有使用)
-            //        int totalChangRows = command.ExecuteNonQuery();
-            //        //HttpContext.Current.Response.Write("Total chang" + totalChangRows + " Rows.");
-            //        //Console.WriteLine("Total chang" + totalChangRows + " Rows.");
-
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        HttpContext.Current.Response.Write(ex);
-            //        //Console.WriteLine(ex);
-            //    }
-
-            //}
-        }
-        #endregion
-        #region 關鍵字模糊查詢
-        public static DataTable KeyWordSearchDroneDestination(string WantSearch, string KeyWord)
-        {
-
-            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail  WHERE {WantSearch} LIKE @KeyWord ORDER BY {WantSearch} ASC;";
-
-            //建立連線
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            #endregion
+            #region 關鍵字模糊查詢
+            public static DataTable KeyWordSearchDroneDestination(string WantSearch, string KeyWord)
             {
-                //轉譯成SQL看得懂的語法
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue($"@KeyWord", "%" + KeyWord + "%");
 
+                //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+                string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
-                try
+                //使用的SQL語法
+                string queryString = $@" SELECT * FROM Drone_Detail  WHERE {WantSearch} LIKE @KeyWord ORDER BY {WantSearch} ASC;";
+
+                //建立連線
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    //開始連線
-                    connection.Open();
+                    //轉譯成SQL看得懂的語法
+                    SqlCommand command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue($"@KeyWord", "%" + KeyWord + "%");
 
-                    //從資料庫中讀取資料
-                    SqlDataReader reader = command.ExecuteReader();
 
-                    //在記憶體中創新的空表
-                    DataTable dt = new DataTable();
+                    try
+                    {
+                        //開始連線
+                        connection.Open();
 
-                    //把值塞進空表
-                    dt.Load(reader);
+                        //從資料庫中讀取資料
+                        SqlDataReader reader = command.ExecuteReader();
 
-                    //foreach (DataRow dr in dt.Rows)
+                        //在記憶體中創新的空表
+                        DataTable dt = new DataTable();
+
+                        //把值塞進空表
+                        dt.Load(reader);
+
+                        //foreach (DataRow dr in dt.Rows)
+                        //{
+                        //    Console.WriteLine(
+                        //        "\t{0}\t{1}\t{2}",
+                        //        dr["ID"],
+                        //        dr["Birthday"],
+                        //        dr["Name"]
+                        //    );
+                        //}
+
+                        //關閉資料庫連線
+                        reader.Close();
+
+                        //回傳dt
+                        return dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return null;
+                    }
+
+                    //finally
                     //{
-                    //    Console.WriteLine(
-                    //        "\t{0}\t{1}\t{2}",
-                    //        dr["ID"],
-                    //        dr["Birthday"],
-                    //        dr["Name"]
-                    //    );
+                    //    connection.Close();
                     //}
-
-                    //關閉資料庫連線
-                    reader.Close();
-
-                    //回傳dt
-                    return dt;
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return null;
-                }
-
-                //finally
-                //{
-                //    connection.Close();
-                //}
             }
-        }
-        #endregion
-        public static DataTable UpdateOnlyoneDroneDetail(string sid)
-        {
-            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail Where Sid=@Sid;";
-
-            //建立連線
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            #endregion
+            public static DataTable UpdateOnlyoneDroneDetail(string sid)
             {
-                //轉譯成SQL看得懂的語法
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@Sid", sid);
+                //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+                string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
-                try
+                //使用的SQL語法
+                string queryString = $@" SELECT * FROM Drone_Detail Where Sid=@Sid;";
+
+                //建立連線
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    //開始連線
-                    connection.Open();
+                    //轉譯成SQL看得懂的語法
+                    SqlCommand command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@Sid", sid);
 
-                    //從資料庫中讀取資料
-                    SqlDataReader reader = command.ExecuteReader();
+                    try
+                    {
+                        //開始連線
+                        connection.Open();
 
-                    //在記憶體中創新的空表
-                    DataTable dt = new DataTable();
+                        //從資料庫中讀取資料
+                        SqlDataReader reader = command.ExecuteReader();
 
-                    //把值塞進空表
-                    dt.Load(reader);
+                        //在記憶體中創新的空表
+                        DataTable dt = new DataTable();
 
-                    reader.Close();
+                        //把值塞進空表
+                        dt.Load(reader);
 
-                    //回傳dt
-                    return dt;
+                        reader.Close();
+
+                        //回傳dt
+                        return dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return null;
+                    }
+
+
                 }
-                catch (Exception ex)
+            }
+
+
+
+            #region 讀取管理者 
+
+            public DataTable ReadUserAccount(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
+            {                                   //總筆數        //搜尋條件         //關鍵字              //當前點選頁數           //一頁幾筆資料             
+
+                string keyWordSearchString;
+                //如果搜尋條件、關鍵字不是空值或是空白
+                if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
                 {
-                    Console.WriteLine(ex.Message);
-                    return null;
+                    //去找輸入搜尋條件的值
+                    keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+                }
+                else
+                {
+                    //就不做搜尋
+                    keyWordSearchString = string.Empty;
                 }
 
-
-            }
-        }
-
-
-
-        #region 讀取管理者 
-        
-        public DataTable ReadUserAccount(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
-        {                                   //總筆數        //搜尋條件         //關鍵字              //當前點選頁數           //一頁幾筆資料             
-
-            string keyWordSearchString;
-            //如果搜尋條件、關鍵字不是空值或是空白
-            if(!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
-            {
-                //去找輸入搜尋條件的值
-                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
-            }
-            else
-            {
-                //就不做搜尋
-                keyWordSearchString = string.Empty;
-            }
-
-            string queryString = $@" SELECT TOP 10 * FROM 
+                string queryString = $@" SELECT TOP 10 * FROM 
                                         (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid]) AS ROWSID FROM UserAccount)
                                         a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
-            string countQuery =
-                $@" SELECT 
+                string countQuery =
+                    $@" SELECT 
                         COUNT(Sid)
                     FROM UserAccount
                     WHERE SuperAccount = 'False' AND IsDelete IS NULL {keyWordSearchString};";
 
 
-            List<SqlParameter> dbParameters = new List<SqlParameter>();
+                List<SqlParameter> dbParameters = new List<SqlParameter>();
 
-            if(!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
-            {
-                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
-            }
-
-            var dt = this.GetDataTable(queryString, dbParameters);
-
-            var dataCount = this.GetScale(countQuery, dbParameters) as int?;
-
-            TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
-
-            return dt;
-
-        } 
-        #endregion
-
-
-        #region 下拉式選單(負責人員)
-        public static DataTable DropDownListRead()
-        {
-            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            //使用的SQL語法
-            string queryString = $@" SELECT * FROM UserAccount;";
-
-            //建立連線
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                //轉譯成SQL看得懂的語法
-                SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Parameters.AddWithValue("@NumberCol", "2");
-
-                try
+                if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
                 {
-                    //開始連線
-                    connection.Open();
+                    dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
+                }
 
-                    //從資料庫中讀取資料
-                    SqlDataReader reader = command.ExecuteReader();
+                var dt = this.GetDataTable(queryString, dbParameters);
 
-                    //在記憶體中創新的空表
-                    DataTable dt = new DataTable();
+                var dataCount = this.GetScale(countQuery, dbParameters) as int?;
 
-                    //把值塞進空表
-                    dt.Load(reader);
-                    //foreach (DataRow dr in dt.Rows)
+                TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
+
+                return dt;
+
+            }
+            #endregion
+
+
+            #region 下拉式選單(負責人員)
+            public static DataTable DropDownListRead()
+            {
+                //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+                string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+
+                //使用的SQL語法
+                string queryString = $@" SELECT * FROM UserAccount;";
+
+                //建立連線
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    //轉譯成SQL看得懂的語法
+                    SqlCommand command = new SqlCommand(queryString, connection);
+                    //command.Parameters.AddWithValue("@NumberCol", "2");
+
+                    try
+                    {
+                        //開始連線
+                        connection.Open();
+
+                        //從資料庫中讀取資料
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        //在記憶體中創新的空表
+                        DataTable dt = new DataTable();
+
+                        //把值塞進空表
+                        dt.Load(reader);
+                        //foreach (DataRow dr in dt.Rows)
+                        //{
+                        //    Console.WriteLine(
+                        //        "\t{0}\t{1}\t{2}",
+                        //        dr["ID"],
+                        //        dr["Birthday"],
+                        //        dr["Name"]
+                        //    );
+                        //}
+
+                        //關閉資料庫連線
+                        reader.Close();
+
+                        //回傳dt
+                        return dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return null;
+                    }
+
+                    //finally
                     //{
-                    //    Console.WriteLine(
-                    //        "\t{0}\t{1}\t{2}",
-                    //        dr["ID"],
-                    //        dr["Birthday"],
-                    //        dr["Name"]
-                    //    );
+                    //    connection.Close();
                     //}
-
-                    //關閉資料庫連線
-                    reader.Close();
-
-                    //回傳dt
-                    return dt;
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return null;
-                }
-
-                //finally
-                //{
-                //    connection.Close();
-                //}
             }
-        }
-        #endregion
+            #endregion
 
 
-        //public int GetUserLevel(int Sid)
-        //{
-        //    string queryString = $@" SELECT AccountLevel FROM UserAccount WHERE Sid = @Sid;";
+            //public int GetUserLevel(int Sid)
+            //{
+            //    string queryString = $@" SELECT AccountLevel FROM UserAccount WHERE Sid = @Sid;";
 
-        //    List<SqlParameter> dbParameters = new List<SqlParameter>() 
-        //    {
-        //        new SqlParameter("@Sid", Sid),
-        //    };
-
-
-        //    var dt =Convert.ToInt32( this.GetScale(queryString, dbParameters));
-
-        //    return dt;
-        //}
+            //    List<SqlParameter> dbParameters = new List<SqlParameter>() 
+            //    {
+            //        new SqlParameter("@Sid", Sid),
+            //    };
 
 
-        public void DeleteUserAccount(int Sid, string Account)
-        {
+            //    var dt =Convert.ToInt32( this.GetScale(queryString, dbParameters));
 
-            string queryString = $@"UPDATE UserAccount SET Account = @Account, IsDelete = 'true' Where Sid = @Sid";
+            //    return dt;
+            //}
 
-            List<SqlParameter> parameters = new List<SqlParameter>()
+
+            public void DeleteUserAccount(int Sid, string Account)
+            {
+
+                string queryString = $@"UPDATE UserAccount SET Account = @Account, IsDelete = 'true' Where Sid = @Sid";
+
+                List<SqlParameter> parameters = new List<SqlParameter>()
                 {
                    new SqlParameter("@Sid", Sid),
                    new SqlParameter("@Account", $"{Account}_Deleted_{Sid}")
                 };
 
-            this.ExecuteNonQuery(queryString, parameters);
+                this.ExecuteNonQuery(queryString, parameters);
 
-        }
-        public static DataTable ReadCustomerDetail()
-        {
-            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            //使用的SQL語法
-            string queryString = $@" SELECT * FROM Customer WHERE Deleter IS NULL;";
-
-            //建立連線
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                //轉譯成SQL看得懂的語法
-                SqlCommand command = new SqlCommand(queryString, connection);
-               
-
-                try
-                {
-                    //開始連線
-                    connection.Open();
-
-                    //從資料庫中讀取資料
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    //在記憶體中創新的空表
-                    DataTable dt = new DataTable();
-
-                    //把值塞進空表
-                    dt.Load(reader);
-             
-                    //關閉資料庫連線
-                    reader.Close();
-
-                    //回傳dt
-                    return dt;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return null;
-                }
-
-              
             }
-        }
+            public static DataTable ReadCustomerDetail()
+            {
+                //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+                string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
+                //使用的SQL語法
+                string queryString = $@" SELECT * FROM Customer WHERE Deleter IS NULL;";
+
+                //建立連線
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    //轉譯成SQL看得懂的語法
+                    SqlCommand command = new SqlCommand(queryString, connection);
+
+
+                    try
+                    {
+                        //開始連線
+                        connection.Open();
+
+                        //從資料庫中讀取資料
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        //在記憶體中創新的空表
+                        DataTable dt = new DataTable();
+
+                        //把值塞進空表
+                        dt.Load(reader);
+
+                        //關閉資料庫連線
+                        reader.Close();
+
+                        //回傳dt
+                        return dt;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return null;
+                    }
+
+
+                }
+            }
+
+
+        }
 
     }
-
-}
