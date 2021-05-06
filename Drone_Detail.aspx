@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Drone_Detail.aspx.cs" Inherits="Yubay_Drone_team.Drone_Detail" %>
 
+<%@ Register Src="~/ChangePages.ascx" TagPrefix="uc1" TagName="ChangePages" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         

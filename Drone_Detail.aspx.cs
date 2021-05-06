@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Input;
+using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
 
@@ -45,7 +46,9 @@ namespace Yubay_Drone_team
             if ("DeleItem" == cmdName)
             {
                 Model.Drone_ID = e.CommandArgument.ToString().Split(',')[1].Trim();
-                Model.Deleter = (string)Session["_sessionKey"];
+                LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
+                var username = loginInfo.UserName;
+                Model.Deleter = username.ToString();
                 //string cmdArguAccount = e.CommandArgument.ToString().Split(',')[1].Trim();
                 //DBbase.DelectDroneDetail(Convert.ToInt32(cmdArgu), cmdArguAccount);
                 DBbase.DelectDroneDetail(Model);
