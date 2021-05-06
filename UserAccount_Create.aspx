@@ -152,7 +152,7 @@
             <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
             <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" />
         </div>
-        <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>
+        <asp:Label ID="ltMsg" runat="server" Text="新增成功!" CssClass="d-flex justify-content-center errMsg" Visible="false"></asp:Label>
         <%--<asp:Literal ID="Literal1" runat="server" Text="新增成功!"  Visible="false"></asp:Literal>--%>
     </div>
 
