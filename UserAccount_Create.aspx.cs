@@ -158,7 +158,7 @@ namespace Yubay_Drone_team
                         model.Password = newPassword;
                         model.Updater = AccountUserName;
 
-                        
+                        ConnectionDB.UpdateAccount(model, Sid);
                     }
                 }
             }
