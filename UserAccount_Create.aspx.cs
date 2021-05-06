@@ -101,7 +101,7 @@ namespace Yubay_Drone_team
                 string checkPassword = this.Text_CheckPassword.Text;
                 
 
-                if (string.IsNullOrWhiteSpace(account))
+                if (!string.IsNullOrWhiteSpace(account))
                 {
                     model.Account = account;
                 }
@@ -128,7 +128,7 @@ namespace Yubay_Drone_team
                 //    model.AccountLevel = 1;
                 //}
 
-                if (string.IsNullOrWhiteSpace(userName))
+                if (!string.IsNullOrWhiteSpace(userName))
                 {
                     model.UserName = userName;
                 }
