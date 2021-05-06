@@ -34,13 +34,17 @@ namespace Yubay_Drone_team
 
         protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            var cmdName = e.CommandName;
-            DroneMedel cmdArgu = new DroneMedel();
-             cmdArgu = (DroneMedel)e.CommandArgument;
-            ConnectionDB CDB = new ConnectionDB();
+            //var cmdName = e.CommandName;
+            //DroneMedel cmdArgu = new DroneMedel();
+            //cmdArgu = (DroneMedel)e.CommandArgument;
+            //ConnectionDB CDB = new ConnectionDB();
+
+            string cmdName = e.CommandName;
+            string cmdArgu = e.CommandArgument.ToString();
+
             if ("DeleItem" == cmdName)
             {
-                CDB.DelectDroneDetail(cmdArgu);
+                ConnectionDB.DelectDroneDetail(cmdArgu);
 
                 DataTable dt = ConnectionDB.ReadDroneDetail();
                 this.repInvoice.DataSource = dt;
