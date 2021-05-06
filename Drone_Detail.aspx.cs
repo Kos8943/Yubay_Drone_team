@@ -34,25 +34,28 @@ namespace Yubay_Drone_team
 
         protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            //var cmdName = e.CommandName;
-            //DroneMedel cmdArgu = new DroneMedel();
-            //cmdArgu = (DroneMedel)e.CommandArgument;
-            //ConnectionDB CDB = new ConnectionDB();
 
             string cmdName = e.CommandName;
-            string cmdArgu = e.CommandArgument.ToString();
+            //string cmdArgu = e.CommandArgument.ToString().Split(',')[0].Trim();
+            DroneMedel Model = new DroneMedel();
+            ConnectionDB DBbase = new ConnectionDB();
+            Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
+
 
             if ("DeleItem" == cmdName)
             {
-                ConnectionDB.DelectDroneDetail(cmdArgu);
-
+                Model.Drone_ID = e.CommandArgument.ToString().Split(',')[1].Trim();
+                Model.Deleter = (string)Session["_sessionKey"];
+                //string cmdArguAccount = e.CommandArgument.ToString().Split(',')[1].Trim();
+                //DBbase.DelectDroneDetail(Convert.ToInt32(cmdArgu), cmdArguAccount);
+                DBbase.DelectDroneDetail(Model);
                 DataTable dt = ConnectionDB.ReadDroneDetail();
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
             }
             if ("UpDateItem" == cmdName)
             {
-                string targetUrl = "~/Drone_Create.aspx?Sid=" + cmdArgu;
+                string targetUrl = "~/Drone_Create.aspx?Sid=" + Model.Sid;
 
                 Response.Redirect(targetUrl);
             }

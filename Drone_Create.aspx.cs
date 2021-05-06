@@ -70,7 +70,7 @@ namespace Yubay_Drone_team
 
                     
                     DataTable IDdt = ConnectionDB.ID_Checker(model.Drone_ID);
-                    if (IDdt != null)
+                    if (IDdt.Rows.Count != 0)
                     {
                         this.Label1.Text = "已重複輸入";
                         this.Label1.Visible = true;
@@ -87,15 +87,7 @@ namespace Yubay_Drone_team
                     
 
                     model.Sid = Convert.ToInt32(querryString);
-                    //DataTable IDdt= ConnectionDB.ID_Checker(model.Sid);
-                    //if (IDdt != null)
-                    //{
-                    //    this.Label1.Text = "已重複輸入";
-
-                    //    return;
-                    //}
-
-
+ 
                     ConnectionDB.Drone_Detail_Update(model);
 
                     this.Label1.Text = "修改成功!";

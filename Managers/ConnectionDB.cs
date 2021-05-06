@@ -119,7 +119,7 @@ namespace Yubay_Drone_team.Managers
             string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
             //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail WHERE DeleteDate IS NULL;";
+            string queryString = $@" SELECT * FROM Drone_Detail WHERE IsDelete IS NULL;";
 
             //建立連線
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -163,55 +163,27 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
         #region 刪除無人機資料的Method
-        public static void DelectDroneDetail(string Sid)
-
+        public void DelectDroneDetail(DroneMedel Model)
         {
 
-            DateTime dateTime = DateTime.Now;
-            {
+            //使用的SQL語法
 
-                //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-                string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-                string queryString = $@"UPDATE Drone_Detail SET DeleteDate = @DeleteDate Where Sid = @Sid";
+            string queryString = $@"UPDATE Drone_Detail SET Drone_ID = @Drone_ID, Deleter=@Deleter, DeleteDate= @DeleteDate , IsDelete = 'true' Where Sid = @Sid";
 
 
 
-                //建立一個JS語法的字串,此字串內容為刷新本頁
-                string js = "<script language=javascript>window.location.href=window.location.href;</script>";
+            List<SqlParameter> parameters = new List<SqlParameter>()
 
-                //建立連線
-                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    //轉譯成SQL看得懂的語法
-                    SqlCommand command = new SqlCommand(queryString, connection);
+                   new SqlParameter("@Sid", Model.Sid),
+                   new SqlParameter("@Deleter", Model.Deleter),
+                   new SqlParameter("@Drone_ID", $"{Model.Drone_ID}_Deleted_{Model.Sid}"),
+                   new SqlParameter("@DeleteDate",DateTime.Now)
+                };
 
-                    //將值丟進相對應的位子
-                    command.Parameters.AddWithValue("@Sid", Sid);
-                    //command.Parameters.AddWithValue("@Deleter", Deleter);
-                    command.Parameters.AddWithValue("@DeleteDate", dateTime);
+            this.ExecuteNonQuery(queryString, parameters);
 
 
-                    try
-                    {
-                        //開始連線
-                        connection.Open();
-
-                        //受影響的資料筆數(沒有使用)
-                        int totalChangRows = command.ExecuteNonQuery();
-                        Console.WriteLine("Total chang" + totalChangRows + " Rows.");
-
-                        //刷新頁面
-                        HttpContext.Current.Response.Write(js);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-
-                }
-            }
         }
         #endregion
         #region 關鍵字模糊查詢
@@ -322,6 +294,7 @@ namespace Yubay_Drone_team.Managers
 
 
         #region 讀取管理者 
+
         public DataTable ReadUserAccount(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
         {                                   //總筆數        //搜尋條件         //關鍵字              //當前點選頁數           //一頁幾筆資料             
 
