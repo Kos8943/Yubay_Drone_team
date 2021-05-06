@@ -15,13 +15,13 @@ namespace Yubay_Drone_team
     {
 
         /// <summary>
-        /// CreateDrone 控制項。
+        /// UserAccountTittle 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CreateDrone;
+        protected global::System.Web.UI.WebControls.Label UserAccountTittle;
 
         /// <summary>
         /// Text_Account 控制項。
@@ -31,6 +31,24 @@ namespace Yubay_Drone_team
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Text_Account;
+
+        /// <summary>
+        /// Text_UserName 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Text_UserName;
+
+        /// <summary>
+        /// PlaceHolderCreateMode 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderCreateMode;
 
         /// <summary>
         /// Text_Password 控制項。
@@ -51,13 +69,40 @@ namespace Yubay_Drone_team
         protected global::System.Web.UI.WebControls.TextBox Text_CheckPassword;
 
         /// <summary>
-        /// Text_UserName 控制項。
+        /// PlaceHolderUpdateMode 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Text_UserName;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderUpdateMode;
+
+        /// <summary>
+        /// Text_OldPassword 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Text_OldPassword;
+
+        /// <summary>
+        /// Text_NewPassword 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Text_NewPassword;
+
+        /// <summary>
+        /// Text_NewPasswordCheck 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Text_NewPasswordCheck;
 
         /// <summary>
         /// DeleteData_Authority 控制項。
