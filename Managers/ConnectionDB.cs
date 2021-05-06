@@ -340,7 +340,6 @@ namespace Yubay_Drone_team.Managers
 
 
         #region 讀取管理者 
-        
         public DataTable ReadUserAccount(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
         {                                   //總筆數        //搜尋條件         //關鍵字              //當前點選頁數           //一頁幾筆資料             
 
@@ -462,6 +461,7 @@ namespace Yubay_Drone_team.Managers
         //    return dt;
         //}
 
+        #region 刪除使用者帳號(未完成)
 
         public void DeleteUserAccount(int Sid, string Account)
         {
@@ -476,7 +476,8 @@ namespace Yubay_Drone_team.Managers
 
             this.ExecuteNonQuery(queryString, parameters);
 
-        }
+        } 
+        #endregion
         public static DataTable ReadCustomerDetail()
         {
             //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
@@ -522,7 +523,94 @@ namespace Yubay_Drone_team.Managers
             }
         }
 
+        #region 新增使用者帳號
 
+        public void CreateUserAccount(AccountModel model)
+        {
+            //使用的SQL語法
+            string queryString = $@" INSERT INTO UserAccount (Account, Password, SuperAccount, UserName, AccountLevel)
+                                        VALUES (@Account, @Password, @SuperAccount, @UserName, @AccountLevel);";
+
+            //建立連線
+
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Account", model.Account),
+                   new SqlParameter("@Password",model.Password),
+                   new SqlParameter("@SuperAccount",model.SuperAccount),
+                   new SqlParameter("@UserName",model.UserName),
+                   new SqlParameter("@AccountLevel", model.AccountLevel)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+        #region 讀取單筆User帳號
+
+        public DataTable ReadSingleUserAccount(int Sid)
+        {
+            string queryString = $@" SELECT Account, [Password], UserName, AccountLevel FROM UserAccount Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+
+        #region 確認舊帳號
+        public bool checkOldPassword(int Sid, string oldPassword)
+        {
+            string queryString = $@"SELECT [Password] FROM UserAccount Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+
+            if (string.Compare(data.Rows[0]["Password"].ToString(), oldPassword) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        #endregion
+
+
+        #region 修改帳號
+        public void UpdateAccount(AccountModel model, int sid)
+        {
+            string queryString = $@"UPDATE UserAccount SET [Password] = @Password, UserName = @UserName, AccountLevel = @AccountLevel, Updater = @Updater, UpdateDate = @UpdateDate Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", sid),
+                   new SqlParameter("@Password", model.Password),
+                   new SqlParameter("@UserName", model.UserName),
+                   new SqlParameter("@AccountLevel", model.AccountLevel),
+                   new SqlParameter("@Updater", model.Updater),
+                   new SqlParameter("@UpdateDate", DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        } 
+        #endregion
     }
 
 }

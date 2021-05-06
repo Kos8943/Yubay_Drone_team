@@ -93,10 +93,10 @@ namespace Yubay_Drone_team
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            
             string WantSearch = this.DropDownListSearch.SelectedValue;
             string KeyWord = this.textKeyWord.Text;
-            ConnectionDB DBbase = new ConnectionDB();
-
+            
             string currentPage = Request.QueryString["Page"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
