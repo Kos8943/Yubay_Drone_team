@@ -113,53 +113,48 @@ namespace Yubay_Drone_team.Managers
 
 
         #region 查詢無人機資料的Method
-        public static DataTable ReadDroneDetail()
+        public DataTable ReadDroneDetail(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
         {
-            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail WHERE IsDelete IS NULL;";
-
-            //建立連線
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string keyWordSearchString;
+            //如果搜尋條件、關鍵字不是空值或是空白
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
-                //轉譯成SQL看得懂的語法
-                SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Parameters.AddWithValue("@NumberCol", "2");
-
-                try
-                {
-                    //開始連線
-                    connection.Open();
-
-                    //從資料庫中讀取資料
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    //在記憶體中創新的空表
-                    DataTable dt = new DataTable();
-
-                    //把值塞進空表
-                    dt.Load(reader);
-
-
-                    //關閉資料庫連線
-                    reader.Close();
-
-                    //回傳dt
-                    return dt;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return null;
-                }
-
-                //finally
-                //{
-                //    connection.Close();
-                //}
+                //去找輸入搜尋條件的值
+                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
             }
+            else
+            {
+                //就不做搜尋
+                keyWordSearchString = string.Empty;
+            }
+
+            string queryString = $@" SELECT TOP 10 * FROM 
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Drone_Detail)
+                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+
+            string countQuery =
+                $@" SELECT 
+                        COUNT(Sid)
+                    FROM Drone_Detail
+                    WHERE IsDelete IS NULL {keyWordSearchString};";
+
+
+            List<SqlParameter> dbParameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
+            }
+
+            var dt = this.GetDataTable(queryString, dbParameters);
+
+            var dataCount = this.GetScale(countQuery, dbParameters) as int?;
+
+            TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
+
+            return dt;
+
+            
         }
         #endregion
         #region 刪除無人機資料的Method
