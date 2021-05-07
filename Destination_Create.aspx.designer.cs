@@ -69,13 +69,13 @@ namespace Yubay_Drone_team
         protected global::System.Web.UI.WebControls.TextBox Text_Remarks;
 
         /// <summary>
-        /// Customer_Name 控制項。
+        /// DropDownList_Customer_Name 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Customer_Name;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Customer_Name;
 
         /// <summary>
         /// Text_Phone 控制項。

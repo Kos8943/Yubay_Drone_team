@@ -640,6 +640,24 @@ namespace Yubay_Drone_team.Managers
 
         }
         #endregion
+
+
+        #region 讀取單筆User帳號
+
+        public DataTable ReadSingleCustomer(int Sid)
+        {
+            string queryString = $@" SELECT Address, Phone  FROM Customer Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
     }
 
 }
