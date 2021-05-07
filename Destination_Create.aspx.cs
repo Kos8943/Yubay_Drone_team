@@ -22,15 +22,16 @@ namespace Yubay_Drone_team
             //取得session的使用者權限
             UserLevel AccountLevel = loginInfo.AccountLevel;
 
+            ConnectionDB connectionDB = new ConnectionDB();
 
-            DataTable ddlDrone_ID = ConnectionDB.ReadDroneDetail();
+            DataTable ddlDrone_ID = connectionDB.ReadDrone_ID_Only();
             this.DropDownList_Drone.DataSource = ddlDrone_ID;
             this.DropDownList_Drone.DataTextField = "Drone_ID";
             this.DropDownList_Drone.DataValueField = "Drone_ID";
             this.DropDownList_Drone.DataBind();
 
 
-            DataTable ddlCustonerName = ConnectionDB.ReadCustomerDetail();
+            DataTable ddlCustonerName = connectionDB.ReadAllCustomerName();
             this.DropDownList_Customer_Name.DataSource = ddlCustonerName;
             this.DropDownList_Customer_Name.DataTextField = "Name";
             this.DropDownList_Customer_Name.DataValueField = "Sid";         

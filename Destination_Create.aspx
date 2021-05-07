@@ -146,12 +146,12 @@
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Phone">客戶電話</label>
-                        <asp:TextBox ID="Text_Phone" CssClass="inputsize" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Phone" CssClass="inputsize costomerPhone" runat="server"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Address">客戶地址</label>
-                        <asp:TextBox ID="Text_Address" CssClass="inputsize" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Address" CssClass="inputsize costomerAddress" runat="server"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
@@ -181,7 +181,6 @@
 
     <script>
         $(".ddlCustomerName").change(function () {
-            console.log("HI");
             var Sid = $(this).val();
             $.ajax({
                 method: "POST",
@@ -189,8 +188,10 @@
                 type: "JSON",
                 data: { "Sid": Sid }
             }).done(function (responseData) {
-
-               
+                console.log(responseData);
+                console.log($(".costomerPhone"))
+                $(".costomerPhone").val(responseData["Phone"]);
+                $(".costomerAddress").val(responseData["Address"]);
             });
         });
     </script>

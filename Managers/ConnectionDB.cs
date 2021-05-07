@@ -637,7 +637,7 @@ namespace Yubay_Drone_team.Managers
         #endregion
 
 
-        #region 讀取單筆User帳號
+        #region 讀取單筆客戶地址跟電話
 
         public DataTable ReadSingleCustomer(int Sid)
         {
@@ -648,6 +648,33 @@ namespace Yubay_Drone_team.Managers
                 {
                    new SqlParameter("@Sid", Sid)
                 };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+        #region 讀取全部無人機ID
+        public DataTable ReadDrone_ID_Only()
+        {
+            string queryString = $@" SELECT Drone_ID FROM Drone_Detail;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+        #region 讀取客戶名單
+
+        public DataTable ReadAllCustomerName()
+        {
+            string queryString = $@" SELECT [Name], Sid FROM Customer;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
 
             DataTable data = this.GetDataTable(queryString, parameters);
             return data;
