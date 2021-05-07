@@ -176,7 +176,6 @@ namespace Yubay_Drone_team
             else//修改模式
             {
                
-
                 //檢查userName是否為空值
                 if (!string.IsNullOrWhiteSpace(userName))
                 {

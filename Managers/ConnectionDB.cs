@@ -312,7 +312,7 @@ namespace Yubay_Drone_team.Managers
             }
 
             string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid]) AS ROWSID FROM UserAccount)
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM UserAccount)
                                         a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
             string countQuery =
@@ -416,17 +416,19 @@ namespace Yubay_Drone_team.Managers
         //    return dt;
         //}
 
-        #region 刪除使用者帳號(未完成)
+        #region 刪除使用者帳號
 
-        public void DeleteUserAccount(int Sid, string Account)
+        public void DeleteUserAccount(int Sid, string Account, string UserName)
         {
 
-            string queryString = $@"UPDATE UserAccount SET Account = @Account, IsDelete = 'true' Where Sid = @Sid";
+            string queryString = $@"UPDATE UserAccount SET Account = @Account, Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' Where Sid = @Sid";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
                 {
                    new SqlParameter("@Sid", Sid),
-                   new SqlParameter("@Account", $"{Account}_Deleted_{Sid}")
+                   new SqlParameter("@Account", $"{Account}_Deleted_{Sid}"),
+                   new SqlParameter("@Deleter", $"{UserName}"),
+                   new SqlParameter("@DeleteDate", DateTime.Now)
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
@@ -564,6 +566,78 @@ namespace Yubay_Drone_team.Managers
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+        #region 讀取出勤紀錄 
+
+        public DataTable ReadDestination(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
+        {                                   //總筆數        //搜尋條件         //關鍵字              //當前點選頁數           //一頁幾筆資料             
+
+            string keyWordSearchString;
+            //如果搜尋條件、關鍵字不是空值或是空白
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                //去找輸入搜尋條件的值
+                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+            }
+            else
+            {
+                //就不做搜尋
+                keyWordSearchString = string.Empty;
+            }
+
+            string queryString = $@" SELECT TOP 10 * FROM 
+                                        (SELECT Sid, [Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Customer_Sid, Remarks, Pesticide, Pesticide_Date, IsDelete,ROW_NUMBER() OVER (ORDER BY [Sid]) AS ROWSID FROM Destination)
+                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+
+//            SELECT TOP 10 * FROM
+//              (SELECT[Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Customer_Sid,                   Remarks, Pesticide, Pesticide_Date, IsDelete, ROW_NUMBER() OVER(ORDER BY[Sid]) AS ROWSID FROM Destination)
+//                  a WHERE ROWSID > 10 AND IsDelete IS NULL OR IsDelete = 'false';
+
+
+
+            string countQuery =
+                $@" SELECT 
+                        COUNT(Sid)
+                    FROM Destination
+                    WHERE  (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+
+
+            List<SqlParameter> dbParameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
+            }
+
+            var dt = this.GetDataTable(queryString, dbParameters);
+
+            var dataCount = this.GetScale(countQuery, dbParameters) as int?;
+
+            TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
+
+            return dt;
+
+        }
+        #endregion
+
+
+        #region 刪除無人機出勤紀錄
+        public void DeleteDestination(int Sid, string UserName)
+        {
+
+            string queryString = $@"UPDATE Destination SET Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+                {
+                   new SqlParameter("@Sid", Sid),
+                   new SqlParameter("@Deleter", $"{UserName}"),
+                   new SqlParameter("@DeleteDate", DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+
         }
         #endregion
     }

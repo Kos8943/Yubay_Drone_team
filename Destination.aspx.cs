@@ -10,11 +10,11 @@ using Yubay_Drone_team.Managers;
 
 namespace Yubay_Drone_team
 {
-    public partial class User_Account : System.Web.UI.Page
+    public partial class Destination : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Main.TableTitle = "使用者管理";
+            Main.TableTitle = "無人機出勤紀錄";
 
             string currentPage = Request.QueryString["Page"];
             string SearchType = Request.QueryString["SearchType"];
@@ -42,7 +42,7 @@ namespace Yubay_Drone_team
                 ConnectionDB DBbase = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
                 int TotalSize;
-                DataTable dt = DBbase.ReadUserAccount(out TotalSize, SearchType, SearchKeyWord, Convert.ToInt32(currentPage));
+                DataTable dt = DBbase.ReadDestination(out TotalSize, SearchType, SearchKeyWord, Convert.ToInt32(currentPage));
                 ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
@@ -53,14 +53,14 @@ namespace Yubay_Drone_team
         protected void Add_Click(object sender, EventArgs e)
         {
             //網頁轉跳至.aspx
-            Response.Redirect("UserAccount_Create.aspx");
+            Response.Redirect("Destination_Create.aspx");
         }
 
         protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             string cmdName = e.CommandName;
-            string cmdArguSid = e.CommandArgument.ToString().Split(',')[0].Trim();
-            
+            string cmdArguSid = e.CommandArgument.ToString();
+
 
             ConnectionDB DBbase = new ConnectionDB();
 
@@ -70,13 +70,12 @@ namespace Yubay_Drone_team
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 //取得session的使用者名稱
                 string UserName = loginInfo.UserName;
-
-                string cmdArguAccount = e.CommandArgument.ToString().Split(',')[1].Trim();
-                DBbase.DeleteUserAccount(Convert.ToInt32(cmdArguSid), cmdArguAccount, UserName);
+              
+                DBbase.DeleteDestination(Convert.ToInt32(cmdArguSid), UserName);
             }
             if ("UpDateItem" == cmdName)
             {
-                string targetUrl = "~/UserAccount_Create.aspx?Sid=" + cmdArguSid;
+                string targetUrl = "~/Destination_Create.aspx?Sid=" + cmdArguSid;
 
                 Response.Redirect(targetUrl);
             }
@@ -90,7 +89,7 @@ namespace Yubay_Drone_team
 
 
             int TotalSize;
-            DataTable dt = DBbase.ReadUserAccount(out TotalSize, "", "", Convert.ToInt32(currentPage));
+            DataTable dt = DBbase.ReadDestination(out TotalSize, "", "", Convert.ToInt32(currentPage));
             ChangePages.TotalSize = TotalSize;
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();
@@ -98,10 +97,10 @@ namespace Yubay_Drone_team
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            
+
             string WantSearch = this.DropDownListSearch.SelectedValue;
             string KeyWord = this.textKeyWord.Text;
-            
+
             string currentPage = Request.QueryString["Page"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
@@ -109,14 +108,14 @@ namespace Yubay_Drone_team
                 currentPage = "1";
             }
 
-            if(!string.IsNullOrWhiteSpace(WantSearch) && !string.IsNullOrWhiteSpace(KeyWord))
+            if (!string.IsNullOrWhiteSpace(WantSearch) && !string.IsNullOrWhiteSpace(KeyWord))
             {
-                Response.Redirect($"User_Account.aspx?Page={currentPage}&{WantSearch}={KeyWord}&SearchType={WantSearch}");
+                Response.Redirect($"Destination.aspx?Page={currentPage}&{WantSearch}={KeyWord}&SearchType={WantSearch}");
             }
             else
             {
-                Response.Redirect($"User_Account.aspx?Page={currentPage}");
-            }  
+                Response.Redirect($"Destination.aspx?Page={currentPage}");
+            }
 
         }
 
@@ -125,7 +124,7 @@ namespace Yubay_Drone_team
             string SearchType = Request.QueryString["SearchType"];
             string SearchKeyWord = Request.QueryString[$"{SearchType}"];
 
-            if(!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
             {
                 this.DropDownListSearch.SelectedValue = SearchType;
                 this.textKeyWord.Text = SearchKeyWord;

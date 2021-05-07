@@ -86,6 +86,8 @@
     <Content Include="ChangePages.ascx" />
     <Content Include="Customer_Create.aspx" />
     <Content Include="Customer_Detail.aspx" />
+    <Content Include="Destination.aspx" />
+    <Content Include="Destination_Create.aspx" />
     <Content Include="Drone_Create.aspx" />
     <Content Include="Drone_Detail.aspx" />
     <Content Include="Global.asax" />
@@ -141,6 +143,20 @@
     </Compile>
     <Compile Include="Customer_Detail.aspx.designer.cs">
       <DependentUpon>Customer_Detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Destination.aspx.cs">
+      <DependentUpon>Destination.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Destination.aspx.designer.cs">
+      <DependentUpon>Destination.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Destination_Create.aspx.cs">
+      <DependentUpon>Destination_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Destination_Create.aspx.designer.cs">
+      <DependentUpon>Destination_Create.aspx</DependentUpon>
     </Compile>
     <Compile Include="Drone_Create.aspx.cs">
       <DependentUpon>Drone_Create.aspx</DependentUpon>
