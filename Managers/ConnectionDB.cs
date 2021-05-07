@@ -641,7 +641,7 @@ namespace Yubay_Drone_team.Managers
 
         public DataTable ReadSingleCustomer(int Sid)
         {
-            string queryString = $@" SELECT Address, Phone  FROM Customer Where Sid = @Sid;";
+            string queryString = $@" SELECT [Name], Address, Phone  FROM Customer Where Sid = @Sid;";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
 
@@ -678,6 +678,80 @@ namespace Yubay_Drone_team.Managers
 
             DataTable data = this.GetDataTable(queryString, parameters);
             return data;
+        }
+        #endregion
+
+        #region 讀取單筆出勤紀錄
+        public DataTable ReadSingleDestination(int Sid)
+        {
+            string queryString = $@" SELECT Sid, [Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Pesticide, Pesticide_Date, Remarks FROM Destination Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+        #region 新增出勤紀錄
+
+        public void CreateDestination(DestinationModel model)
+        {
+            //使用的SQL語法
+            string queryString = $@" INSERT INTO Destination (Date, Staff, Drone_ID, Battery_Count, Customer_Name,                          Customer_Phone, Customer_Address, Customer_Sid, Pesticide, Pesticide_Date, Remarks)
+
+                                        VALUES (@Date, @Staff, @Drone_ID, @Battery_Count, @Customer_Name, @Customer_Phone, @Customer_Address, @Customer_Sid, @Pesticide, @Pesticide_Date, @Remarks);";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Date", model.Date),
+                   new SqlParameter("@Staff",model.Staff),
+                   new SqlParameter("@Drone_ID",model.Drone_ID),
+                   new SqlParameter("@Battery_Count",model.Battery_Count),
+                   new SqlParameter("@Customer_Name", model.Customer_Name),
+                   new SqlParameter("@Customer_Phone",model.Customer_Phone),
+                   new SqlParameter("@Customer_Address",model.Customer_Address),
+                   new SqlParameter("@Customer_Sid",model.Customer_Sid),
+                   new SqlParameter("@Pesticide",model.Pesticide),
+                   new SqlParameter("@Pesticide_Date",model.Pesticide_Date),
+                   new SqlParameter("@Remarks",model.Remarks)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+
+
+        #region 修改出勤紀錄
+        public void UpdateDestination(DestinationModel model, int sid)
+        {
+            string queryString = $@"UPDATE Destination SET [Date] = @Date, Staff = @Staff, Drone_ID = @Drone_ID, Battery_Count = @Battery_Count, Customer_Name = @Customer_Name, Customer_Phone = @Customer_Phone, Customer_Address = @Customer_Address, Pesticide = @Pesticide, Pesticide_Date = @Pesticide_Date, Remarks = @Remarks, Updater = @Updater, UpdateDate = @UpdateDate Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", sid),
+                   new SqlParameter("@Date", model.Date),
+                   new SqlParameter("@Staff", model.Staff),
+                   new SqlParameter("@Drone_ID", model.Drone_ID),
+                   new SqlParameter("@Battery_Count", model.Battery_Count),
+                   new SqlParameter("@Customer_Name", model.Customer_Name),
+                   new SqlParameter("@Customer_Phone", model.Customer_Phone),
+                   new SqlParameter("@Customer_Address", model.Customer_Address),
+                   new SqlParameter("@Pesticide", model.Pesticide),
+                   new SqlParameter("@Pesticide_Date", model.Pesticide_Date),
+                   new SqlParameter("@Remarks", model.Remarks),
+                   new SqlParameter("@Updater", model.Updater),
+                   new SqlParameter("@UpdateDate", DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
         }
         #endregion
     }

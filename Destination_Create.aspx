@@ -188,8 +188,7 @@
                 type: "JSON",
                 data: { "Sid": Sid }
             }).done(function (responseData) {
-                console.log(responseData);
-                console.log($(".costomerPhone"))
+
                 $(".costomerPhone").val(responseData["Phone"]);
                 $(".costomerAddress").val(responseData["Address"]);
             });
