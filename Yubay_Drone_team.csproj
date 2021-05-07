@@ -196,6 +196,7 @@
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\ConnectionDB.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\DroneMedel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAccount_Create.aspx.cs">
