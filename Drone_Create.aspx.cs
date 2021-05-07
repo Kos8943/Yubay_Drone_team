@@ -14,6 +14,13 @@ namespace Yubay_Drone_team
     {
         protected void Page_init(object sender, EventArgs e)
         {
+            DataTable dt = ConnectionDB.DropDownListRead();
+            DropDownList_Operator.DataSource = dt;
+            DropDownList_Operator.DataTextField = "UserName";
+            this.DropDownList_Operator.DataValueField = "UserName";
+            DropDownList_Operator.DataBind();
+
+
             string querryString = Request.QueryString["Sid"]; //取得網址上的內容並存成字串
             if (string.IsNullOrEmpty(querryString))
             {
@@ -37,10 +44,7 @@ namespace Yubay_Drone_team
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataTable dt = ConnectionDB.DropDownListRead();
-            DropDownList_Operator.DataSource = dt;
-            DropDownList_Operator.DataTextField = "UserName";
-            DropDownList_Operator.DataBind();
+            
 
         }
 
