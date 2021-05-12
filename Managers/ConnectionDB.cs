@@ -684,7 +684,7 @@ namespace Yubay_Drone_team.Managers
         #region 讀取單筆出勤紀錄
         public DataTable ReadSingleDestination(int Sid)
         {
-            string queryString = $@" SELECT Sid, [Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Pesticide, Pesticide_Date, Remarks FROM Destination Where Sid = @Sid;";
+            string queryString = $@" SELECT Sid, [Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Pesticide, Pesticide_Date, Customer_Sid, Remarks FROM Destination Where Sid = @Sid;";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
 

@@ -34,7 +34,8 @@ namespace Yubay_Drone_team
             this.DropDownList_Customer_Name.DataValueField = "Sid";         
             this.DropDownList_Customer_Name.DataBind();
             this.DropDownList_Customer_Name.Items.Insert(0, new ListItem("選擇客戶姓名", "0"));
-
+            
+            
 
             ////判定QueryString["Sid"],空值得話進入新增模式,否則把相應值放進欄位
             if (string.IsNullOrEmpty(querryString))
@@ -49,12 +50,16 @@ namespace Yubay_Drone_team
                 {
                     //把值放進相應欄位
                     DataTable dt = connectionDB.ReadSingleDestination(Sid);
-                    this.Text_Date.Text = dt.Rows[0]["Date"].ToString();
+                    DateTime DesDate =  (DateTime)dt.Rows[0]["Date"];
+                    string pesticide = (!string.IsNullOrWhiteSpace(dt.Rows[0]["Pesticide"].ToString())) ? dt.Rows[0]["Pesticide"].ToString() : "-";
+
+
+                    this.Text_Date.Text = DesDate.ToString("yyyy-MM-dd");
                     this.Text_Staff.Text = dt.Rows[0]["Staff"].ToString();
                     this.DropDownList_Drone.SelectedValue = dt.Rows[0]["Drone_ID"].ToString();
                     this.Text_Battery.Text = dt.Rows[0]["Battery_Count"].ToString();
                     this.Text_Remarks.Text = dt.Rows[0]["Remarks"].ToString();
-                    this.DropDownList_Customer_Name.SelectedValue = dt.Rows[0]["Customer_Name"].ToString();
+                    this.DropDownList_Customer_Name.SelectedValue = dt.Rows[0]["Customer_Sid"].ToString();
                     this.Text_Phone.Text = dt.Rows[0]["Customer_Phone"].ToString();
                     this.Text_Address.Text = dt.Rows[0]["Customer_Address"].ToString();
                     this.Text_Pesticide.Text = dt.Rows[0]["Pesticide"].ToString();

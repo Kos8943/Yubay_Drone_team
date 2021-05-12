@@ -13,11 +13,19 @@ namespace Yubay_Drone_team
         public static string TableTitle { get; set; } = "無人機管理"; 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.TableName.InnerText = TableTitle;
             //if (!LoginHelper.HasLogined())
             //{
             //    Response.Redirect("Login.aspx");
             //}
+            this.TableName.InnerText = TableTitle;
+
+            //取得session
+            LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
+            //取得session的使用者權限
+            string AccountLevel = loginInfo.UserName;
+
+            this.LoginUserName.InnerText = $"你好,{AccountLevel}";
+            
 
 
         }
