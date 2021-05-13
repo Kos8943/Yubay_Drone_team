@@ -104,7 +104,7 @@ namespace Yubay_Drone_team
             }
             else
             {
-                this.Label1.Text = "不可空白或輸入重複";
+                this.Label1.Text = "除了停用原因之外其餘不可空白";
                 this.Label1.Visible = true;
                 return;
 
@@ -117,8 +117,6 @@ namespace Yubay_Drone_team
             Response.Redirect("Drone_Detail.aspx");
 
         }
-
-
 
 
     }

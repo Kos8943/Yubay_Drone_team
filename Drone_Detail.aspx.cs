@@ -59,7 +59,6 @@ namespace Yubay_Drone_team
             if ("UpDateItem" == cmdName)
             {
                 string targetUrl = "~/Drone_Create.aspx?Sid=" + Model.Sid;
-
                 Response.Redirect(targetUrl);
             }
         }
