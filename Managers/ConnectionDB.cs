@@ -754,6 +754,24 @@ namespace Yubay_Drone_team.Managers
             this.ExecuteNonQuery(queryString, parameters);
         }
         #endregion
+
+        #region 確認User帳號重複
+
+        public int CheckUserAccount(string account)
+        {
+            string queryString = $@" SELECT Account FROM UserAccount Where Account = @Account;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Account", account)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            int accuontCount = data.Rows.Count;
+            return accuontCount;
+        }
+        #endregion
     }
 
 }
