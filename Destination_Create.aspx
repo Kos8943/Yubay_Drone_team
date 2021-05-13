@@ -68,6 +68,10 @@
             margin-left: 35px;
         }
 
+        .dropdownListWidth{
+            width:180px;
+        }
+
 
         /* xl - Extra large devices (large desktops, 1200px and up) */
         @media (min-width: 1282px) {
@@ -118,7 +122,7 @@
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_DropDownList_Drone">使用無人機</label>
-                        <asp:DropDownList runat="server" id="DropDownList_Drone"></asp:DropDownList>
+                        <asp:DropDownList runat="server" id="DropDownList_Drone" class="dropdownListWidth"></asp:DropDownList>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
@@ -137,17 +141,17 @@
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_DropDownList_Customer_Name">客戶姓名</label>
-                        <asp:DropDownList runat="server" id="Customer_Name"></asp:DropDownList>
+                        <asp:DropDownList runat="server" id="DropDownList_Customer_Name" class="dropdownListWidth ddlCustomerName"></asp:DropDownList>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Phone">客戶電話</label>
-                        <asp:TextBox ID="Text_Phone" CssClass="inputsize" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Phone" CssClass="inputsize costomerPhone" runat="server"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Address">客戶地址</label>
-                        <asp:TextBox ID="Text_Address" CssClass="inputsize" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Address" CssClass="inputsize costomerAddress" runat="server"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
@@ -173,4 +177,21 @@
         <asp:Label ID="ltMsg" runat="server" Text="新增成功!" CssClass="d-flex justify-content-center errMsg" Visible="false"></asp:Label>
         <%--<asp:Literal ID="Literal1" runat="server" Text="新增成功!"  Visible="false"></asp:Literal>--%>
     </div>
+
+
+    <script>
+        $(".ddlCustomerName").change(function () {
+            var Sid = $(this).val();
+            $.ajax({
+                method: "POST",
+                url: "API/GetCustomerDetail.ashx",
+                type: "JSON",
+                data: { "Sid": Sid }
+            }).done(function (responseData) {
+
+                $(".costomerPhone").val(responseData["Phone"]);
+                $(".costomerAddress").val(responseData["Address"]);
+            });
+        });
+    </script>
 </asp:Content>

@@ -124,7 +124,17 @@ namespace Yubay_Drone_team
                 //檢查帳號欄位是否為空值,不是的話將值塞進Model
                 if (!string.IsNullOrWhiteSpace(account))
                 {
-                    model.Account = account;
+                    if(ConnectionDB.CheckUserAccount(account) == 0)
+                    {
+                        model.Account = account;
+                    }
+                    else
+                    {
+                        this.ltMsg.Text = "帳號重複";
+                        this.ltMsg.Visible = true;
+                        return;
+                    }
+                    
                 }
                 else
                 {

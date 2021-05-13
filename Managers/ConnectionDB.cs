@@ -113,53 +113,48 @@ namespace Yubay_Drone_team.Managers
 
 
         #region 查詢無人機資料的Method
-        public static DataTable ReadDroneDetail()
+        public DataTable ReadDroneDetail(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
         {
-            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-
-            //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail WHERE IsDelete IS NULL;";
-
-            //建立連線
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string keyWordSearchString;
+            //如果搜尋條件、關鍵字不是空值或是空白
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
-                //轉譯成SQL看得懂的語法
-                SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Parameters.AddWithValue("@NumberCol", "2");
-
-                try
-                {
-                    //開始連線
-                    connection.Open();
-
-                    //從資料庫中讀取資料
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    //在記憶體中創新的空表
-                    DataTable dt = new DataTable();
-
-                    //把值塞進空表
-                    dt.Load(reader);
-
-
-                    //關閉資料庫連線
-                    reader.Close();
-
-                    //回傳dt
-                    return dt;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return null;
-                }
-
-                //finally
-                //{
-                //    connection.Close();
-                //}
+                //去找輸入搜尋條件的值
+                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
             }
+            else
+            {
+                //就不做搜尋
+                keyWordSearchString = string.Empty;
+            }
+
+            string queryString = $@" SELECT TOP 10 * FROM 
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Drone_Detail)
+                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+
+            string countQuery =
+                $@" SELECT 
+                        COUNT(Sid)
+                    FROM Drone_Detail
+                    WHERE IsDelete IS NULL {keyWordSearchString};";
+
+
+            List<SqlParameter> dbParameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
+            }
+
+            var dt = this.GetDataTable(queryString, dbParameters);
+
+            var dataCount = this.GetScale(countQuery, dbParameters) as int?;
+
+            TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
+
+            return dt;
+
+            
         }
         #endregion
         #region 刪除無人機資料的Method
@@ -638,6 +633,143 @@ namespace Yubay_Drone_team.Managers
 
             this.ExecuteNonQuery(queryString, parameters);
 
+        }
+        #endregion
+
+
+        #region 讀取單筆客戶地址跟電話
+
+        public DataTable ReadSingleCustomer(int Sid)
+        {
+            string queryString = $@" SELECT [Name], Address, Phone  FROM Customer Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+        #region 讀取全部無人機ID
+        public DataTable ReadDrone_ID_Only()
+        {
+            string queryString = $@" SELECT Drone_ID FROM Drone_Detail;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+        #region 讀取客戶名單
+
+        public DataTable ReadAllCustomerName()
+        {
+            string queryString = $@" SELECT [Name], Sid FROM Customer;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+        #region 讀取單筆出勤紀錄
+        public DataTable ReadSingleDestination(int Sid)
+        {
+            string queryString = $@" SELECT Sid, [Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Pesticide, Pesticide_Date, Customer_Sid, Remarks FROM Destination Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
+
+        #region 新增出勤紀錄
+
+        public void CreateDestination(DestinationModel model)
+        {
+            //使用的SQL語法
+            string queryString = $@" INSERT INTO Destination (Date, Staff, Drone_ID, Battery_Count, Customer_Name,                          Customer_Phone, Customer_Address, Customer_Sid, Pesticide, Pesticide_Date, Remarks)
+
+                                        VALUES (@Date, @Staff, @Drone_ID, @Battery_Count, @Customer_Name, @Customer_Phone, @Customer_Address, @Customer_Sid, @Pesticide, @Pesticide_Date, @Remarks);";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Date", model.Date),
+                   new SqlParameter("@Staff",model.Staff),
+                   new SqlParameter("@Drone_ID",model.Drone_ID),
+                   new SqlParameter("@Battery_Count",model.Battery_Count),
+                   new SqlParameter("@Customer_Name", model.Customer_Name),
+                   new SqlParameter("@Customer_Phone",model.Customer_Phone),
+                   new SqlParameter("@Customer_Address",model.Customer_Address),
+                   new SqlParameter("@Customer_Sid",model.Customer_Sid),
+                   new SqlParameter("@Pesticide",model.Pesticide),
+                   new SqlParameter("@Pesticide_Date",model.Pesticide_Date),
+                   new SqlParameter("@Remarks",model.Remarks)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+
+
+        #region 修改出勤紀錄
+        public void UpdateDestination(DestinationModel model, int sid)
+        {
+            string queryString = $@"UPDATE Destination SET [Date] = @Date, Staff = @Staff, Drone_ID = @Drone_ID, Battery_Count = @Battery_Count, Customer_Name = @Customer_Name, Customer_Phone = @Customer_Phone, Customer_Address = @Customer_Address, Pesticide = @Pesticide, Pesticide_Date = @Pesticide_Date, Remarks = @Remarks, Updater = @Updater, UpdateDate = @UpdateDate Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", sid),
+                   new SqlParameter("@Date", model.Date),
+                   new SqlParameter("@Staff", model.Staff),
+                   new SqlParameter("@Drone_ID", model.Drone_ID),
+                   new SqlParameter("@Battery_Count", model.Battery_Count),
+                   new SqlParameter("@Customer_Name", model.Customer_Name),
+                   new SqlParameter("@Customer_Phone", model.Customer_Phone),
+                   new SqlParameter("@Customer_Address", model.Customer_Address),
+                   new SqlParameter("@Pesticide", model.Pesticide),
+                   new SqlParameter("@Pesticide_Date", model.Pesticide_Date),
+                   new SqlParameter("@Remarks", model.Remarks),
+                   new SqlParameter("@Updater", model.Updater),
+                   new SqlParameter("@UpdateDate", DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+        #region 確認User帳號重複
+
+        public int CheckUserAccount(string account)
+        {
+            string queryString = $@" SELECT Account FROM UserAccount Where Account = @Account;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Account", account)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            int accuontCount = data.Rows.Count;
+            return accuontCount;
         }
         #endregion
     }

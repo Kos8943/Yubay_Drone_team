@@ -18,12 +18,35 @@ namespace Yubay_Drone_team
         {
             Main.TableTitle = "無人機管理";
 
+            string currentPage = Request.QueryString["Page"];
+            string SearchType = Request.QueryString["SearchType"];
+            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+
+            if (string.IsNullOrWhiteSpace(currentPage))
+            {
+                currentPage = "1";
+            }
+
+            if (string.IsNullOrWhiteSpace(SearchType) || string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                SearchType = string.Empty;
+                SearchKeyWord = string.Empty;
+            }
+            else
+            {
+                ChangePages.SearchType = SearchType;
+                ChangePages.SearchKeyWord = SearchKeyWord;
+            }
             if (!IsPostBack)
             {
+                ConnectionDB DBbase = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
-                DataTable dt = ConnectionDB.ReadDroneDetail();
+                int TotalSize;
+                DataTable dt = DBbase.ReadDroneDetail(out TotalSize, SearchType, SearchKeyWord, Convert.ToInt32(currentPage));
+                ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
+                this.SaveInserVal();
             }
         }
 
@@ -49,18 +72,29 @@ namespace Yubay_Drone_team
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
-                //string cmdArguAccount = e.CommandArgument.ToString().Split(',')[1].Trim();
-                //DBbase.DelectDroneDetail(Convert.ToInt32(cmdArgu), cmdArguAccount);
                 DBbase.DelectDroneDetail(Model);
-                DataTable dt = ConnectionDB.ReadDroneDetail();
-                this.repInvoice.DataSource = dt;
-                this.repInvoice.DataBind();
+                //DataTable dt = ConnectionDB.ReadDroneDetail();
+                //this.repInvoice.DataSource = dt;
+                //this.repInvoice.DataBind();
             }
             if ("UpDateItem" == cmdName)
             {
                 string targetUrl = "~/Drone_Create.aspx?Sid=" + Model.Sid;
                 Response.Redirect(targetUrl);
             }
+
+            string currentPage = Request.QueryString["Page"];
+
+            if (string.IsNullOrWhiteSpace(currentPage))
+            {
+                currentPage = "1";
+            }
+
+            int TotalSize;
+            DataTable dt = DBbase.ReadDroneDetail(out TotalSize, "", "", Convert.ToInt32(currentPage));
+            ChangePages.TotalSize = TotalSize;
+            this.repInvoice.DataSource = dt;
+            this.repInvoice.DataBind();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -68,11 +102,37 @@ namespace Yubay_Drone_team
             string WantSearch = this.DropDownListSearch.SelectedValue;
             string KeyWord = this.textKeyWord.Text;
 
-            DataTable dt = ConnectionDB.KeyWordSearchDroneDestination(WantSearch, KeyWord);
-            this.repInvoice.DataSource = dt;
-            this.repInvoice.DataBind();
+            string currentPage = Request.QueryString["Page"];
+
+            if (string.IsNullOrWhiteSpace(currentPage))
+            {
+                currentPage = "1";
+            }
+
+            if (!string.IsNullOrWhiteSpace(WantSearch) && !string.IsNullOrWhiteSpace(KeyWord))
+            {
+                Response.Redirect($"Drone_Detail.aspx?Page={currentPage}&{WantSearch}={KeyWord}&SearchType={WantSearch}");
+            }
+            else
+            {
+                Response.Redirect($"Drone_Detail.aspx?Page={currentPage}");
+            }
+
+            //DataTable dt = ConnectionDB.KeyWordSearchDroneDestination(WantSearch, KeyWord);
+            //this.repInvoice.DataSource = dt;
+            //this.repInvoice.DataBind();
         }
 
+        private void SaveInserVal()
+        {
+            string SearchType = Request.QueryString["SearchType"];
+            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
 
+            if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                this.DropDownListSearch.SelectedValue = SearchType;
+                this.textKeyWord.Text = SearchKeyWord;
+            }
+        }
     }
 }

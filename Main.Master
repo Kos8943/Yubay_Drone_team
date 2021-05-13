@@ -46,6 +46,15 @@
             transform: translateY(-50%);
         }
 
+        #LoginUserName{
+            height: 35px;
+            position: absolute;
+            top: 55%;
+            left: 86%;
+            transform: translateY(-50%);
+            font-size:16px;
+        }
+
         #LogoutBtn {
             height: 35px;
             position: absolute;
@@ -197,6 +206,7 @@
                 </div>
                 <div runat="server" class="col-10 TableNameArea">
                     <span class="TableName" runat="server" id="TableName"></span>
+                    <span runat="server" id="LoginUserName">123</span>
                     <button class="btn btn-outline-success  logout-btn" runat="server" id="LogoutBtn" onserverclick="LogoutBtn_Click">
                         
                         登出

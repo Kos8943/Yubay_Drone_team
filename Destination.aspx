@@ -8,7 +8,7 @@
         }
 
         th{
-            font-size: 18px;
+            font-size: 14px;
         }
 
         .containerPaddingChange{
@@ -100,8 +100,8 @@
                                 <td><%# Eval("Customer_Name") %></td>
                                 <td><%# Eval("Customer_Phone") %></td>
                                 <td><%# Eval("Customer_Address") %></td>
-                                <td><%# Eval("Pesticide") %></td>
-                                <td><%# Eval("Pesticide_Date" ,"{0: yyyy-MM-dd}") %></td>
+                                <td><%# (!string.IsNullOrWhiteSpace(Eval("Pesticide").ToString())) ? Eval("Pesticide") : "-" %></td>
+                                <td><%# (!string.IsNullOrWhiteSpace(Eval("Pesticide_Date").ToString())) ? Eval("Pesticide_Date") : "-" %></td>
                                 <td><%# Eval("Remarks") %></td>
                                 
                                 <td>
