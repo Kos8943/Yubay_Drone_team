@@ -55,11 +55,6 @@ namespace Yubay_Drone_team
             Response.Redirect("Customer_Create.aspx");
         }
 
-        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-
-        }
-
         private void SaveInserVal()
         {
 
@@ -74,22 +69,21 @@ namespace Yubay_Drone_team
             }
         }
 
-        protected void repInvoice_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-
             string cmdName = e.CommandName;
             //string cmdArgu = e.CommandArgument.ToString().Split(',')[0].Trim();
             CustomerModel Model = new CustomerModel();
             Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
-
+            //Model.Name = e.CommandArgument.ToString().Split(',')[1].Trim();
             ConnectionDB DBbase = new ConnectionDB();
-
-            if ("DeleItem" == cmdName)
+            
+            if ("DeleteItem" == cmdName)
             {
-                Model.Name = e.CommandArgument.ToString().Split(',')[1].Trim();
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
+                DBbase.DeleteCustomer(Model.Sid, username);
                 //DBbase.DelectDroneDetail(Model);
                 //DataTable dt = ConnectionDB.ReadDroneDetail();
                 //this.repInvoice.DataSource = dt;
@@ -97,7 +91,7 @@ namespace Yubay_Drone_team
             }
             if ("UpDateItem" == cmdName)
             {
-                string targetUrl = "~/Drone_Create.aspx?Sid=" + Model.Sid;
+                string targetUrl = "~/Customer_Create.aspx?Sid=" + Model.Sid;
                 Response.Redirect(targetUrl);
             }
 
