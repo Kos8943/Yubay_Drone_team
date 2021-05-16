@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                   <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                   <asp:Repeater ID="repInvoice" runat="server" OnItemCommand="Repeater1_ItemCommand">
                     <ItemTemplate>
                         <tr>
                             <td><%# Eval("Name") %></td>
@@ -60,12 +60,7 @@
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
-
-
-
             </tbody>
         </table>
-
-
     </div>
 </asp:Content>

@@ -133,6 +133,7 @@
     <Compile Include="ChangePages.ascx.designer.cs">
       <DependentUpon>ChangePages.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Customer\CustomerAccountManager.cs" />
     <Compile Include="Customer_Create.aspx.cs">
       <DependentUpon>Customer_Create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -199,6 +200,7 @@
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\ConnectionDB.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\DroneMedel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

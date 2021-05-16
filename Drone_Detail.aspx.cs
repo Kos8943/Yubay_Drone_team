@@ -20,7 +20,7 @@ namespace Yubay_Drone_team
 
             string currentPage = Request.QueryString["Page"];
             string SearchType = Request.QueryString["SearchType"];
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+            string SearchKeyWord = Request.QueryString  [$"{SearchType}"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
             {
@@ -118,13 +118,12 @@ namespace Yubay_Drone_team
                 Response.Redirect($"Drone_Detail.aspx?Page={currentPage}");
             }
 
-            //DataTable dt = ConnectionDB.KeyWordSearchDroneDestination(WantSearch, KeyWord);
-            //this.repInvoice.DataSource = dt;
-            //this.repInvoice.DataBind();
+        
         }
 
         private void SaveInserVal()
         {
+            
             string SearchType = Request.QueryString["SearchType"];
             string SearchKeyWord = Request.QueryString[$"{SearchType}"];
 
