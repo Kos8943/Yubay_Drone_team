@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                   <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                   <asp:Repeater ID="repInvoice" runat="server" OnItemCommand="Repeater1_ItemCommand">
                     <ItemTemplate>
                         <tr>
                             <td><%# Eval("Name") %></td>
@@ -56,16 +56,11 @@
                                 <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
                             </td>--%>
                             <td><asp:Button CssClass="btn btn-outline-secondary btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
-                            <td><asp:Button CssClass="btn btn-outline-danger btn-sm" runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") %>' OnClientClick="javascript:return confirm('確定刪除?')"/></td>
+                            <td><asp:Button CssClass="btn btn-outline-danger btn-sm" runat="server" Text="刪除" CommandName="DeleteItem" CommandArgument='<%# Eval("Sid") %>' OnClientClick="javascript:return confirm('確定刪除?')"/></td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
-
-
-
             </tbody>
         </table>
-
-
     </div>
 </asp:Content>

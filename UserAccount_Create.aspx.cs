@@ -121,10 +121,11 @@ namespace Yubay_Drone_team
                 string checkPassword = this.Text_CheckPassword.Text;
                 
 
-                //檢查帳號欄位是否為空值,不是的話將值塞進Model
+                //檢查帳號欄位是否為空值
                 if (!string.IsNullOrWhiteSpace(account))
                 {
-                    if(ConnectionDB.CheckUserAccount(account) == 0)
+                    //檢查新增的帳號是否重複,不是的話將值塞進Model
+                    if (ConnectionDB.CheckUserAccount(account) == 0)
                     {
                         model.Account = account;
                     }
@@ -271,6 +272,7 @@ namespace Yubay_Drone_team
 
         protected void Btn_Cancel_Click(object sender, EventArgs e)
         {
+            //按取消按鈕會轉跳至查詢頁面
             Response.Redirect("User_Account.aspx");
         }
 
@@ -279,6 +281,7 @@ namespace Yubay_Drone_team
         {
             bool CheckBoxAccountLevel = this.DeleteData_Authority.Checked;
 
+            //確認刪除資料的CheckBox有沒有被勾選,並回傳相對應的使用者等級
             if (CheckBoxAccountLevel)
             {
                 return 2;

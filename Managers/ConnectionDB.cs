@@ -129,13 +129,13 @@ namespace Yubay_Drone_team.Managers
             }
 
             string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Drone_Detail)
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Customer)
                                         a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
             string countQuery =
                 $@" SELECT 
                         COUNT(Sid)
-                    FROM Drone_Detail
+                    FROM Customer
                     WHERE IsDelete IS NULL {keyWordSearchString};";
 
 
@@ -773,51 +773,74 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
 
-        #region 查詢無人機維修紀錄的Method
-        public DataTable ReadFixed(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
+        #region 新增客戶資料管理
+
+        public void CreateCustomer(CustomerModel model)
         {
-            string keyWordSearchString;
-            //如果搜尋條件、關鍵字不是空值或是空白
-            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
-            {
-                //去找輸入搜尋條件的值
-                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
-            }
-            else
-            {
-                //就不做搜尋
-                keyWordSearchString = string.Empty;
-            }
+            string queryString = $@" INSERT INTO Destination (Name, Address, Phone, Crop, Area, Farm_Address)
 
-            string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Fixed)
-                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+                                        VALUES (@Name, @Address, @Phone, @Crop, @Area, @Farm_Address);";
+            List<SqlParameter> parameters = new List<SqlParameter>()
 
-            string countQuery =
-                $@" SELECT 
-                        COUNT(Sid)
-                    FROM Fixed
-                    WHERE IsDelete IS NULL {keyWordSearchString};";
+                {
+                   new SqlParameter("@Name", model.Name),
+                   new SqlParameter("@Address",model.Address),
+                   new SqlParameter("@Drone_ID",model.Phone),
+                   new SqlParameter("@Battery_Count",model.Crop),
+                   new SqlParameter("@Customer_Name", model.Area),
+                   new SqlParameter("@Customer_Phone",model.Farm_Address),
+                   
+                };
 
-
-            List<SqlParameter> dbParameters = new List<SqlParameter>();
-
-            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
-            {
-                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
-            }
-
-            var dt = this.GetDataTable(queryString, dbParameters);
-
-            var dataCount = this.GetScale(countQuery, dbParameters) as int?;
-
-            TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
-
-            return dt;
-
-
+            this.ExecuteNonQuery(queryString, parameters);
         }
         #endregion
+
+        #region 修改客戶資料
+        public void UpdateCustomer(CustomerModel model, int sid)
+        {
+            string queryString = $@"UPDATE Customer SET Name = @Name, Address = @Address, Phone= @Phone, Crop = @Crop, Area = @Area Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", sid),
+                   new SqlParameter("@Name", model.Name),
+                   new SqlParameter("@Address", model.Address),
+                   new SqlParameter("@Phone", model.Phone),
+                   new SqlParameter("@Crop", model.Crop),
+                   new SqlParameter("@Area", model.Area),
+                   
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+        public void DeleteCustomer(int Sid, string Username)
+        {
+
+            string queryString = 
+                $@"UPDATE Customer 
+                   SET Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' 
+                   Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+                {
+                   new SqlParameter("@Sid", Sid),
+                   new SqlParameter("@Deleter", $"{Username}"),
+                   new SqlParameter("@DeleteDate", DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+
+        }
+
     }
 
 }
+
+
+
+
+
