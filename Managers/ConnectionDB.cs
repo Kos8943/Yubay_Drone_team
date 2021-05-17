@@ -662,7 +662,7 @@ namespace Yubay_Drone_team.Managers
         #region 讀取全部無人機ID
         public DataTable ReadDrone_ID_Only()
         {
-            string queryString = $@" SELECT Drone_ID FROM Drone_Detail;";
+            string queryString = $@" SELECT Drone_ID FROM Drone_Detail WHERE (IsDelete IS NULL OR IsDelete = 'false')";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
 
@@ -941,7 +941,7 @@ namespace Yubay_Drone_team.Managers
         #region 讀取單筆無人機維修紀錄
         public DataTable ReadSingleFixed(int Sid)
         {
-            string queryString = $@" SELECT Sid , Drone_ID, FixChange, StopDate, SendDate, FixVendor, StopReason, Remarks FROM Destination Where Sid = @Sid;";
+            string queryString = $@" SELECT Sid , Drone_ID, FixChange, StopDate, SendDate, FixVendor, StopReason, Remarks FROM Fixed Where Sid = @Sid;";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
 
@@ -951,6 +951,57 @@ namespace Yubay_Drone_team.Managers
 
             DataTable data = this.GetDataTable(queryString, parameters);
             return data;
+        }
+        #endregion
+
+        #region 新增出勤紀錄
+
+        public void CreateFixed(FixedModel model)
+        {
+            //使用的SQL語法
+            string queryString = $@" INSERT INTO Fixed (Drone_ID, FixChange, StopDate,SendDate, FixVendor, StopReason, Remarks)
+
+                                        VALUES (@Drone_ID, @FixChange, @StopDate, @SendDate, @FixVendor, @StopReason, @Remarks);";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Drone_ID",model.Drone_ID),
+                   new SqlParameter("@FixChange",model.FixChange),
+                   new SqlParameter("@StopDate", model.StopDate),
+                   new SqlParameter("@SendDate",model.SendDate),
+                   new SqlParameter("@FixVendor",model.FixVendor),
+                   new SqlParameter("@StopReason",model.StopReason),
+                   new SqlParameter("@Remarks",model.Remarks)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+
+
+        #region 修改出勤紀錄
+        public void UpdateFixed(FixedModel model, int sid)
+        {
+            string queryString = $@"UPDATE Fixed SET [Drone_ID] = @Drone_ID, FixChange = @FixChange, StopDate = @StopDate, SendDate = @SendDate, FixVendor = @FixVendor, StopReason = @StopReason, Remarks = @Remarks, Updater = @Updater, UpdateDate = @UpdateDate Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", sid),
+                   new SqlParameter("@Drone_ID",model.Drone_ID),
+                   new SqlParameter("@FixChange",model.FixChange),
+                   new SqlParameter("@StopDate", model.StopDate),
+                   new SqlParameter("@SendDate",model.SendDate),
+                   new SqlParameter("@FixVendor",model.FixVendor),
+                   new SqlParameter("@StopReason",model.StopReason),
+                   new SqlParameter("@Remarks", model.Remarks),
+                   new SqlParameter("@Updater", model.Updater),
+                   new SqlParameter("@UpdateDate", DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
         }
         #endregion
     }

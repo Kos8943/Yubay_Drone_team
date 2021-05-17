@@ -15,13 +15,13 @@ namespace Yubay_Drone_team
     {
 
         /// <summary>
-        /// Label1 控制項。
+        /// UserAccountTittle 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label UserAccountTittle;
 
         /// <summary>
         /// DropDownList_Drone 控制項。
@@ -69,13 +69,13 @@ namespace Yubay_Drone_team
         protected global::System.Web.UI.WebControls.TextBox Text_FixVendor;
 
         /// <summary>
-        /// TextBox1 控制項。
+        /// Text_StopReason 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox Text_StopReason;
 
         /// <summary>
         /// Text_Remarks 控制項。

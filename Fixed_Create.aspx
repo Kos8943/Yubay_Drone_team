@@ -68,8 +68,8 @@
             margin-left: 35px;
         }
 
-        .dropdownListWidth{
-            width:180px;
+        .dropdownListWidth {
+            width: 180px;
         }
 
 
@@ -100,7 +100,7 @@
     <div class="FormArea">
         <div class="container-fluid">
             <div class="titleAreaMargin" style="text-align: center;">
-                <asp:Label ID="Label1" CssClass="title" runat="server" Text="新增無人機出勤紀錄"></asp:Label>
+                <asp:Label ID="UserAccountTittle" CssClass="title" runat="server" Text="新增無人機維修紀錄"></asp:Label>
             </div>
             <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
 
@@ -126,7 +126,7 @@
             </div>
             <div>
                 <label>故障原因</label>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="Text_StopReason" runat="server"></asp:TextBox>
             </div>
             <div>
                 <label>備註</label>
