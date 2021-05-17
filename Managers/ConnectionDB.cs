@@ -936,6 +936,21 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
 
+        #region 讀取單筆無人機維修紀錄
+        public DataTable ReadSingleFixed(int Sid)
+        {
+            string queryString = $@" SELECT Sid , Drone_ID, FixChange, StopDate, SendDate, FixVendor, StopReason, Remarks FROM Destination Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
     }
 }
 

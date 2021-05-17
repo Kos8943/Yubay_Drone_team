@@ -14,6 +14,7 @@ namespace Yubay_Drone_team
     {
         protected void Page_init(object sender, EventArgs e)
         {
+            //抓取負責人員並放進下拉選單
             DataTable dt = ConnectionDB.DropDownListRead();
             DropDownList_Operator.DataSource = dt;
             DropDownList_Operator.DataTextField = "UserName";
