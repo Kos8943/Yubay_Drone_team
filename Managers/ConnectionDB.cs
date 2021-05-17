@@ -154,7 +154,7 @@ namespace Yubay_Drone_team.Managers
 
             return dt;
 
-            
+
         }
         #endregion
         #region 刪除無人機資料的Method
@@ -591,9 +591,9 @@ namespace Yubay_Drone_team.Managers
                                         (SELECT Sid, [Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Customer_Sid, Remarks, Pesticide, Pesticide_Date, IsDelete,ROW_NUMBER() OVER (ORDER BY [Sid]) AS ROWSID FROM Destination)
                                         a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
-//            SELECT TOP 10 * FROM
-//              (SELECT[Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Customer_Sid,                   Remarks, Pesticide, Pesticide_Date, IsDelete, ROW_NUMBER() OVER(ORDER BY[Sid]) AS ROWSID FROM Destination)
-//                  a WHERE ROWSID > 10 AND IsDelete IS NULL OR IsDelete = 'false';
+            //            SELECT TOP 10 * FROM
+            //              (SELECT[Date], Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Customer_Sid,                   Remarks, Pesticide, Pesticide_Date, IsDelete, ROW_NUMBER() OVER(ORDER BY[Sid]) AS ROWSID FROM Destination)
+            //                  a WHERE ROWSID > 10 AND IsDelete IS NULL OR IsDelete = 'false';
 
 
 
@@ -665,7 +665,7 @@ namespace Yubay_Drone_team.Managers
             string queryString = $@" SELECT Drone_ID FROM Drone_Detail;";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
-            
+
 
             DataTable data = this.GetDataTable(queryString, parameters);
             return data;
@@ -794,7 +794,7 @@ namespace Yubay_Drone_team.Managers
                    new SqlParameter("@Battery_Count",model.Crop),
                    new SqlParameter("@Customer_Name", model.Area),
                    new SqlParameter("@Customer_Phone",model.Farm_Address),
-                   
+
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
@@ -815,7 +815,7 @@ namespace Yubay_Drone_team.Managers
                    new SqlParameter("@Phone", model.Phone),
                    new SqlParameter("@Crop", model.Crop),
                    new SqlParameter("@Area", model.Area),
-                   
+
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
@@ -827,7 +827,7 @@ namespace Yubay_Drone_team.Managers
         public void DeleteCustomer(int Sid, string Username)
         {
 
-            string queryString = 
+            string queryString =
                 $@"UPDATE Customer 
                    SET Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' 
                    Where Sid = @Sid";
@@ -886,6 +886,10 @@ namespace Yubay_Drone_team.Managers
                     return null;
                 }
 
+            }
+        }
+        #endregion
+
         #region 查詢無人機維修紀錄的Method
         public DataTable ReadFixed(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
         {
@@ -933,7 +937,6 @@ namespace Yubay_Drone_team.Managers
         #endregion
 
     }
-
 }
 
 
