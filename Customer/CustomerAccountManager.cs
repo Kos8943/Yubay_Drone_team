@@ -11,6 +11,7 @@ namespace Yubay_Drone_team.Customer
 {
     public class CustomerAccountManager
     {
+        #region 讀取Customer資料
         public DataTable ReadCustomerDetail(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
         {
             string keyWordSearchString;
@@ -52,7 +53,7 @@ namespace Yubay_Drone_team.Customer
 
             return dt;
         }
-
+        #endregion
         public DataTable GetDataTable(string dbCommand, List<SqlParameter> parameters)
         {
             string connectionString = GetConnectionString();

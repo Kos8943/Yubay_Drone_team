@@ -77,7 +77,8 @@ namespace Yubay_Drone_team
             Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
             //Model.Name = e.CommandArgument.ToString().Split(',')[1].Trim();
             ConnectionDB DBbase = new ConnectionDB();
-            
+            CustomerAccountManager DBbaseCustomer = new CustomerAccountManager();
+
             if ("DeleteItem" == cmdName)
             {
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
@@ -103,7 +104,7 @@ namespace Yubay_Drone_team
             }
 
             int TotalSize;
-            DataTable dt = DBbase.ReadDroneDetail(out TotalSize, "", "", Convert.ToInt32(currentPage));
+            DataTable dt = DBbaseCustomer.ReadCustomerDetail(out TotalSize, "", "", Convert.ToInt32(currentPage));
             ChangePages.TotalSize = TotalSize;
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();

@@ -129,7 +129,7 @@ namespace Yubay_Drone_team.Managers
             }
 
             string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Customer)
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Drone_Detail)
                                         a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
             string countQuery =
@@ -242,6 +242,8 @@ namespace Yubay_Drone_team.Managers
             }
         }
         #endregion
+
+        #region 新增無人機管理
         public static DataTable UpdateOnlyoneDroneDetail(string sid)
         {
             //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
@@ -285,7 +287,7 @@ namespace Yubay_Drone_team.Managers
 
             }
         }
-
+        #endregion
 
 
         #region 讀取管理者 
@@ -430,6 +432,8 @@ namespace Yubay_Drone_team.Managers
 
         }
         #endregion
+
+        #region 讀取客戶資料
         public static DataTable ReadCustomerDetail()
         {
             //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
@@ -474,6 +478,7 @@ namespace Yubay_Drone_team.Managers
 
             }
         }
+        #endregion
 
         #region 新增使用者帳號
 
@@ -817,6 +822,8 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
 
+
+        #region 刪除客戶資料
         public void DeleteCustomer(int Sid, string Username)
         {
 
@@ -835,7 +842,54 @@ namespace Yubay_Drone_team.Managers
             this.ExecuteNonQuery(queryString, parameters);
 
         }
+        #endregion
 
+
+        #region 修改單筆客戶資料
+        public static DataTable UpdateOnlyoneCustomer(string sid)
+        {
+            //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
+            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+
+            //使用的SQL語法
+            string queryString = $@" SELECT * FROM Drone_Detail Where Sid=@Sid;";
+
+            //建立連線
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //轉譯成SQL看得懂的語法
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Sid", sid);
+
+                try
+                {
+                    //開始連線
+                    connection.Open();
+
+                    //從資料庫中讀取資料
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    //在記憶體中創新的空表
+                    DataTable dt = new DataTable();
+
+                    //把值塞進空表
+                    dt.Load(reader);
+
+                    reader.Close();
+
+                    //回傳dt
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+
+
+            }
+        }
+        #endregion
     }
 
 }
