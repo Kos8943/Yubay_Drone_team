@@ -53,12 +53,13 @@ namespace Yubay_Drone_team
             string querryString = Request.QueryString["Sid"];
             CustomerModel model = new CustomerModel();
                        //轉型,強制型別轉換
-            model.Sid =Convert.ToInt32(querryString);
+           // model.Sid =Convert.ToInt32(querryString);
             model.Name = this.Text_Name.Text;
             model.Address = this.Text_Address.Text;
             model.Phone = this.Text_Phone.Text;
             model.Crop = this.Text_Crop.Text;
             model.Area = this.Text_Area.Text;
+            model.Farm_Address = this.Text_Farm_Address.Text;
      
 
             ConnectionDB ConnectionDB = new ConnectionDB();
@@ -67,8 +68,8 @@ namespace Yubay_Drone_team
             //if判斷式是否重複或修改是否成功
 
             if (this.Text_Name.Text != string.Empty && this.Text_Address.Text != string.Empty && this.Text_Phone.Text != string.Empty
-                && this.Text_Crop.Text != string.Empty && this.Text_Area.Text != string.Empty && this.Text_Farm_Address.Text != string.Empty
-                ) 
+                && this.Text_Crop.Text != string.Empty && this.Text_Area.Text != string.Empty && this.Text_Farm_Address.Text != string.Empty)
+                 
                 
             {
 
@@ -111,7 +112,7 @@ namespace Yubay_Drone_team
         //轉跳取消頁面
         protected void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Drone_Detail.aspx");
+            Response.Redirect("Customer_Detail.aspx");
         }
     }
 }

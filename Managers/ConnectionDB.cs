@@ -782,7 +782,7 @@ namespace Yubay_Drone_team.Managers
 
         public void CreateCustomer(CustomerModel model)
         {
-            string queryString = $@" INSERT INTO Destination (Name, Address, Phone, Crop, Area, Farm_Address)
+            string queryString = $@" INSERT INTO Customer (Name, Address, Phone, Crop, Area, Farm_Address)
 
                                         VALUES (@Name, @Address, @Phone, @Crop, @Area, @Farm_Address);";
             List<SqlParameter> parameters = new List<SqlParameter>()
@@ -790,10 +790,10 @@ namespace Yubay_Drone_team.Managers
                 {
                    new SqlParameter("@Name", model.Name),
                    new SqlParameter("@Address",model.Address),
-                   new SqlParameter("@Drone_ID",model.Phone),
-                   new SqlParameter("@Battery_Count",model.Crop),
-                   new SqlParameter("@Customer_Name", model.Area),
-                   new SqlParameter("@Customer_Phone",model.Farm_Address),
+                   new SqlParameter("@Phone",model.Phone),
+                   new SqlParameter("@Crop",model.Crop),
+                   new SqlParameter("@Area", model.Area),
+                   new SqlParameter("@Farm_Address",model.Farm_Address),
 
                 };
 

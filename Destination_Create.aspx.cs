@@ -37,7 +37,7 @@ namespace Yubay_Drone_team
             
             
 
-            ////判定QueryString["Sid"],空值得話進入新增模式,否則把相應值放進欄位
+            //判定QueryString["Sid"],空值得話進入新增模式,否則把相應值放進欄位
             if (string.IsNullOrEmpty(querryString))
             {
                 return;
