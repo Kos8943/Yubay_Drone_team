@@ -17,22 +17,22 @@ namespace Yubay_Drone_team
             Main.TableTitle = "無人機出勤紀錄";
 
             string currentPage = Request.QueryString["Page"];
-            string SearchType = Request.QueryString["SearchType"];
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+            string SearchField = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString["WantSearch"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
             {
                 currentPage = "1";
             }
 
-            if (string.IsNullOrWhiteSpace(SearchType) || string.IsNullOrWhiteSpace(SearchKeyWord))
+            if (string.IsNullOrWhiteSpace(SearchField) || string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                SearchType = string.Empty;
+                SearchField = string.Empty;
                 SearchKeyWord = string.Empty;
             }
             else
             {
-                ChangePages.SearchType = SearchType;
+                ChangePages.SearchType = SearchField;
                 ChangePages.SearchKeyWord = SearchKeyWord;
             }
 
@@ -42,7 +42,7 @@ namespace Yubay_Drone_team
                 ConnectionDB DBbase = new ConnectionDB();
                 textKeyWord.Attributes.Add("onkeypress", "if( event.keyCode == 13 ) { return false; }");
                 int TotalSize;
-                DataTable dt = DBbase.ReadDestination(out TotalSize, SearchType, SearchKeyWord, Convert.ToInt32(currentPage));
+                DataTable dt = DBbase.ReadDestination(out TotalSize, SearchField, SearchKeyWord, Convert.ToInt32(currentPage));
                 ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
@@ -81,15 +81,28 @@ namespace Yubay_Drone_team
             }
 
             string currentPage = Request.QueryString["Page"];
+            string SearchField = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString["WantSearch"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
             {
                 currentPage = "1";
             }
 
+            if (string.IsNullOrWhiteSpace(SearchField) || string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                SearchField = string.Empty;
+                SearchKeyWord = string.Empty;
+            }
+            else
+            {
+                ChangePages.SearchType = SearchField;
+                ChangePages.SearchKeyWord = SearchKeyWord;
+            }
+
 
             int TotalSize;
-            DataTable dt = DBbase.ReadDestination(out TotalSize, "", "", Convert.ToInt32(currentPage));
+            DataTable dt = DBbase.ReadDestination(out TotalSize, SearchField, SearchKeyWord, Convert.ToInt32(currentPage));
             ChangePages.TotalSize = TotalSize;
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();
@@ -98,7 +111,7 @@ namespace Yubay_Drone_team
         protected void btnSearch_Click(object sender, EventArgs e)
         {
 
-            string WantSearch = this.DropDownListSearch.SelectedValue;
+            string SearchField = this.DropDownListSearch.SelectedValue;
             string KeyWord = this.textKeyWord.Text;
 
             string currentPage = Request.QueryString["Page"];
@@ -108,9 +121,9 @@ namespace Yubay_Drone_team
                 currentPage = "1";
             }
 
-            if (!string.IsNullOrWhiteSpace(WantSearch) && !string.IsNullOrWhiteSpace(KeyWord))
+            if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(KeyWord))
             {
-                Response.Redirect($"Destination.aspx?Page={currentPage}&{WantSearch}={KeyWord}&SearchType={WantSearch}");
+                Response.Redirect($"Destination.aspx?Page={currentPage}&WantSearch={KeyWord}&SearchField={SearchField}");
             }
             else
             {
@@ -121,12 +134,12 @@ namespace Yubay_Drone_team
 
         private void SaveInserVal()
         {
-            string SearchType = Request.QueryString["SearchType"];
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+            string SearchField = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString["WantSearch"];
 
-            if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                this.DropDownListSearch.SelectedValue = SearchType;
+                this.DropDownListSearch.SelectedValue = SearchField;
                 this.textKeyWord.Text = SearchKeyWord;
             }
         }

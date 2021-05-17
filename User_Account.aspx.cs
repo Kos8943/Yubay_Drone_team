@@ -18,8 +18,8 @@ namespace Yubay_Drone_team
 
             //抓取Url上得值
             string currentPage = Request.QueryString["Page"];
-            string SearchType = Request.QueryString["SearchType"];
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+            string SearchField = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString[$"WantSearch"];
 
             //預設在第一頁
             if (string.IsNullOrWhiteSpace(currentPage))
@@ -28,14 +28,14 @@ namespace Yubay_Drone_team
             }
 
             //判斷是否有進階搜尋,有的話取值,沒有的話清空
-            if (string.IsNullOrWhiteSpace(SearchType) || string.IsNullOrWhiteSpace(SearchKeyWord))
+            if (string.IsNullOrWhiteSpace(SearchField) || string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                SearchType = string.Empty;
+                SearchField = string.Empty;
                 SearchKeyWord = string.Empty;
             }
             else
             {
-                ChangePages.SearchType = SearchType;
+                ChangePages.SearchType = SearchField;
                 ChangePages.SearchKeyWord = SearchKeyWord;
             }
 
@@ -49,7 +49,7 @@ namespace Yubay_Drone_team
 
                 //從資料庫撈資料
                 int TotalSize;               
-                DataTable dt = DBbase.ReadUserAccount(out TotalSize, SearchType, SearchKeyWord, Convert.ToInt32(currentPage));
+                DataTable dt = DBbase.ReadUserAccount(out TotalSize, SearchField, SearchKeyWord, Convert.ToInt32(currentPage));
                 ChangePages.TotalSize = TotalSize;
                 this.repInvoice.DataSource = dt;
                 this.repInvoice.DataBind();
@@ -99,15 +99,29 @@ namespace Yubay_Drone_team
 
             
             string currentPage = Request.QueryString["Page"];
+            string SearchField = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString[$"WantSearch"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
             {
                 currentPage = "1";
             }
 
+            //判斷是否有進階搜尋,有的話取值,沒有的話清空
+            if (string.IsNullOrWhiteSpace(SearchField) || string.IsNullOrWhiteSpace(SearchKeyWord))
+            {
+                SearchField = string.Empty;
+                SearchKeyWord = string.Empty;
+            }
+            else
+            {
+                ChangePages.SearchType = SearchField;
+                ChangePages.SearchKeyWord = SearchKeyWord;
+            }
+
             //資料刪除後重新Rander至畫面上
             int TotalSize;
-            DataTable dt = DBbase.ReadUserAccount(out TotalSize, "", "", Convert.ToInt32(currentPage));
+            DataTable dt = DBbase.ReadUserAccount(out TotalSize, SearchField, SearchKeyWord, Convert.ToInt32(currentPage));
             ChangePages.TotalSize = TotalSize;
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();
@@ -116,7 +130,7 @@ namespace Yubay_Drone_team
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             //想搜尋的欄位
-            string WantSearch = this.DropDownListSearch.SelectedValue;
+            string SearchField = this.DropDownListSearch.SelectedValue;
 
             //搜尋的值
             string KeyWord = this.textKeyWord.Text;
@@ -129,9 +143,9 @@ namespace Yubay_Drone_team
             }
 
             //如果搜尋欄位有值的話,把搜尋欄位跟搜尋值都放進URL,否則只放頁數
-            if(!string.IsNullOrWhiteSpace(WantSearch) && !string.IsNullOrWhiteSpace(KeyWord))
+            if(!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(KeyWord))
             {
-                Response.Redirect($"User_Account.aspx?Page={currentPage}&{WantSearch}={KeyWord}&SearchType={WantSearch}");
+                Response.Redirect($"User_Account.aspx?Page={currentPage}&WantSearch={KeyWord}&SearchField={SearchField}");
             }
             else
             {
@@ -145,13 +159,13 @@ namespace Yubay_Drone_team
         private void SaveInserVal()
         {
             //抓取Url上得值
-            string SearchType = Request.QueryString["SearchType"];
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+            string SearchField = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString[$"WantSearch"];
 
             //判斷是否有進階搜尋,有的話把值放進搜尋欄位
-            if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                this.DropDownListSearch.SelectedValue = SearchType;
+                this.DropDownListSearch.SelectedValue = SearchField;
                 this.textKeyWord.Text = SearchKeyWord;
             }
         } 
