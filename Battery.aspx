@@ -37,9 +37,9 @@
                     <asp:Repeater ID="repInvoice" runat="server" OnItemCommand="repInvoice_ItemCommand">
                         <ItemTemplate>
                             <tr>
-                                <td class="col-2"><%# Eval("Drone_ID") %></td>
-                                <td class="col-2"><%# Eval("Manufacturer") %></td>
-                                <td class="col-6"><%# Eval("WeightLoad") %>kg</td>
+                                <td class="col-2"><%# Eval("Battery_ID") %></td>
+                                <td class="col-2"><%# Eval("status") %></td>
+                                <td class="col-6"><%# Eval("stopReason") %>kg</td>
                                 <%--<td>
                                 <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
                             </td>--%>

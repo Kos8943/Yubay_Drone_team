@@ -38,7 +38,7 @@ namespace Yubay_Drone_team
                 {
                     //把值放進相應欄位
                     DataTable dt = connectionDB.ReadSingleFixed(Sid);
-                    DateTime StopDate
+                    DateTime StopDate;
 
                     this.DropDownList_Drone.SelectedValue = dt.Rows[0]["Drone_ID"].ToString();
                     this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();

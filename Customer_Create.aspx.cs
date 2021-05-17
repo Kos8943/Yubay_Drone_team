@@ -35,9 +35,6 @@ namespace Yubay_Drone_team
             this.CreateCustomer.Text = "修改客戶資料";
             this.Btn_Create.Text = "修改";
 
-
-
-
         }
         protected void Page_Load(object sender, EventArgs e)
         {
