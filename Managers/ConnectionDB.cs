@@ -836,6 +836,52 @@ namespace Yubay_Drone_team.Managers
 
         }
 
+        #region 查詢無人機維修紀錄的Method
+        public DataTable ReadFixed(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
+        {
+            string keyWordSearchString;
+            //如果搜尋條件、關鍵字不是空值或是空白
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                //去找輸入搜尋條件的值
+                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+            }
+            else
+            {
+                //就不做搜尋
+                keyWordSearchString = string.Empty;
+            }
+
+            string queryString = $@" SELECT TOP 10 * FROM 
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Fixed)
+                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+
+            string countQuery =
+                $@" SELECT 
+                        COUNT(Sid)
+                    FROM Fixed
+                    WHERE IsDelete IS NULL {keyWordSearchString};";
+
+
+            List<SqlParameter> dbParameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
+            }
+
+            var dt = this.GetDataTable(queryString, dbParameters);
+
+            var dataCount = this.GetScale(countQuery, dbParameters) as int?;
+
+            TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
+
+            return dt;
+
+
+        }
+        #endregion
+
     }
 
 }
