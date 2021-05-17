@@ -804,7 +804,9 @@ namespace Yubay_Drone_team.Managers
         #region 修改客戶資料
         public void UpdateCustomer(CustomerModel model, int sid)
         {
-            string queryString = $@"UPDATE Customer SET Name = @Name, Address = @Address, Phone= @Phone, Crop = @Crop, Area = @Area Where Sid = @Sid";
+            string queryString = $@"UPDATE Customer 
+                                SET Name = @Name, Address = @Address, Phone= @Phone, Crop = @Crop, Area = @Area ,Farm_Address=@Farm_Address
+                                Where Sid = @Sid";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
 
@@ -815,7 +817,7 @@ namespace Yubay_Drone_team.Managers
                    new SqlParameter("@Phone", model.Phone),
                    new SqlParameter("@Crop", model.Crop),
                    new SqlParameter("@Area", model.Area),
-
+                   new SqlParameter("@Farm_Address", model.Farm_Address),
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
@@ -852,7 +854,7 @@ namespace Yubay_Drone_team.Managers
             string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
             //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail Where Sid=@Sid;";
+            string queryString = $@" SELECT * FROM Customer Where Sid=@Sid;";
 
             //建立連線
             using (SqlConnection connection = new SqlConnection(connectionString))
