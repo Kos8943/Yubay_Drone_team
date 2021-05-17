@@ -90,6 +90,8 @@
     <Content Include="Destination_Create.aspx" />
     <Content Include="Drone_Create.aspx" />
     <Content Include="Drone_Detail.aspx" />
+    <Content Include="Fixed.aspx" />
+    <Content Include="Fixed_Create.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Imgs\delete.png" />
     <Content Include="Imgs\edit-button.png" />
@@ -175,6 +177,20 @@
     <Compile Include="Drone_Detail.aspx.designer.cs">
       <DependentUpon>Drone_Detail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Fixed.aspx.cs">
+      <DependentUpon>Fixed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fixed.aspx.designer.cs">
+      <DependentUpon>Fixed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fixed_Create.aspx.cs">
+      <DependentUpon>Fixed_Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fixed_Create.aspx.designer.cs">
+      <DependentUpon>Fixed_Create.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,6 +217,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\DroneMedel.cs" />
+    <Compile Include="Models\FixedModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAccount_Create.aspx.cs">
       <DependentUpon>UserAccount_Create.aspx</DependentUpon>

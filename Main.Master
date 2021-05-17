@@ -220,7 +220,7 @@
                 <div class="col-2 titles">
                     <div class="row titlePadding">
                         <div class="titleArea col-12"><a class="tableLink" href="Drone_Detail.aspx">無人機管理</a></div>
-                        <div class="titleArea col-12"><a class="tableLink" href="#">無人機維修紀錄</a></div>
+                        <div class="titleArea col-12"><a class="tableLink" href="Fixed.aspx">無人機維修紀錄</a></div>
                         <div class="titleArea col-12"><a class="tableLink" href="Customer_Detail.aspx">客戶資料管理</a></div>
                         <div class="titleArea col-12"><a class="tableLink" href="#">電池管理</a></div>
                         <div class="titleArea col-12"><a class="tableLink" href="Destination.aspx">無人機出勤紀錄</a></div>
