@@ -43,7 +43,7 @@ namespace Yubay_Drone_team
                     DataTable dt = connectionDB.ReadSingleFixed(Sid);
                     DateTime stopDate = (DateTime)dt.Rows[0]["StopDate"];
                     DateTime sendDate = (DateTime)dt.Rows[0]["SendDate"];
-                    
+
 
                     this.DropDownList_Drone.SelectedValue = dt.Rows[0]["Drone_ID"].ToString();
                     this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
