@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
 
@@ -18,6 +19,7 @@ namespace Yubay_Drone_team
             string querryString = Request.QueryString["Sid"];
 
             ConnectionDB connectionDB = new ConnectionDB();
+
             //抓取無人機ID並放進下拉選單
             DataTable ddlDrone_ID = connectionDB.ReadDrone_ID_Only();
             this.DropDownList_Drone.DataSource = ddlDrone_ID;
@@ -36,18 +38,29 @@ namespace Yubay_Drone_team
                 //檢查QueryString["Sid"]是否為正常值,不是的話轉跳回列表頁
                 if (Int32.TryParse(querryString, out Sid))
                 {
+                    this.DropDownList_Drone.Enabled = false;
                     //把值放進相應欄位
                     DataTable dt = connectionDB.ReadSingleFixed(Sid);
-                    DateTime StopDate
+                    DateTime stopDate = (DateTime)dt.Rows[0]["StopDate"];
+                    DateTime sendDate = (DateTime)dt.Rows[0]["SendDate"];
+                    
 
                     this.DropDownList_Drone.SelectedValue = dt.Rows[0]["Drone_ID"].ToString();
                     this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
-                    this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
-                    this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
-                    this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
-                    this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
-                    this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
-                    this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
+                    this.Text_StopDate.Text = stopDate.ToString("yyyy-MM-dd");
+                    this.Text_SendDate.Text = sendDate.ToString("yyyy-MM-dd");
+                    this.Text_FixVendor.Text = dt.Rows[0]["FixVendor"].ToString();
+                    this.Text_StopReason.Text = dt.Rows[0]["StopReason"].ToString();
+                    this.Text_Remarks.Text = dt.Rows[0]["Remarks"].ToString();
+
+                    this.UserAccountTittle.Text = "修改無人機維修紀錄";
+                    this.Btn_Create.Text = "修改";
+                }
+                else
+                {
+                    //如果修改URL的QueryString["Sid"],為不正確的值則轉跳
+                    Response.Redirect("Fixed.aspx");
+
                 }
             }
         }
@@ -63,18 +76,15 @@ namespace Yubay_Drone_team
         protected void Btn_Create_Click(object sender, EventArgs e)
         {
             FixedModel model = new FixedModel();
-            ConnectionDB connectionDB = new ConnectionDB();
+            ConnectionDB ConnectionDB = new ConnectionDB();
 
             //設定欄位變數
             string useDrone_ID = this.DropDownList_Drone.SelectedValue;
             string fixChange = this.Text_FixChange.Text;
             string stopDate = this.Text_StopDate.Text;
             string fixVendor = this.Text_FixVendor.Text;
-            string stopReason = this.Text_StopDate.Text;
+            string stopReason = this.Text_StopReason.Text;
 
-            //抓取不須判定的值
-            string sendDate = this.Text_SendDate.Text;
-            string remarks = this.Text_Remarks.Text;
 
 
             //判定useDrone_ID是否為空值
@@ -134,11 +144,45 @@ namespace Yubay_Drone_team
                 return;
             }
 
+            //抓取不須判定的值
+            DateTime sendDate = Convert.ToDateTime(this.Text_SendDate.Text);
+            string remarks = this.Text_Remarks.Text;
+
+            model.SendDate = sendDate;
+            model.Remarks = remarks;
+
+            //檢查SID值是否正確
+            string querryString = Request.QueryString["Sid"];
+            int Sid;
+            bool tryParseSid = Int32.TryParse(querryString, out Sid);
+
+            //新增模式
+            if (string.IsNullOrWhiteSpace(querryString) && !tryParseSid)
+            {
+                ConnectionDB.CreateFixed(model);
+                this.ltMsg.Text = "新增成功";
+                this.ltMsg.Visible = true;
+                return;
+
+            }
+            else//修改模式
+            {
+
+                //取得session
+                LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
+                //取得session的使用者權限
+                string UserName = loginInfo.UserName;
+                model.Updater = UserName;
+                ConnectionDB.UpdateFixed(model, Sid);
+                this.ltMsg.Text = "修改成功";
+                this.ltMsg.Visible = true;
+                return;
+            }
         }
 
         protected void Btm_Cancel_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Fixed.aspx");
         }
     }
 }
