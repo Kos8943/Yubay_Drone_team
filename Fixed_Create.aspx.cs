@@ -143,6 +143,28 @@ namespace Yubay_Drone_team
                 this.ltMsg.Visible = true;
                 return;
             }
+
+            //抓取不須判定的值
+            DateTime sendDate = Convert.ToDateTime(this.Text_SendDate.Text);
+            string remarks = this.Text_Remarks.Text;
+
+            model.SendDate = sendDate;
+            model.Remarks = remarks;
+
+            //檢查SID值是否正確
+            string querryString = Request.QueryString["Sid"];
+            int Sid;
+            bool tryParseSid = Int32.TryParse(querryString, out Sid);
+
+            //新增模式
+            if (string.IsNullOrWhiteSpace(querryString) && !tryParseSid)
+            {
+                ConnectionDB.CreateFixed(model);
+                this.ltMsg.Text = "新增成功";
+                this.ltMsg.Visible = true;
+                return;
+
+            }
             else//修改模式
             {
 
@@ -157,7 +179,6 @@ namespace Yubay_Drone_team
                 return;
             }
         }
-
         protected void Btm_Cancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("Fixed.aspx");
