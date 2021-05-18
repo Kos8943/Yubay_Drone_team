@@ -206,7 +206,7 @@
                 </div>
                 <div runat="server" class="col-10 TableNameArea">
                     <span class="TableName" runat="server" id="TableName"></span>
-                    <span runat="server" id="LoginUserName">123</span>
+                    <span runat="server" id="LoginUserName"></span>
                     <button class="btn btn-outline-success  logout-btn" runat="server" id="LogoutBtn" onserverclick="LogoutBtn_Click">
                         
                         登出

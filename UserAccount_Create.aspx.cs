@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
+using System.Text.RegularExpressions;
 
 namespace Yubay_Drone_team
 {
@@ -124,17 +125,31 @@ namespace Yubay_Drone_team
                 //檢查帳號欄位是否為空值
                 if (!string.IsNullOrWhiteSpace(account))
                 {
-                    //檢查新增的帳號是否重複,不是的話將值塞進Model
-                    if (ConnectionDB.CheckUserAccount(account) == 0)
+                    Regex regex = new Regex(@"^[A-Za-z0-9]");
+
+                    //檢查帳號欄位是否只有英數字
+                    if (regex.IsMatch(account))
                     {
-                        model.Account = account;
+                        //檢查新增的帳號是否重複,不是的話將值塞進Model
+                        if (ConnectionDB.CheckUserAccount(account) == 0)
+                        {
+                            model.Account = account;
+                        }
+                        else
+                        {
+                            this.ltMsg.Text = "帳號重複";
+                            this.ltMsg.Visible = true;
+                            return;
+                        }
                     }
                     else
                     {
-                        this.ltMsg.Text = "帳號重複";
+                        this.ltMsg.Text = "請輸入英文或數字";
                         this.ltMsg.Visible = true;
                         return;
                     }
+                    
+                    
                     
                 }
                 else
@@ -212,14 +227,31 @@ namespace Yubay_Drone_team
                     string newPassword = this.Text_NewPassword.Text;
                     string newPasswordCheck = this.Text_NewPasswordCheck.Text;
 
+                    LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
+                    string AccountUserName = loginInfo.UserName;
+
+                    //只修改使用者名稱
+                    if (string.IsNullOrWhiteSpace(newPassword) && string.IsNullOrWhiteSpace(newPasswordCheck))
+                    {
+                        model.UserName = userName;
+                        model.Password = oldPassword;
+                        model.Updater = AccountUserName;
+
+                        //將直寫進資料庫
+                        ConnectionDB.UpdateAccount(model, Sid);
+
+                        this.ltMsg.Text = "名稱修改成功";
+                        this.ltMsg.Visible = true;
+                        return;
+                    }
+
                     //檢查新密碼與新密碼欄位是否為空值
                     if (!string.IsNullOrWhiteSpace(newPassword) && !string.IsNullOrWhiteSpace(newPasswordCheck))
                     {
                         //檢查新密碼與新密碼確認的值是否一致,是的話將值塞進Model
                         if (string.Compare(newPassword, newPasswordCheck) == 0)
                         {
-                            LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
-                            string AccountUserName = loginInfo.UserName;
+                           
                             model.UserName = userName;
                             model.Password = newPassword;
                             model.Updater = AccountUserName;

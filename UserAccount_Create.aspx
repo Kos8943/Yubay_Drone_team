@@ -126,18 +126,18 @@
         <%-- 修改模式使用 --%>
          <asp:PlaceHolder ID="PlaceHolderUpdateMode" runat="server" Visible="false">
             <div class="d-flex justify-content-between inputmarin">
-                <label for="ContentPlaceHolder1_Text_OldPassword" TextMode="Password">舊密碼</label>
-                <asp:TextBox ID="Text_OldPassword" CssClass="inputsize" runat="server"></asp:TextBox>
+                <label for="ContentPlaceHolder1_Text_OldPassword">舊密碼</label>
+                <asp:TextBox ID="Text_OldPassword" CssClass="inputsize" runat="server" TextMode="Password"></asp:TextBox>
             </div>
 
             <div class="d-flex justify-content-between inputmarin">
-                <label for="ContentPlaceHolder1_Text_NewPassword" TextMode="Password">新密碼</label>
-                <asp:TextBox ID="Text_NewPassword" CssClass="inputsize" runat="server"></asp:TextBox>
+                <label for="ContentPlaceHolder1_Text_NewPassword">新密碼</label>
+                <asp:TextBox ID="Text_NewPassword" CssClass="inputsize" runat="server" TextMode="Password"></asp:TextBox>
             </div>
 
              <div class="d-flex justify-content-between inputmarin">
-                <label for="ContentPlaceHolder1_Text_NewPasswordCheck" TextMode="Password">確認新密碼</label>
-                <asp:TextBox ID="Text_NewPasswordCheck" CssClass="inputsize" runat="server"></asp:TextBox>
+                <label for="ContentPlaceHolder1_Text_NewPasswordCheck" >確認新密碼</label>
+                <asp:TextBox ID="Text_NewPasswordCheck" CssClass="inputsize" runat="server" TextMode="Password"></asp:TextBox>
             </div>
         </asp:PlaceHolder>
         <%-- 修改模式使用 --%>
