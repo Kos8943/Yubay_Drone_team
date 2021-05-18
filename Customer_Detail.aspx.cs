@@ -19,8 +19,8 @@ namespace Yubay_Drone_team
             Main.TableTitle = "客戶資料管理";
 
             string currentPage = Request.QueryString["Page"];
-            string SearchType = Request.QueryString["SearchType"];
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+            string SearchType = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString[$"WantSearch"];
 
             if (string.IsNullOrWhiteSpace(currentPage))
             {
@@ -50,6 +50,36 @@ namespace Yubay_Drone_team
             }
         }
 
+        #region 客戶資料查詢的頁面
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            //想搜尋的欄位
+            string SearchField = this.DropDownListSearch.SelectedValue;
+
+            //搜尋的值
+            string KeyWord = this.textKeyWord.Text;
+
+            string currentPage = Request.QueryString["Page"];
+
+            if (string.IsNullOrWhiteSpace(currentPage))
+            {
+                currentPage = "1";
+            }
+
+            //如果搜尋欄位有值的話,把搜尋欄位跟搜尋值都放進URL,否則只放頁數
+            if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(KeyWord))
+            {
+                Response.Redirect($"Customer_Detail.aspx?Page={currentPage}&WantSearch={KeyWord}&SearchField={SearchField}");
+            }
+            else
+            {
+                Response.Redirect($"Customer_Detail.aspx?Page={currentPage}");
+            }
+
+        }
+        #endregion
+
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
             Response.Redirect("Customer_Create.aspx");
@@ -58,8 +88,8 @@ namespace Yubay_Drone_team
         private void SaveInserVal()
         {
 
-            string SearchType = Request.QueryString["SearchType"]; //從網址上面抓下拉式選單裡所選的搜尋條件
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];//將搜尋的條件丟進去使用者輸入的關鍵字
+            string SearchType = Request.QueryString["SearchField"]; //從網址上面抓下拉式選單裡所選的搜尋條件
+            string SearchKeyWord = Request.QueryString[$"WantSearch"];//將搜尋的條件丟進去使用者輸入的關鍵字
 
             //如果前面兩個東西都是空值進入判斷式
             if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
