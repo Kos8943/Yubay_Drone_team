@@ -116,7 +116,6 @@
                 <label>故障原因</label>
                 <asp:TextBox ID="Text_StopDate" runat="server" type="date"></asp:TextBox>
             </div>
-       
         </div>
         <div>
             <asp:Button ID="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />

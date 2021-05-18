@@ -1,6 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Battery.aspx.cs" Inherits="Yubay_Drone_team.Battery" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+
+       #BtnCreate{
+        width:50px;
+      }
+
+    </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="TableListArea">
@@ -36,7 +44,7 @@
                 <tbody>
                     <asp:Repeater ID="repInvoice" runat="server" OnItemCommand="repInvoice_ItemCommand">
                         <ItemTemplate>
-                            <tr>
+                            <tr class="row">
                                 <td class="col-2"><%# Eval("Battery_ID") %></td>
                                 <td class="col-2"><%# Eval("status") %></td>
                                 <td class="col-6"><%# Eval("stopReason") %>kg</td>

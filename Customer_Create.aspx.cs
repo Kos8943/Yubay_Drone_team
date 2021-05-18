@@ -38,7 +38,11 @@ namespace Yubay_Drone_team
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            //隱藏換頁功能
+            this.Master.FindControl("ChangePages").Visible = false;
+
+            //設定TableName
+            Main.TableTitle = string.Empty;
         }
 
         protected void BtnCustomer_Click(object sender, EventArgs e)
@@ -66,8 +70,6 @@ namespace Yubay_Drone_team
             //if判斷式是否重複或修改是否成功
 
             if (this.Text_Name.Text != string.Empty && this.Text_Address.Text != string.Empty && this.Text_Phone.Text != string.Empty)
-
-
             {
 
                 if (string.IsNullOrEmpty(querryString))
@@ -78,7 +80,6 @@ namespace Yubay_Drone_team
                 }
                 else
                 {
-
 
                     model.Sid = Convert.ToInt32(querryString);
                     ConnectionDB.UpdateCustomer(model,model.Sid);

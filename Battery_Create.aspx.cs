@@ -9,6 +9,9 @@ namespace Yubay_Drone_team
 {
 	public partial class Battery_Create : System.Web.UI.Page
 	{
+		
+
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 

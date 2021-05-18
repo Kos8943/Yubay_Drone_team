@@ -216,6 +216,7 @@
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\ConnectionDB.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\BatteryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DestinationModel.cs" />
     <Compile Include="Models\DroneMedel.cs" />

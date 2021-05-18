@@ -54,6 +54,51 @@ namespace Yubay_Drone_team.Customer
             return dt;
         }
         #endregion
+
+        #region 讀取電池資料
+        public DataTable ReadBatteryDetail(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
+        {
+            string keyWordSearchString;
+            //如果搜尋條件、關鍵字不是空值或是空白
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                //去找輸入搜尋條件的值
+                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+            }
+            else
+            {
+                //就不做搜尋
+                keyWordSearchString = string.Empty;
+            }
+
+            string queryString = $@" SELECT TOP 10 * FROM 
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Battery)
+                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+
+            string countQuery =
+                $@" SELECT 
+                        COUNT(Sid)
+                    FROM Battery
+                    WHERE IsDelete IS NULL {keyWordSearchString};";
+
+
+            List<SqlParameter> dbParameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
+            {
+                dbParameters.Add(new SqlParameter($"@{wantSearch}", "%" + searchKeyWord + "%"));
+            }
+
+            var dt = this.GetDataTable(queryString, dbParameters);
+
+            var dataCount = this.GetScale(countQuery, dbParameters) as int?;
+
+            TotalSize = (dataCount.HasValue) ? dataCount.Value : 0;
+
+            return dt;
+        }
+#endregion
+
         public DataTable GetDataTable(string dbCommand, List<SqlParameter> parameters)
         {
             string connectionString = GetConnectionString();
@@ -81,6 +126,10 @@ namespace Yubay_Drone_team.Customer
                 }
             }
         }
+
+
+
+
 
         public object GetScale(string dbCommand, List<SqlParameter> parameters)
         {
@@ -127,8 +176,6 @@ namespace Yubay_Drone_team.Customer
 
             string queryString = $@"UPDATE Drone_Detail SET Drone_ID = @Drone_ID, Deleter=@Deleter, DeleteDate= @DeleteDate , IsDelete = 'true' Where Sid = @Sid";
 
-
-
             List<SqlParameter> parameters = new List<SqlParameter>()
 
                 {
@@ -139,7 +186,6 @@ namespace Yubay_Drone_team.Customer
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
-
 
         }
 
