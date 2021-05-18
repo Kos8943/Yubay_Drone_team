@@ -46,10 +46,7 @@ namespace Yubay_Drone_team.Helpers
                 }   
 
             }
-
-
-           
-
+        
         }
 
         public DataTable GetDataTable(string dbCommand, List<SqlParameter> parameters)

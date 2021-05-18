@@ -23,7 +23,7 @@
                  <asp:ListItem Value="Farm_Address" Text="地號" ></asp:ListItem>
              </asp:DropDownList>
             <asp:TextBox ID="textKeyWord" runat="server" CssClass="ToolMagin"></asp:TextBox>
-             <button runat="server" onserverclick="BtnCreate_Click" class="btn btn-light ToolMagin" style="border:1px solid gray">
+             <button runat="server" onserverclick="btnSearch_Click" class="btn btn-light ToolMagin" style="border:1px solid gray">
                 <img src="Imgs/search.svg" style="width:20px; height:15px;"/>
                 <span>查詢</span>
             </button>
