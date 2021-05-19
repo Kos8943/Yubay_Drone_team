@@ -45,7 +45,11 @@ namespace Yubay_Drone_team
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //隱藏換頁功能
+            this.Master.FindControl("ChangePages").Visible = false;
+
+            //設定TableName
+            Main.TableTitle = string.Empty;
 
         }
 
