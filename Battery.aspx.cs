@@ -81,7 +81,7 @@ namespace Yubay_Drone_team
             //如果搜尋欄位有值的話,把搜尋欄位跟搜尋值都放進URL,否則只放頁數
             if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(KeyWord))
             {
-                Response.Redirect($"Battery.aspx?Page={currentPage}&WantSearch={KeyWord}&SearchField={SearchField}");
+                 Response.Redirect($"Battery.aspx?Page={currentPage}&WantSearch={KeyWord}&SearchField={SearchField}");
             }
             else
             {
@@ -96,13 +96,13 @@ namespace Yubay_Drone_team
         private void SaveInserVal()
         {
             //抓取Url上得值
-            string SearchField = Request.QueryString["SearchField"];
+            string SearchType = Request.QueryString["SearchType"];
             string SearchKeyWord = Request.QueryString[$"WantSearch"];
 
             //判斷是否有進階搜尋,有的話把值放進搜尋欄位
-            if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                this.DropDownListSearch.SelectedValue = SearchField;
+                this.DropDownListSearch.SelectedValue = SearchType;
                 this.textKeyWord.Text = SearchKeyWord;
             }
         }
@@ -111,22 +111,20 @@ namespace Yubay_Drone_team
         protected void repInvoice_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             string cmdName = e.CommandName;
-            //string cmdArgu = e.CommandArgument.ToString().Split(',')[0].Trim();
+     
             BatteryModel Model = new BatteryModel();
             ConnectionDB DBbase = new ConnectionDB();
             Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
-
+            CustomerAccountManager DBbaseBattery = new CustomerAccountManager();
 
             if ("DeleItem" == cmdName)
             {
-                //Model.Battery_ID = e.CommandArgument.ToString().Split(',')[1].Trim();
+              
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
                 DBbase.DeleteBattery(Model.Sid, username);
-                //DataTable dt = ConnectionDB.ReadDroneDetail();
-                //this.repInvoice.DataSource = dt;
-                //this.repInvoice.DataBind();
+               
             }
             if ("UpDateItem" == cmdName)
             {
@@ -140,9 +138,9 @@ namespace Yubay_Drone_team
             {
                 currentPage = "1";
             }
-            CustomerAccountManager DBbase1 = new CustomerAccountManager();
+           
             int TotalSize;
-            DataTable dt = DBbase1.ReadBatteryDetail(out TotalSize, "", "", Convert.ToInt32(currentPage));
+            DataTable dt = DBbaseBattery.ReadBatteryDetail(out TotalSize, "", "", Convert.ToInt32(currentPage));
             ChangePages.TotalSize = TotalSize;
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();

@@ -19,7 +19,7 @@
             </button>--%>
             <%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="./Imgs/plus.svg"/>--%>
             <asp:DropDownList ID="DropDownListSearch" runat="server" CssClass="ToolMagin">
-                <asp:ListItem Value="Drone_ID" Text="電池編號"></asp:ListItem>
+                <asp:ListItem Value="Battery_ID" Text="電池編號"></asp:ListItem>
                 <asp:ListItem Value="Status" Text="使用狀態"></asp:ListItem>
                 <asp:ListItem Value="StopReason" Text="停用原因"></asp:ListItem>
             </asp:DropDownList>
