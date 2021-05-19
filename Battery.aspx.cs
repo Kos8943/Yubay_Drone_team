@@ -55,12 +55,12 @@ namespace Yubay_Drone_team
 
         protected void Add_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Battery_Create.aspx");
         }
 
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Battery_Create.aspx");
+            
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
