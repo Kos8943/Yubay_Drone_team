@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .FormArea {
-            width: 50%;
+            width: 40%;
             border: 1px #111 solid;
             padding: 0 5%;
             background-color: rgb(254,254,254);
@@ -64,10 +64,6 @@
             color: red;
         }
 
-        .checkBoxStyle {
-            margin-left: 35px;
-        }
-
         .dropdownListWidth {
             width: 180px;
         }
@@ -77,7 +73,7 @@
         @media (min-width: 1282px) {
 
             .FormArea {
-                padding: 0 2%;
+                padding: 0 10%;
             }
 
             .title {
@@ -89,7 +85,7 @@
             }
 
             .inputmarin {
-                margin-bottom: 35px;
+                margin-bottom: 7px;
             }
         }
     </style>
@@ -97,46 +93,46 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="FormArea">
-        <div class="container-fluid">
             <div class="titleAreaMargin" style="text-align: center;">
                 <asp:Label ID="FixedTittle" CssClass="title" runat="server" Text="新增無人機維修紀錄"></asp:Label>
             </div>
+
             <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
 
-            <div>
-                <label>無人機編號</label>
-                <asp:DropDownList ID="DropDownList_Drone" runat="server"></asp:DropDownList>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_DropDownList_Drone">無人機編號</label>
+                <asp:DropDownList ID="DropDownList_Drone" class="dropdownListWidth" runat="server"></asp:DropDownList>
             </div>
-            <div>
-                <label>更換部件</label>
-                <asp:TextBox ID="Text_FixChange" runat="server"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_FixChange">更換部件</label>
+                <asp:TextBox ID="Text_FixChange" CssClass="inputsize" runat="server"></asp:TextBox>
             </div>
-            <div>
-                <label>故障日期</label>
-                <asp:TextBox ID="Text_StopDate" runat="server" type="date"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_StopDate">故障日期</label>
+                <asp:TextBox ID="Text_StopDate" CssClass="inputsize" runat="server" type="date"></asp:TextBox>
             </div>
-            <div>
-                <label>送修時間</label>
-                <asp:TextBox ID="Text_SendDate" runat="server" type="date"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_SendDate">送修時間</label>
+                <asp:TextBox ID="Text_SendDate" CssClass="inputsize" runat="server" type="date"></asp:TextBox>
             </div>
-            <div>
-                <label>維修廠商</label>
-                <asp:TextBox ID="Text_FixVendor" runat="server"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_FixVendor">維修廠商</label>
+                <asp:TextBox ID="Text_FixVendor" CssClass="inputsize" runat="server"></asp:TextBox>
             </div>
-            <div>
-                <label>故障原因</label>
-                <asp:TextBox ID="Text_StopReason" runat="server"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_StopReason">故障原因</label>
+                <asp:TextBox ID="Text_StopReason" CssClass="inputsize" runat="server"></asp:TextBox>
             </div>
-            <div>
-                <label>備註</label>
-                <asp:TextBox ID="Text_Remarks" runat="server" type="textarea"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_Remarks">備註</label>
+                <asp:TextBox ID="Text_Remarks" CssClass="inputsize" runat="server" type="textarea"></asp:TextBox>
             </div>
-        </div>
-        <div>
-            <asp:Button ID="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
+        <div class="d-flex justify-content-center buttonArea">
+            <asp:Button ID="Btn_Create" runat="server" Text="建立" CssClass="Btn_Create"  OnClick="Btn_Create_Click" />
             <asp:Button ID="Btm_Cancel" runat="server" Text="取消" OnClick="Btm_Cancel_Click" />
         </div>
-        <asp:Label ID="ltMsg" runat="server" Text="新增成功" Visible="false"></asp:Label>
+        <asp:Label ID="ltMsg" runat="server" Text="新增成功" CssClass="d-flex justify-content-center errMsg" Visible="false"></asp:Label>
     </div>
 </asp:Content>

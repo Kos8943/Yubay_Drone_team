@@ -3,7 +3,7 @@
 
 <style>
      .FormArea {
-            width: 50%;
+            width: 40%;
             border: 1px #111 solid;
             padding: 0 5%;
             background-color: rgb(254,254,254);
@@ -68,16 +68,12 @@
             margin-left: 35px;
         }
 
-        .dropdownListWidth{
-            width:180px;
-        }
-
 
         /* xl - Extra large devices (large desktops, 1200px and up) */
         @media (min-width: 1282px) {
 
             .FormArea {
-                padding: 0 2%;
+                padding: 0 10%;
             }
 
             .title {
@@ -98,29 +94,28 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
       <div class="FormArea">
-        <div class="container-fluid">
             <div class="titleAreaMargin" style="text-align: center;">
                 <asp:Label ID="BatteryTittle" CssClass="title" runat="server" Text="新增電池管理"></asp:Label>
             </div>
+
             <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
 
-            <div>
-                <label>電池編號</label>
-                <asp:TextBox ID="Text_Battery_ID" runat="server"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_Battery_ID">電池編號</label>
+                <asp:TextBox ID="Text_Battery_ID" CssClass="inputsize"  runat="server"></asp:TextBox>
             </div>
-            <div>
-                <label>使用狀況</label>
-                <asp:TextBox ID="Text_Status" runat="server"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_Status">使用狀況</label>
+                <asp:TextBox ID="Text_Status" CssClass="inputsize"  runat="server"></asp:TextBox>
             </div>
-            <div>
-                <label>故障原因</label>
-                <asp:TextBox ID="Text_StopReason" runat="server"></asp:TextBox>
+            <div class="d-flex justify-content-between inputmarin">
+                <label for="ContentPlaceHolder1_Text_StopReason">故障原因</label>
+                <asp:TextBox ID="Text_StopReason" CssClass="inputsize"  runat="server"></asp:TextBox>
             </div>
-        </div>
-        <div>
-            <asp:Button ID="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
+        <div class="d-flex justify-content-center buttonArea">
+            <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
             <asp:Button ID="Btm_Cancel" runat="server" Text="取消" OnClick="Btm_Cancel_Click" />
         </div>
-        <asp:Label ID="ltMsg" runat="server" Text="新增成功" Visible="false"></asp:Label>
+        <asp:Label ID="ltMsg" runat="server" Text="新增成功" CssClass="errMsg"  Visible="false"></asp:Label>
     </div>
 </asp:Content>
