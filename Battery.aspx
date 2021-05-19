@@ -47,7 +47,7 @@
                             <tr class="row">
                                 <td class="col-2"><%# Eval("Battery_ID") %></td>
                                 <td class="col-2"><%# Eval("status") %></td>
-                                <td class="col-6"><%# Eval("stopReason") %>kg</td>
+                                <td class="col-6"><%# Eval("stopReason") %></td>
                                 <%--<td>
                                 <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
                             </td>--%>
