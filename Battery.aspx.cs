@@ -119,11 +119,11 @@ namespace Yubay_Drone_team
 
             if ("DeleItem" == cmdName)
             {
-              
+                Model.Battery_ID = e.CommandArgument.ToString().Split(',')[1].Trim();
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
-                DBbase.DeleteBattery(Model.Sid, username);
+                DBbase.DeleteBattery(Model);
                
             }
             if ("UpDateItem" == cmdName)

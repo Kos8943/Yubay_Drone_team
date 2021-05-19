@@ -1077,18 +1077,19 @@ namespace Yubay_Drone_team.Managers
         #endregion
 
         #region  刪除電池管理資料
-        public void DeleteBattery(int Sid, string Username)
+        public void DeleteBattery(BatteryModel Model)
         {
 
             string queryString =
                 $@"UPDATE Battery 
-                   SET Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' 
+                   SET   Battery_ID = @Battery_ID , Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' 
                    Where Sid = @Sid";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
                 {
-                   new SqlParameter("@Sid", Sid),
-                   new SqlParameter("@Deleter", $"{Username}"),
+                   new SqlParameter("@Sid", Model.Sid),
+                   new SqlParameter("@Deleter", Model.Deleter),
+                   new SqlParameter("@Battery_ID", $"{Model.Battery_ID}_Deleted_{Model.Sid}"),
                    new SqlParameter("@DeleteDate", DateTime.Now)
                 };
 
