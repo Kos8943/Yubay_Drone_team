@@ -114,7 +114,7 @@ namespace Yubay_Drone_team
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
-                DBbase.DeleteCustomer(Model.Sid, username);
+                DBbase.DeleteCustomer(Model);
                 //DBbase.DelectDroneDetail(Model);
                 //DataTable dt = ConnectionDB.ReadDroneDetail();
                 //this.repInvoice.DataSource = dt;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
 
@@ -80,6 +81,12 @@ namespace Yubay_Drone_team
                 }
                 else
                 {
+
+                    //取得session
+                    LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
+                    //取得session的使用者權限
+                    string UserName = loginInfo.UserName;
+                    model.Updater = UserName;
 
                     model.Sid = Convert.ToInt32(querryString);
                     ConnectionDB.UpdateCustomer(model,model.Sid);

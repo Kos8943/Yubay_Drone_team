@@ -11,6 +11,7 @@ namespace Yubay_Drone_team.Managers
 {
     public class ConnectionDB : CreateHelper
     {
+        #region 新增無人機功能
         public void Drone_Detail_Create(DroneMedel Model)
         {
 
@@ -36,6 +37,10 @@ namespace Yubay_Drone_team.Managers
             this.ExecuteNonQuery(queryString, parameters);
 
         }
+
+        #endregion
+
+        #region 讀取無人機的Method
         public DataTable ID_Checker(string Drone_ID)
         {
 
@@ -75,17 +80,18 @@ namespace Yubay_Drone_team.Managers
             }
 
         }
+        #endregion
 
 
-
-        public void Drone_Detail_Update(DroneMedel Model)
+        #region 修改無人機功能
+        public void Drone_Detail_Update(DroneMedel Model ,int Sid)
         {
 
             //使用的SQL語法
           
             string queryString = $@"UPDATE Drone_Detail SET  
                  Drone_ID = @Drone_ID, Manufacturer = @Manufacturer, WeightLoad = @WeightLoad, Status = @Status, 
-                 StopReason= @StopReason, Operator = @Operator Where Sid = @Sid";
+                 StopReason= @StopReason, Operator = @Operator , Updater = @Updater, UpdateDate = @UpdateDate Where Sid = @Sid";
 
 
 
@@ -98,15 +104,16 @@ namespace Yubay_Drone_team.Managers
                    new SqlParameter("@Status",Model.Status),
                    new SqlParameter("@StopReason", Model.StopReason),
                    new SqlParameter("@Operator", Model.Operator),
-                   new SqlParameter("@Sid",Model.Sid)
-
+                   new SqlParameter("@Sid",Model.Sid),
+                   new SqlParameter("@Updater", Model.Updater),
+                   new SqlParameter("@UpdateDate", DateTime.Now)
 
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
 
         }
-
+        #endregion
 
         #region 查詢無人機資料的Method
         public DataTable ReadDroneDetail(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
@@ -785,7 +792,7 @@ namespace Yubay_Drone_team.Managers
         public void UpdateCustomer(CustomerModel model, int sid)
         {
             string queryString = $@"UPDATE Customer 
-                                SET Name = @Name, Address = @Address, Phone= @Phone, Crop = @Crop, Area = @Area ,Farm_Address=@Farm_Address
+                                SET Name = @Name, Address = @Address, Phone= @Phone, Crop = @Crop, Area = @Area ,Farm_Address=@Farm_Address , Updater = @Updater, UpdateDate = @UpdateDate 
                                 Where Sid = @Sid";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
@@ -798,6 +805,8 @@ namespace Yubay_Drone_team.Managers
                    new SqlParameter("@Crop", model.Crop),
                    new SqlParameter("@Area", model.Area),
                    new SqlParameter("@Farm_Address", model.Farm_Address),
+                   new SqlParameter("@Updater", model.Updater),
+                   new SqlParameter("@UpdateDate", DateTime.Now)
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
@@ -805,18 +814,19 @@ namespace Yubay_Drone_team.Managers
         #endregion
 
         #region 刪除客戶資料
-        public void DeleteCustomer(int Sid, string Username)
+        public void DeleteCustomer(CustomerModel Model)
         {
 
             string queryString =
                 $@"UPDATE Customer 
-                   SET Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' 
+                   SET  Name= @Name,  Deleter = @Deleter, DeleteDate = @DeleteDate, IsDelete = 'true' 
                    Where Sid = @Sid";
 
             List<SqlParameter> parameters = new List<SqlParameter>()
                 {
-                   new SqlParameter("@Sid", Sid),
-                   new SqlParameter("@Deleter", $"{Username}"),
+                   new SqlParameter("@Sid", Model.Sid),
+                   new SqlParameter("@Deleter", Model.Deleter),
+                   new SqlParameter("@Battery_ID", $"{Model.Name}_Deleted_{Model.Sid}"),
                    new SqlParameter("@DeleteDate", DateTime.Now)
                 };
 
@@ -932,7 +942,7 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
 
-        #region 新增出勤紀錄
+        #region 新增維修紀錄
 
         public void CreateFixed(FixedModel model)
         {
@@ -957,7 +967,7 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
 
-        #region 修改出勤紀錄
+        #region 修改維修紀錄
         public void UpdateFixed(FixedModel model, int sid)
         {
             string queryString = $@"UPDATE Fixed SET [Drone_ID] = @Drone_ID, FixChange = @FixChange, StopDate = @StopDate, SendDate = @SendDate, FixVendor = @FixVendor, StopReason = @StopReason, Remarks = @Remarks, Updater = @Updater, UpdateDate = @UpdateDate Where Sid = @Sid";

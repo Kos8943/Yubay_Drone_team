@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
 
@@ -57,6 +58,8 @@ namespace Yubay_Drone_team
         protected void Btn_Create_Click(object sender, EventArgs e)
         {
             string querryString = Request.QueryString["Sid"];
+            int Sid;
+            bool tryParseSid = Int32.TryParse(querryString, out Sid);
 
             DroneMedel model = new DroneMedel();
             model.Drone_ID = this.Text_Number.Text;
@@ -70,8 +73,8 @@ namespace Yubay_Drone_team
 
 
             if (this.Text_Number.Text != string.Empty && this.Text_Manufacturer.Text != string.Empty && this.Text_Weight.Text != string.Empty &&
-                this.DropDownList_Status.Text != string.Empty &&
-                this.DropDownList_Operator.Text != string.Empty)
+                this.DropDownList_Status.Text != string.Empty && this.DropDownList_Operator.Text != string.Empty)
+               
             {
 
                 if (string.IsNullOrEmpty(querryString))
@@ -93,11 +96,15 @@ namespace Yubay_Drone_team
                 }
                 else
                 {
-                    
 
+                    //取得session
+                    LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
+                    //取得session的使用者權限
+                    string UserName = loginInfo.UserName;
+                    model.Updater = UserName;
                     model.Sid = Convert.ToInt32(querryString);
  
-                    ConnectionDB.Drone_Detail_Update(model);
+                    ConnectionDB.Drone_Detail_Update(model,Sid);
 
                     this.Label1.Text = "修改成功!";
 
