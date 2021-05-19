@@ -1143,6 +1143,29 @@ namespace Yubay_Drone_team.Managers
 
         #endregion
 
+        #region 刪除無人機維修紀錄的Method
+        public void DelectFixed(FixedModel Model)
+        {
+
+            //使用的SQL語法
+
+            string queryString = $@"UPDATE Fixed SET Deleter=@Deleter, DeleteDate= @DeleteDate , IsDelete = 'true' Where Sid = @Sid";
+
+
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Model.Sid),
+                   new SqlParameter("@Deleter", Model.Deleter),
+                   new SqlParameter("@DeleteDate",DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+
+
+        }
+        #endregion
 
     }
 }

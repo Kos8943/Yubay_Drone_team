@@ -59,18 +59,18 @@ namespace Yubay_Drone_team
         {
             string cmdName = e.CommandName;
             //string cmdArgu = e.CommandArgument.ToString().Split(',')[0].Trim();
-            DroneMedel Model = new DroneMedel();
+            FixedModel Model = new FixedModel();
             ConnectionDB DBbase = new ConnectionDB();
             Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
 
 
             if ("DeleItem" == cmdName)
             {
-                Model.Drone_ID = e.CommandArgument.ToString().Split(',')[1].Trim();
+                //Model.Drone_ID = e.CommandArgument.ToString().Split(',')[1].Trim();
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
-                DBbase.DelectDroneDetail(Model);
+                DBbase.DelectFixed(Model);
                 //DataTable dt = ConnectionDB.ReadDroneDetail();
                 //this.repInvoice.DataSource = dt;
                 //this.repInvoice.DataBind();
@@ -89,7 +89,7 @@ namespace Yubay_Drone_team
             }
 
             int TotalSize;
-            DataTable dt = DBbase.ReadDroneDetail(out TotalSize, "", "", Convert.ToInt32(currentPage));
+            DataTable dt = DBbase.ReadFixed(out TotalSize, "", "", Convert.ToInt32(currentPage));
             ChangePages.TotalSize = TotalSize;
             this.repInvoice.DataSource = dt;
             this.repInvoice.DataBind();
