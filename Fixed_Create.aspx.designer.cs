@@ -15,13 +15,13 @@ namespace Yubay_Drone_team
     {
 
         /// <summary>
-        /// UserAccountTittle 控制項。
+        /// FixedTittle 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label UserAccountTittle;
+        protected global::System.Web.UI.WebControls.Label FixedTittle;
 
         /// <summary>
         /// DropDownList_Drone 控制項。

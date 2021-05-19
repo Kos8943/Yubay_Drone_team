@@ -100,21 +100,21 @@
       <div class="FormArea">
         <div class="container-fluid">
             <div class="titleAreaMargin" style="text-align: center;">
-                <asp:Label ID="Label1" CssClass="title" runat="server" Text="新增電池管理"></asp:Label>
+                <asp:Label ID="BatteryTittle" CssClass="title" runat="server" Text="新增電池管理"></asp:Label>
             </div>
             <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
 
             <div>
                 <label>電池編號</label>
-                <asp:DropDownList ID="DropDownList_Drone" runat="server"></asp:DropDownList>
+                <asp:TextBox ID="Text_Battery_ID" runat="server"></asp:TextBox>
             </div>
             <div>
                 <label>使用狀況</label>
-                <asp:TextBox ID="Text_FixChange" runat="server"></asp:TextBox>
+                <asp:TextBox ID="Text_Status" runat="server"></asp:TextBox>
             </div>
             <div>
                 <label>故障原因</label>
-                <asp:TextBox ID="Text_StopDate" runat="server" type="date"></asp:TextBox>
+                <asp:TextBox ID="Text_StopReason" runat="server"></asp:TextBox>
             </div>
         </div>
         <div>

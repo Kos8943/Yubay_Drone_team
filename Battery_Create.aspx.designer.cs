@@ -15,40 +15,40 @@ namespace Yubay_Drone_team
     {
 
         /// <summary>
-        /// Label1 控制項。
+        /// BatteryTittle 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label BatteryTittle;
 
         /// <summary>
-        /// DropDownList_Drone 控制項。
+        /// Text_Battery_ID 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Drone;
+        protected global::System.Web.UI.WebControls.TextBox Text_Battery_ID;
 
         /// <summary>
-        /// Text_FixChange 控制項。
+        /// Text_Status 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Text_FixChange;
+        protected global::System.Web.UI.WebControls.TextBox Text_Status;
 
         /// <summary>
-        /// Text_StopDate 控制項。
+        /// Text_StopReason 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Text_StopDate;
+        protected global::System.Web.UI.WebControls.TextBox Text_StopReason;
 
         /// <summary>
         /// Btn_Create 控制項。

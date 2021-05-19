@@ -1167,6 +1167,104 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
 
+        #region 新增電池
+
+        public void CreateBattery(BatteryModel model)
+        {
+            //使用的SQL語法
+            string queryString = $@" INSERT INTO Battery (Battery_ID, status, stopReason)
+
+                                        VALUES (@Battery_ID, @status, @stopReason);";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Battery_ID",model.Battery_ID),
+                   new SqlParameter("@status",model.status),
+                   new SqlParameter("@stopReason", model.stopReason)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+        #region 修改電池
+        public void UpdateBattery(BatteryModel model, int sid)
+        {
+            string queryString = $@"UPDATE Battery SET [Battery_ID] = @Battery_ID, status = @status, stopReason = @stopReason, Updater = @Updater, UpdateDate = @UpdateDate Where Sid = @Sid";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", sid),
+                   new SqlParameter("@Battery_ID",model.Battery_ID),
+                   new SqlParameter("@status",model.status),
+                   new SqlParameter("@stopReason", model.stopReason),
+                   new SqlParameter("@Updater", model.Updater),
+                   new SqlParameter("@UpdateDate", DateTime.Now)
+                };
+
+            this.ExecuteNonQuery(queryString, parameters);
+        }
+        #endregion
+
+        #region 查詢電池是否重複
+        public DataTable BatteryID_Checker(string Battery_ID)
+        {
+
+            //使用的SQL語法
+            string queryString = $@" SELECT * FROM Battery WHERE Battery_ID = @Sid";
+            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+            //建立連線
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@Sid", Battery_ID);
+
+                try
+                {
+                    //開始連線
+                    connection.Open();
+
+                    //從資料庫中讀取資料
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    //在記憶體中創新的空表
+                    DataTable dt = new DataTable();
+
+                    //把值塞進空表
+                    dt.Load(reader);
+
+                    reader.Close();
+
+                    //回傳dt
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+            }
+
+        }
+        #endregion
+
+        #region 讀取單筆電池
+        public DataTable ReadSingleBattery(int Sid)
+        {
+            string queryString = $@" SELECT Sid , Battery_ID, status, stopReason FROM Battery Where Sid = @Sid;";
+
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Sid", Sid)
+                };
+
+            DataTable data = this.GetDataTable(queryString, parameters);
+            return data;
+        }
+        #endregion
     }
 }
 

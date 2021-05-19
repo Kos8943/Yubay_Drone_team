@@ -100,7 +100,7 @@
     <div class="FormArea">
         <div class="container-fluid">
             <div class="titleAreaMargin" style="text-align: center;">
-                <asp:Label ID="UserAccountTittle" CssClass="title" runat="server" Text="新增無人機維修紀錄"></asp:Label>
+                <asp:Label ID="FixedTittle" CssClass="title" runat="server" Text="新增無人機維修紀錄"></asp:Label>
             </div>
             <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
 

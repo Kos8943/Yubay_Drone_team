@@ -35,7 +35,7 @@ namespace Yubay_Drone_team
             else
             {
                 int Sid;
-                //檢查QueryString["Sid"]是否為正常值,不是的話轉跳回列表頁
+                //檢查QueryString["Sid"]是否為正常值進入修改模式,不是的話轉跳回列表頁
                 if (Int32.TryParse(querryString, out Sid))
                 {
                     this.DropDownList_Drone.Enabled = false;
@@ -53,7 +53,7 @@ namespace Yubay_Drone_team
                     this.Text_StopReason.Text = dt.Rows[0]["StopReason"].ToString();
                     this.Text_Remarks.Text = dt.Rows[0]["Remarks"].ToString();
 
-                    this.UserAccountTittle.Text = "修改無人機維修紀錄";
+                    this.FixedTittle.Text = "修改無人機維修紀錄";
                     this.Btn_Create.Text = "修改";
                 }
                 else
@@ -106,7 +106,7 @@ namespace Yubay_Drone_team
             }
             else
             {
-                this.ltMsg.Text = "請選擇更換零件";
+                this.ltMsg.Text = "請輸入更換零件";
                 this.ltMsg.Visible = true;
                 return;
             }
