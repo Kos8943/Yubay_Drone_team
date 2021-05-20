@@ -37,16 +37,16 @@ namespace Yubay_Drone_team
             }
 
             string SearchLink = string.Empty;
-            string SearchType = Request.QueryString["SearchType"];
-            string SearchKeyWord = Request.QueryString[$"{SearchType}"];
+            string SearchField = Request.QueryString["SearchField"];
+            string SearchKeyWord = Request.QueryString[$"WantSearch"];
 
             if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                SearchLink = $"&{SearchType}={SearchKeyWord}&SearchType={SearchType}";
+                SearchLink = $"&WantSearch={SearchKeyWord}&SearchField={SearchField}";
             }
 
-            this.aLinkFristPage.HRef = this.BuildPagingUrl(1, SearchType, SearchKeyWord);
-            this.aLinkLastPage.HRef = this.BuildPagingUrl(pages, SearchType, SearchKeyWord);
+            this.aLinkFristPage.HRef = this.BuildPagingUrl(1, SearchField, SearchKeyWord);
+            this.aLinkLastPage.HRef = this.BuildPagingUrl(pages, SearchField, SearchKeyWord);
             for (int i = currentPageIndex - 3; i <= currentPageIndex + 3; i++)
             {
                 //不讓頁數為負數

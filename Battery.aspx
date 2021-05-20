@@ -51,9 +51,9 @@
                                 <%--<td>
                                 <button runat="server" class="btn btn-outline-secondary btn-sm" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>'>修改</button>
                             </td>--%>
-                                <td>
+                                <td class="col-1">
                                     <asp:Button CssClass="btn btn-outline-secondary btn-sm" runat="server" Text="修改" CommandName="UpDateItem" CommandArgument='<%# Eval("Sid") %>' /></td>
-                                <td>
+                                <td class="col-1">
                                     <asp:Button CssClass="btn btn-outline-danger btn-sm BtnDel" runat="server" Text="刪除" CommandName="DeleItem" CommandArgument='<%# Eval("Sid") + "," +Eval("Battery_ID") %>' OnClientClick="javascript:return confirm('確定刪除?')" /></td>
                             </tr>
                         </ItemTemplate>
