@@ -13,10 +13,10 @@ namespace Yubay_Drone_team
         public static string TableTitle { get; set; } = "無人機管理"; 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!LoginHelper.HasLogined())
-            //{
-            //    Response.Redirect("Login.aspx");
-            //}
+            if (!LoginHelper.HasLogined())
+            {
+                Response.Redirect("Login.aspx");
+            }
             this.TableName.InnerText = TableTitle;
 
             //取得session

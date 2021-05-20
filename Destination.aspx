@@ -72,7 +72,7 @@
         <div class="container-fluid containerPaddingChange">
             <table class="table table-hover" style="font-size: 18px;">
                 <thead>
-                    <tr class="table-primary tdHeight">
+                    <tr class="tdHeight">
                         <th scope="col">出勤日期</th>
                         <th scope="col">出勤人員</th>
                         <th scope="col">使用無人機</th>

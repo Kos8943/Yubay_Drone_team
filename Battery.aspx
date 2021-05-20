@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <table class="table table-hover" style="font-size: 18px;">
                 <thead>
-                    <tr class="table-primary tdHeight row">
+                    <tr class="tdHeight row">
                         <th class="col-2">電池編號</th>
                         <th class="col-2">電池編號</th>
                         <th class="col-8">停用原因</th>

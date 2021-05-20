@@ -30,7 +30,7 @@ namespace Yubay_Drone_team
 
             }
 
-            DataTable data = ConnectionDB.UpdateOnlyoneDroneDetail(querryString);
+            DataTable data = ConnectionDB.Select_DroneDetail(querryString);
 
             this.Text_Number.Text = data.Rows[0]["Drone_ID"].ToString();
             this.Text_Manufacturer.Text = data.Rows[0]["Manufacturer"].ToString();

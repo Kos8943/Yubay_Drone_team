@@ -248,14 +248,14 @@ namespace Yubay_Drone_team.Managers
         }
         #endregion
 
-        #region 新增無人機管理
-        public static DataTable UpdateOnlyoneDroneDetail(string sid)
+        #region 讀取無人機管理
+        public static DataTable Select_DroneDetail(string sid)
         {
             //建立連線資料庫的字串變數Catalog=Drone的Drone為資料庫名稱
             string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
             //使用的SQL語法
-            string queryString = $@" SELECT * FROM Drone_Detail Where Sid=@Sid;";
+            string queryString = $@" SELECT * FROM Drone_Detail Where Sid=@Sid ORDER BY Sid ";
 
             //建立連線
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -696,7 +696,7 @@ namespace Yubay_Drone_team.Managers
         public void CreateDestination(DestinationModel model)
         {
             //使用的SQL語法
-            string queryString = $@" INSERT INTO Destination (Date, Staff, Drone_ID, Battery_Count, Customer_Name,                          Customer_Phone, Customer_Address, Customer_Sid, Pesticide, Pesticide_Date, Remarks)
+            string queryString = $@" INSERT INTO Destination (Date, Staff, Drone_ID, Battery_Count, Customer_Name, Customer_Phone, Customer_Address, Customer_Sid, Pesticide, Pesticide_Date, Remarks)
 
                                         VALUES (@Date, @Staff, @Drone_ID, @Battery_Count, @Customer_Name, @Customer_Phone, @Customer_Address, @Customer_Sid, @Pesticide, @Pesticide_Date, @Remarks);";
 

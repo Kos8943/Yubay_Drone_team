@@ -41,7 +41,7 @@
         </div>
         <table class="table table-hover" style="font-size: 18px;">
             <thead>
-                <tr class="table-primary tdHeight">
+                <tr class="tdHeight">
                     <th scope="col">無人機編號</th>
                     <th scope="col">製造商</th>
                     <th scope="col">最大起飛重量</th>

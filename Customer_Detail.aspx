@@ -31,7 +31,7 @@
         </div>
         <table class="table table-hover" style="font-size:18px">
             <thead>
-                <tr class="table-primary tdHeight">
+                <tr class="tdHeight">
                     <th scope="col">姓名</th>
                     <th scope="col">地址</th>
                     <th scope="col">電話</th>

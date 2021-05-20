@@ -98,6 +98,8 @@
     <Content Include="Imgs\exit.svg" />
     <Content Include="Imgs\iconfinder_Safety01_928417.svg" />
     <Content Include="Imgs\iconfinder_User_5431752.svg" />
+    <Content Include="Imgs\LOGO.jpg" />
+    <Content Include="Imgs\LOGO01.png" />
     <Content Include="Imgs\news20171201_001.png" />
     <Content Include="Imgs\plus.svg" />
     <Content Include="Imgs\search.svg" />

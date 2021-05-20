@@ -22,12 +22,14 @@
         }
 
         .LogoArea {
-            background-color: antiquewhite;
+            /*background-color: antiquewhite;*/
             position: relative;
-            background-color: rgb(52, 58, 70);
+            /*background-color: rgb(52, 58, 70);*/
+            background-color:#344c67;
         }
 
         .LogoImg {
+            width:50%;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -68,7 +70,8 @@
         }
 
         .titles {
-            background-color: rgb(43,50,60);
+            /*background-color: rgb(43,50,60);*/
+            background-color:#4c637b;
             padding-top: 25px;
         }
 
@@ -79,7 +82,7 @@
 
         .titleArea {
             margin-bottom: 15px;
-            border-bottom: 3px solid rgb(41,55,65);
+            border-bottom: 3px solid rgba(41,55,65,0);
             padding-left: 22%;
         }
 
@@ -89,7 +92,12 @@
 
         .tableLink {
             text-decoration: none;
-            color: rgb(238,238,238);
+            color: rgba(238,238,238, .8);
+        }
+
+        .tableLink:hover{
+            color: rgba(238,238,238, .8);
+            text-decoration: none;
         }
 
         .TableSize {
@@ -202,7 +210,8 @@
         <div class="container-fluid headerArea">
             <div class="row headerHight">
                 <div class="col-2 LogoArea">
-                    <img class="LogoImg" src="Imgs/news20171201_001.png" />
+                    <img class="LogoImg" src="Imgs/LOGO01.png" />
+                    <%--<img class="LogoImg" src="Imgs/news20171201_001.png" />--%>
                 </div>
                 <div runat="server" class="col-10 TableNameArea">
                     <span class="TableName" runat="server" id="TableName"></span>

@@ -77,7 +77,8 @@
             width: 278px;
             height: 38px;
             font-family: 'Segoe UI',Arial,'Microsoft Jhenghei',sans-serif;
-            background-color: rgb(5,139,233);
+            /*background-color: rgb(5,139,233);*/
+            background-color:#FFB11B;
             border: 1px solid rgba(0, 0, 0,.1);
             border-radius: 5px;
             font-size: 20px;

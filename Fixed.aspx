@@ -29,7 +29,7 @@
         </div>
         <table class="table table-hover" style="font-size: 18px;">
             <thead>
-                <tr class="table-primary tdHeight">
+                <tr class="tdHeight">
                     <th scope="col">無人機編號</th>
                     <th scope="col">更換零件</th>
                     <th scope="col">停用時間</th>

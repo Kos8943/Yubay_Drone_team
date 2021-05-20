@@ -110,7 +110,7 @@
             <asp:TextBox ID="Text_Manufacturer" CssClass="inputsize" runat="server"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
-            <label for="ContentPlaceHolder1_Text_Weight">最大起飛重量</label>
+            <label for="ContentPlaceHolder1_Text_Weight">最大起飛重量(kg)</label>
             <asp:TextBox ID="Text_Weight" CssClass="inputsize" runat="server"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
