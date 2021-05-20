@@ -77,7 +77,7 @@ namespace Yubay_Drone_team
                 {
                     ConnectionDB.CreateCustomer(model);
                     this.Label1.Visible = true;
-
+                    this.Label1.Text = "新增成功";
                 }
                 else
                 {
@@ -98,7 +98,15 @@ namespace Yubay_Drone_team
 
                 }
             }
-       
+            else
+            {
+                this.Label1.Text = "姓名、地址、電話為必填欄位";
+                //就顯示Label1
+                this.Label1.Visible = true;
+                return;
+
+            }
+
         }
 
         //轉跳取消頁面
