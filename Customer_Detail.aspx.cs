@@ -102,23 +102,21 @@ namespace Yubay_Drone_team
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             string cmdName = e.CommandName;
-            //string cmdArgu = e.CommandArgument.ToString().Split(',')[0].Trim();
-            CustomerModel Model = new CustomerModel();
-            Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
-            //Model.Name = e.CommandArgument.ToString().Split(',')[1].Trim();
+            CustomerModel Model = new CustomerModel();        
             ConnectionDB DBbase = new ConnectionDB();
             CustomerAccountManager DBbaseCustomer = new CustomerAccountManager();
+            Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
+
 
             if ("DeleteItem" == cmdName)
             {
+                Model.Name = e.CommandArgument.ToString().Split(',')[1].Trim();
+                //查看權限檢查是否可以作刪除動作
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
                 DBbase.DeleteCustomer(Model);
-                //DBbase.DelectDroneDetail(Model);
-                //DataTable dt = ConnectionDB.ReadDroneDetail();
-                //this.repInvoice.DataSource = dt;
-                //this.repInvoice.DataBind();
+             
             }
             if ("UpDateItem" == cmdName)
             {

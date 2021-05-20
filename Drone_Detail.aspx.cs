@@ -73,9 +73,7 @@ namespace Yubay_Drone_team
                 var username = loginInfo.UserName;
                 Model.Deleter = username.ToString();
                 DBbase.DelectDroneDetail(Model);
-                //DataTable dt = ConnectionDB.ReadDroneDetail();
-                //this.repInvoice.DataSource = dt;
-                //this.repInvoice.DataBind();
+        
             }
             if ("UpDateItem" == cmdName)
             {

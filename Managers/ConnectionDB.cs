@@ -826,7 +826,7 @@ namespace Yubay_Drone_team.Managers
                 {
                    new SqlParameter("@Sid", Model.Sid),
                    new SqlParameter("@Deleter", Model.Deleter),
-                   new SqlParameter("@Battery_ID", $"{Model.Name}_Deleted_{Model.Sid}"),
+                   new SqlParameter("@Name", $"{Model.Name}_Deleted_{Model.Sid}"),
                    new SqlParameter("@DeleteDate", DateTime.Now)
                 };
 
