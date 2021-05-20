@@ -101,7 +101,7 @@ namespace Yubay_Drone_team
         {
             if(!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                return $"{Url}?Page={pageIndex}&{SearchType}={SearchKeyWord}&SearchType={SearchType}";
+                return $"{Url}?Page={pageIndex}&WantSearch={SearchKeyWord}&SearchField={SearchType}";
             }
             else
             {

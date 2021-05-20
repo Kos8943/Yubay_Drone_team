@@ -305,7 +305,7 @@ namespace Yubay_Drone_team.Managers
             if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
                 //去找輸入搜尋條件的值
-                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+                keyWordSearchString = $"{wantSearch} Like @{wantSearch} AND";
             }
             else
             {
@@ -313,15 +313,23 @@ namespace Yubay_Drone_team.Managers
                 keyWordSearchString = string.Empty;
             }
 
-            string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM UserAccount)
-                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+            //string queryString = $@" SELECT TOP 10 * FROM 
+            //                            (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM UserAccount)
+            //                            a WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False' AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+
+
+            string queryString = $@"SELECT TOP 10 * FROM
+                                        (SELECT *, ROW_NUMBER() OVER(ORDER BY[Sid] ASC) AS ROWSID
+                                        FROM UserAccount
+                                        WHERE  {keyWordSearchString} IsDelete IS NULL OR IsDelete = 'false') a 
+                                        WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False';";
+            
 
             string countQuery =
                 $@" SELECT 
                         COUNT(Sid)
                     FROM UserAccount
-                    WHERE SuperAccount = 'False' AND IsDelete IS NULL {keyWordSearchString};";
+                    WHERE {keyWordSearchString} SuperAccount = 'False' AND IsDelete IS NULL ;";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
