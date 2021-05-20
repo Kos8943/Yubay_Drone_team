@@ -160,7 +160,7 @@ namespace Yubay_Drone_team
         {
             //抓取Url上得值
             string SearchField = Request.QueryString["SearchField"];
-            string SearchKeyWord = Request.QueryString[$"WantSearch"];
+            string SearchKeyWord = Request.QueryString["WantSearch"];
 
             //判斷是否有進階搜尋,有的話把值放進搜尋欄位
             if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(SearchKeyWord))

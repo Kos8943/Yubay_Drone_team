@@ -321,7 +321,7 @@ namespace Yubay_Drone_team.Managers
             string queryString = $@"SELECT TOP 10 * FROM
                                         (SELECT *, ROW_NUMBER() OVER(ORDER BY[Sid] ASC) AS ROWSID
                                         FROM UserAccount
-                                        WHERE  {keyWordSearchString} IsDelete IS NULL OR IsDelete = 'false') a 
+                                        WHERE  {keyWordSearchString}　SuperAccount = 0 AND IsDelete IS NULL OR IsDelete = 'false') a 
                                         WHERE ROWSID > {pageSize * (currentPage - 1)} AND SuperAccount = 'False';";
             
 
@@ -329,7 +329,7 @@ namespace Yubay_Drone_team.Managers
                 $@" SELECT 
                         COUNT(Sid)
                     FROM UserAccount
-                    WHERE {keyWordSearchString} SuperAccount = 'False' AND IsDelete IS NULL ;";
+                    WHERE {keyWordSearchString} SuperAccount = 0 AND IsDelete IS NULL ;";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
