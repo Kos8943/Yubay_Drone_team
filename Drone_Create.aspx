@@ -111,7 +111,7 @@
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_Text_Weight">最大起飛重量(kg)</label>
-            <asp:TextBox ID="Text_Weight" CssClass="inputsize" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Text_Weight" TextMode="Number" CssClass="inputsize" runat="server"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Status">使用狀態</label>

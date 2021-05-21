@@ -41,7 +41,7 @@ namespace Yubay_Drone_team.Managers
         #endregion
 
         #region 讀取無人機的Method
-        public DataTable ID_Checker(string Drone_ID)
+        public DataTable Read_Drone_Detail(string Drone_ID)
         {
 
             //使用的SQL語法
