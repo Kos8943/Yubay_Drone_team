@@ -117,13 +117,13 @@ namespace Yubay_Drone_team.Managers
 
         #region 查詢無人機資料的Method
         public DataTable ReadDroneDetail(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
-        {
+        {                                   //總筆數        //搜尋條件         //關鍵字              //當前點選頁數           //一頁幾筆資料
             string keyWordSearchString;
             //如果搜尋條件、關鍵字不是空值或是空白
             if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
                 //去找輸入搜尋條件的值
-                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch}";
             }
             else
             {
@@ -131,15 +131,17 @@ namespace Yubay_Drone_team.Managers
                 keyWordSearchString = string.Empty;
             }
 
-            string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Drone_Detail)
-                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+           
+
+            string queryString =$@" SELECT TOP 10 * FROM
+                                   (SELECT *,ROW_NUMBER() OVER(ORDER BY [Sid]) AS ROWSID FROM Drone_Detail)
+                                    a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
             string countQuery =
                 $@" SELECT 
                         COUNT(Sid)
                     FROM Drone_Detail
-                    WHERE IsDelete IS NULL {keyWordSearchString};";
+                    WHERE (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
