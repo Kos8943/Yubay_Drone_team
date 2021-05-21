@@ -20,11 +20,13 @@ namespace Yubay_Drone_team
             if (string.IsNullOrEmpty(querryString))
             {
                 return;
-
             }
 
             //修改客戶資料管理
-            DataTable data = ConnectionDB.UpdateOnlyoneCustomer(querryString);
+            ConnectionDB connectionDB = new ConnectionDB();
+
+
+            DataTable data = connectionDB.ReadSingleCustomer_Detail(Convert.ToInt32(querryString));
 
             this.Text_Name.Text = data.Rows[0]["Name"].ToString();
             this.Text_Address.Text = data.Rows[0]["Address"].ToString();
@@ -46,10 +48,7 @@ namespace Yubay_Drone_team
             Main.TableTitle = string.Empty;
         }
 
-        protected void BtnCustomer_Click(object sender, EventArgs e)
-        {
-
-        }
+    
 
         protected void Btn_Create_Click(object sender, EventArgs e)
         {
@@ -69,7 +68,6 @@ namespace Yubay_Drone_team
 
 
             //if判斷式是否重複或修改是否成功
-
             if (this.Text_Name.Text != string.Empty && this.Text_Address.Text != string.Empty && this.Text_Phone.Text != string.Empty)
             {
 

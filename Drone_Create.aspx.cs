@@ -43,6 +43,8 @@ namespace Yubay_Drone_team
             this.Btn_Create.Text = "修改";
 
         }
+       
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
