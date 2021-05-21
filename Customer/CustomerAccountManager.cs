@@ -19,7 +19,7 @@ namespace Yubay_Drone_team.Customer
             if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
                 //去找輸入搜尋條件的值
-                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+                keyWordSearchString = $"{wantSearch} Like @{wantSearch} AND";
             }
             else
             {
@@ -27,15 +27,19 @@ namespace Yubay_Drone_team.Customer
                 keyWordSearchString = string.Empty;
             }
 
-            string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Customer)
-                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+          
+
+            string queryString = $@"SELECT TOP 10 * FROM
+                                        (SELECT *, ROW_NUMBER() OVER(ORDER BY[Sid] ASC) AS ROWSID
+                                        FROM Customer
+                                        WHERE  {keyWordSearchString} IsDelete IS NULL OR IsDelete = 'false') a 
+                                        WHERE ROWSID > {pageSize * (currentPage - 1)} ";
 
             string countQuery =
                 $@" SELECT 
                         COUNT(Sid)
                     FROM Customer
-                    WHERE IsDelete IS NULL {keyWordSearchString};";
+                    WHERE {keyWordSearchString} IsDelete IS NULL OR IsDelete = 'false';";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
@@ -63,7 +67,7 @@ namespace Yubay_Drone_team.Customer
             if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
                 //去找輸入搜尋條件的值
-                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch} ";
+                keyWordSearchString = $"{wantSearch} Like @{wantSearch} AND";
             }
             else
             {
@@ -72,14 +76,16 @@ namespace Yubay_Drone_team.Customer
             }
 
             string queryString = $@" SELECT TOP 10 * FROM 
-                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID FROM Battery)
-                                        a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+                                        (SELECT *,ROW_NUMBER() OVER (ORDER BY [Sid] ASC) AS ROWSID 
+                                        FROM Battery
+                                        WHERE {keyWordSearchString} IsDelete IS NULL OR IsDelete = 'false') a 
+                                        WHERE  ROWSID > {pageSize * (currentPage - 1)} ";
 
             string countQuery =
                 $@" SELECT 
                         COUNT(Sid)
                     FROM Battery
-                    WHERE IsDelete IS NULL {keyWordSearchString};";
+                    WHERE {keyWordSearchString} IsDelete IS NULL OR IsDelete = 'false';";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
