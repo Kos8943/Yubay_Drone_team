@@ -97,7 +97,7 @@
 
         .tableLink:hover{
             color: rgba(238,238,238, .8);
-            text-decoration: none;
+            
         }
 
         .TableSize {
