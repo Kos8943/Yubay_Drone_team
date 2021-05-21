@@ -23,8 +23,6 @@ namespace Yubay_Drone_team
             string SearchField = Request.QueryString["SearchField"];
             string SearchKeyWord = Request.QueryString["WantSearch"];
 
-            //string SearchKeyWord = Request.QueryString  [$"{SearchType}"];
-
             //預設在第一頁
             if (string.IsNullOrWhiteSpace(currentPage))
             {
@@ -93,7 +91,7 @@ namespace Yubay_Drone_team
             }
             if ("UpDateItem" == cmdName)
             {
-                //準備轉跳至修改使用者頁面,並將SID值用URL帶過去
+                //準備轉跳至修改無人機管理頁面,並將SID值用URL帶過去
                 string targetUrl = "~/Drone_Create.aspx?Sid=" + Model.Sid;
 
                 Response.Redirect(targetUrl);

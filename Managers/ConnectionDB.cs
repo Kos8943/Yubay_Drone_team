@@ -892,7 +892,7 @@ namespace Yubay_Drone_team.Managers
 
         #region 查詢無人機維修紀錄的Method
         public DataTable ReadFixed(out int TotalSize, string wantSearch, string searchKeyWord, int currentPage = 1, int pageSize = 10)
-        {
+        {                             //總筆數        //搜尋條件         //關鍵字              //當前點選頁數       //一頁幾筆資料
             string keyWordSearchString;
             //如果搜尋條件、關鍵字不是空值或是空白
             if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
@@ -914,7 +914,7 @@ namespace Yubay_Drone_team.Managers
                 $@" SELECT 
                         COUNT(Sid)
                     FROM Fixed
-                    WHERE IsDelete IS NULL {keyWordSearchString};";
+                    WHERE (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();
