@@ -358,7 +358,7 @@ namespace Yubay_Drone_team.Managers
             string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
 
             //使用的SQL語法
-            string queryString = $@" SELECT * FROM UserAccount;";
+            string queryString = $@" SELECT * FROM UserAccount WHERE Deleter IS NULL;";
 
             //建立連線
             using (SqlConnection connection = new SqlConnection(connectionString))
