@@ -43,6 +43,8 @@ namespace Yubay_Drone_team
             this.Btn_Create.Text = "修改";
 
         }
+       
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -71,17 +73,16 @@ namespace Yubay_Drone_team
 
             ConnectionDB ConnectionDB = new ConnectionDB();
 
+            //判斷有幾個不能夠是空值
 
             if (this.Text_Number.Text != string.Empty && this.Text_Manufacturer.Text != string.Empty && this.Text_Weight.Text != string.Empty &&
-                this.DropDownList_Status.Text != string.Empty && this.DropDownList_Operator.Text != string.Empty)
-               
+                this.DropDownList_Status.Text != string.Empty && this.DropDownList_Operator.Text != string.Empty)     
             {
-
                 if (string.IsNullOrEmpty(querryString))
                 {
 
                     
-                    DataTable IDdt = ConnectionDB.ID_Checker(model.Drone_ID);
+                    DataTable IDdt = ConnectionDB.Read_Drone_Detail(model.Drone_ID);
                     if (IDdt.Rows.Count != 0)
                     {
                         this.Label1.Text = "已重複輸入";
