@@ -47,7 +47,6 @@ namespace Yubay_Drone_team
                 {
                     //如果修改URL的QueryString["Sid"],為不正確的值則轉跳
                     Response.Redirect("Fixed.aspx");
-
                 }
             }
         }

@@ -124,7 +124,7 @@
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_Text_Deactive">停用原因</label>
-            <asp:TextBox ID="Text_Deactive" CssClass="inputsize" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Text_Deactive" CssClass="inputsize" runat="server" ></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Operator">負責人員</label>

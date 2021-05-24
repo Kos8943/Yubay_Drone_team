@@ -58,10 +58,7 @@ namespace Yubay_Drone_team
             Response.Redirect("Battery_Create.aspx");
         }
 
-        protected void BtnCreate_Click(object sender, EventArgs e)
-        {
-            
-        }
+    
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
