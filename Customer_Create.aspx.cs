@@ -55,7 +55,7 @@ namespace Yubay_Drone_team
             string querryString = Request.QueryString["Sid"];
             CustomerModel model = new CustomerModel();
                        //轉型,強制型別轉換
-           // model.Sid =Convert.ToInt32(querryString);
+       
             model.Name = this.Text_Name.Text;
             model.Address = this.Text_Address.Text;
             model.Phone = this.Text_Phone.Text;
@@ -66,6 +66,7 @@ namespace Yubay_Drone_team
 
             ConnectionDB ConnectionDB = new ConnectionDB();
 
+          
 
             //if判斷式是否重複或修改是否成功
             if (this.Text_Name.Text != string.Empty && this.Text_Address.Text != string.Empty && this.Text_Phone.Text != string.Empty)

@@ -43,7 +43,7 @@ namespace Yubay_Drone_team
             this.Btn_Create.Text = "修改";
 
         }
-       
+
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -73,15 +73,45 @@ namespace Yubay_Drone_team
 
             ConnectionDB ConnectionDB = new ConnectionDB();
 
+            //判斷是否字數符合字數限制
+            if (this.Text_Number.Text.Length > 50)
+            {
+                this.Label1.Text = "無人機編號已超過字數限制";
+                this.Label1.Visible = true;
+
+                return;
+            }
+            if (this.Text_Manufacturer.Text.Length > 50)
+            {
+                this.Label1.Text = "製造商已超過字數限制";
+                this.Label1.Visible = true;
+
+                return;
+            }
+            if (this.Text_Weight.Text.Length > 50)
+            {
+                this.Label1.Text = "最大起飛重量已超過字數限制";
+                this.Label1.Visible = true;
+
+                return;
+            }
+            if (this.Text_Deactive.Text.Length > 50)
+            {
+                this.Label1.Text = "停用原因已超過字數限制";
+                this.Label1.Visible = true;
+
+                return;
+            }
+
             //判斷有幾個不能夠是空值
 
             if (this.Text_Number.Text != string.Empty && this.Text_Manufacturer.Text != string.Empty && this.Text_Weight.Text != string.Empty &&
-                this.DropDownList_Status.Text != string.Empty && this.DropDownList_Operator.Text != string.Empty)     
+                this.DropDownList_Status.Text != string.Empty && this.DropDownList_Operator.Text != string.Empty)
             {
                 if (string.IsNullOrEmpty(querryString))
                 {
 
-                    
+
                     DataTable IDdt = ConnectionDB.Read_Drone_Detail(model.Drone_ID);
                     if (IDdt.Rows.Count != 0)
                     {
@@ -104,16 +134,16 @@ namespace Yubay_Drone_team
                     string UserName = loginInfo.UserName;
                     model.Updater = UserName;
                     model.Sid = Convert.ToInt32(querryString);
- 
-                    ConnectionDB.Drone_Detail_Update(model,Sid);
+
+                    ConnectionDB.Drone_Detail_Update(model, Sid);
 
                     this.Label1.Text = "修改成功!";
 
                     this.Label1.Visible = true;
-                    
+
                 }
 
-                
+
             }
             else
             {
