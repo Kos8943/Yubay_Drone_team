@@ -123,7 +123,7 @@ namespace Yubay_Drone_team.Managers
             if (!string.IsNullOrWhiteSpace(wantSearch) && !string.IsNullOrWhiteSpace(searchKeyWord))
             {
                 //去找輸入搜尋條件的值
-                keyWordSearchString = $"AND {wantSearch} Like @{wantSearch}";
+                keyWordSearchString = $"{wantSearch} Like @{wantSearch} AND";
             }
             else
             {
@@ -134,14 +134,14 @@ namespace Yubay_Drone_team.Managers
            
 
             string queryString =$@" SELECT TOP 10 * FROM
-                                   (SELECT *,ROW_NUMBER() OVER(ORDER BY [Sid]) AS ROWSID FROM Drone_Detail)
-                                    a WHERE ROWSID > {pageSize * (currentPage - 1)} AND (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+                                   (SELECT *,ROW_NUMBER() OVER(ORDER BY [Sid]) AS ROWSID FROM Drone_Detail WHERE {keyWordSearchString} (IsDelete IS NULL OR IsDelete = 'false') )
+                                    a WHERE ROWSID > {pageSize * (currentPage - 1)};";
 
             string countQuery =
                 $@" SELECT 
                         COUNT(Sid)
                     FROM Drone_Detail
-                    WHERE (IsDelete IS NULL OR IsDelete = 'false') {keyWordSearchString};";
+                    WHERE {keyWordSearchString} (IsDelete IS NULL OR IsDelete = 'false');";
 
 
             List<SqlParameter> dbParameters = new List<SqlParameter>();

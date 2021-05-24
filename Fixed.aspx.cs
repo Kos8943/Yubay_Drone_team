@@ -151,13 +151,13 @@ namespace Yubay_Drone_team
         private void SaveInserVal()
         {
             //抓取Url上得值
-            string SearchType = Request.QueryString["SearchType"];
+            string SearchField = Request.QueryString["SearchField"];
             string SearchKeyWord = Request.QueryString[$"WantSearch"];
 
             //判斷是否有進階搜尋,有的話把值放進搜尋欄位
-            if (!string.IsNullOrWhiteSpace(SearchType) && !string.IsNullOrWhiteSpace(SearchKeyWord))
+            if (!string.IsNullOrWhiteSpace(SearchField) && !string.IsNullOrWhiteSpace(SearchKeyWord))
             {
-                this.DropDownListSearch.SelectedValue = SearchType;
+                this.DropDownListSearch.SelectedValue = SearchField;
                 this.textKeyWord.Text = SearchKeyWord;
             }
         }
