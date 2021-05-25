@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
@@ -22,47 +18,67 @@ namespace Yubay_Drone_team
             this.DropDownList_Operator.DataValueField = "UserName";
             DropDownList_Operator.DataBind();
 
-
             string querryString = Request.QueryString["Sid"]; //取得網址上的內容並存成字串
-            if (string.IsNullOrEmpty(querryString))
-            {
-                return;
 
+            int number;
+           
+            //判斷ID是否為正確的型別
+            if (querryString != null && !int.TryParse(querryString, out number))
+            {
+                Response.Write("<script>alert('此為無效ID')</script>");
+                return;
             }
 
+            //從資料庫抓資料顯示在畫面上
             DataTable data = ConnectionDB.Select_DroneDetail(querryString);
 
-            this.Text_Number.Text = data.Rows[0]["Drone_ID"].ToString();
-            this.Text_Manufacturer.Text = data.Rows[0]["Manufacturer"].ToString();
-            this.Text_Weight.Text = data.Rows[0]["WeightLoad"].ToString();
-            this.DropDownList_Status.SelectedValue = data.Rows[0]["Status"].ToString();
-            this.Text_Deactive.Text = data.Rows[0]["StopReason"].ToString();
-            this.DropDownList_Operator.SelectedValue = data.Rows[0]["operator"].ToString();
+            //如果沒資料就跳回新增模式
+            if (data == null)
+            {
+                return;
+            }
+            //如果資料庫無此型別ID則跳回新增模式
+            if (data.Rows.Count <= 0)
+            {
+                Response.Write("<script>alert('此ID無資料')</script>");
+                return;
+            }
 
-            this.CreateDrone.Text = "修改無人機";
-            this.Btn_Create.Text = "修改";
+            //從資料庫抓值修改無人機資料
+            if (int.TryParse(querryString, out number))
+            {                           //取得這個資料表的資料列集合 //0為第一筆資料
+                this.Text_Number.Text = data.Rows[0]["Drone_ID"].ToString();
+                this.Text_Manufacturer.Text = data.Rows[0]["Manufacturer"].ToString();
+                this.Text_Weight.Text = data.Rows[0]["WeightLoad"].ToString();
+                this.DropDownList_Status.SelectedValue = data.Rows[0]["Status"].ToString();
+                this.Text_Deactive.Text = data.Rows[0]["StopReason"].ToString();
+                this.DropDownList_Operator.SelectedValue = data.Rows[0]["operator"].ToString();
 
+                this.CreateDrone.Text = "修改無人機";
+                this.Btn_Create.Text = "修改";
+            }
         }
 
 
-
+        //進入載入畫面 //因為是放在master上，但是沒有用到要隱藏
         protected void Page_Load(object sender, EventArgs e)
         {
             //隱藏換頁功能
             this.Master.FindControl("ChangePages").Visible = false;
-
             //設定TableName
             Main.TableTitle = string.Empty;
 
         }
 
-
+        //新增按鈕事件
         protected void Btn_Create_Click(object sender, EventArgs e)
         {
+            //載入新增的畫面先做型別比對
             string querryString = Request.QueryString["Sid"];
+            //比對QuerryString是不是數字
             int Sid;
             bool tryParseSid = Int32.TryParse(querryString, out Sid);
-
+            //給他Model去給使用者一個放資料的空間
             DroneMedel model = new DroneMedel();
             model.Drone_ID = this.Text_Number.Text;
             model.Manufacturer = this.Text_Manufacturer.Text;
@@ -71,47 +87,20 @@ namespace Yubay_Drone_team
             model.StopReason = this.Text_Deactive.Text;
             model.Operator = this.DropDownList_Operator.SelectedValue;
 
-            ConnectionDB ConnectionDB = new ConnectionDB();
+           
 
-            //判斷是否字數符合字數限制
-            if (this.Text_Number.Text.Length > 50)
-            {
-                this.Label1.Text = "無人機編號已超過字數限制";
-                this.Label1.Visible = true;
-
-                return;
-            }
-            if (this.Text_Manufacturer.Text.Length > 50)
-            {
-                this.Label1.Text = "製造商已超過字數限制";
-                this.Label1.Visible = true;
-
-                return;
-            }
-            if (this.Text_Weight.Text.Length > 50)
-            {
-                this.Label1.Text = "最大起飛重量已超過字數限制";
-                this.Label1.Visible = true;
-
-                return;
-            }
-            if (this.Text_Deactive.Text.Length > 50)
-            {
-                this.Label1.Text = "停用原因已超過字數限制";
-                this.Label1.Visible = true;
-
-                return;
-            }
+           
 
             //判斷有幾個不能夠是空值
-
-            if (this.Text_Number.Text != string.Empty && this.Text_Manufacturer.Text != string.Empty && this.Text_Weight.Text != string.Empty &&
-                this.DropDownList_Status.Text != string.Empty && this.DropDownList_Operator.Text != string.Empty)
-            {
+            if (this.Text_Number.Text != string.Empty && 
+                this.Text_Manufacturer.Text != string.Empty && 
+                this.Text_Weight.Text != string.Empty) 
+            {  
+                ConnectionDB ConnectionDB = new ConnectionDB();
+               
                 if (string.IsNullOrEmpty(querryString))
-                {
-
-
+                { 
+                    //讀取資料庫欄位判斷是否重複輸入
                     DataTable IDdt = ConnectionDB.Read_Drone_Detail(model.Drone_ID);
                     if (IDdt.Rows.Count != 0)
                     {
@@ -121,7 +110,7 @@ namespace Yubay_Drone_team
                         return;
                     }
                     ConnectionDB.Drone_Detail_Create(model);
-
+                    //顯示已重複輸入
                     this.Label1.Visible = true;
 
                 }
@@ -134,7 +123,7 @@ namespace Yubay_Drone_team
                     string UserName = loginInfo.UserName;
                     model.Updater = UserName;
                     model.Sid = Convert.ToInt32(querryString);
-
+                    //在資料庫做修改
                     ConnectionDB.Drone_Detail_Update(model, Sid);
 
                     this.Label1.Text = "修改成功!";
@@ -154,13 +143,6 @@ namespace Yubay_Drone_team
             }
 
         }
-
-        protected void Btn_Cancel_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Drone_Detail.aspx");
-
-        }
-
 
     }
 }

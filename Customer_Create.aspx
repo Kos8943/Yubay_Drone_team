@@ -107,7 +107,7 @@
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_Text_Weight">電話</label>
-            <asp:TextBox ID="Text_Phone" CssClass="inputsize" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Text_Phone" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Status">農作物</label>

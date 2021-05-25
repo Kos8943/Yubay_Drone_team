@@ -6,7 +6,7 @@
             width: 40%;
             border: 1px #111 solid;
             padding: 0 5%;
-            background-color:rgb(254,254,254);
+            background-color: rgb(254,254,254);
         }
 
         .inputsize {
@@ -77,16 +77,14 @@
             }
 
             .titleAreaMargin {
-            margin: 30px 0;
-        }
+                margin: 30px 0;
+            }
 
             .inputmarin {
-            margin-bottom: 20px;
-        }
+                margin-bottom: 20px;
+            }
         }
     </style>
-
-
 </asp:Content>
 
 
@@ -98,20 +96,26 @@
         <div class="titleAreaMargin" style="text-align: center;">
             <asp:Label ID="CreateDrone" CssClass="title" runat="server" Text="新增無人機"></asp:Label>
         </div>
-
-        <div style="border-bottom:1px solid black; margin-bottom:30px;"></div>
-
+            <div style=" text-align:center" >    
+            <asp:Label style="color: red;"  ID ="Label2" runat="server" Text="*為必填"></asp:Label>
+        </div>
+        <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
+        
+       
         <div class="d-flex justify-content-between inputmarin">
+            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Number">編號</label>
-            <asp:TextBox ID="Text_Number" CssClass="inputsize" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Text_Number" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
+            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Manufacturer">製造商</label>
-            <asp:TextBox ID="Text_Manufacturer" CssClass="inputsize" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Text_Manufacturer" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
+            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Weight">最大起飛重量(kg)</label>
-            <asp:TextBox ID="Text_Weight" TextMode="Number" CssClass="inputsize" runat="server"></asp:TextBox>
+            <asp:TextBox ID="Text_Weight" TextMode="Number" CssClass="inputsize" runat="server" MaxLength="3"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Status">使用狀態</label>
@@ -124,7 +128,7 @@
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_Text_Deactive">停用原因</label>
-            <asp:TextBox ID="Text_Deactive" CssClass="inputsize" runat="server" ></asp:TextBox>
+            <asp:TextBox ID="Text_Deactive" CssClass="inputsize" runat="server" MaxLength="20"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Operator">負責人員</label>
@@ -132,10 +136,12 @@
             </asp:DropDownList>
         </div>
         <div class="d-flex justify-content-center buttonArea">
-            <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
-            <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" />
+            <asp:Button ID="Btn_Create" CssClass="Btn_Create btn "  runat="server" Text="建立" OnClick="Btn_Create_Click" />
+           <a href="Drone_Detail.aspx" onclick="return confirm('是否取消新增/修改畫面，並轉跳至無人機管理畫面');" 
+               class="btn ">取消</a> 
         </div>
         <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>
+        
         <%--<asp:Literal ID="Literal1" runat="server" Text="新增成功!"  Visible="false"></asp:Literal>--%>
     </div>
 

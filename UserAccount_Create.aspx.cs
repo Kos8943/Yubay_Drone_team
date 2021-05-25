@@ -103,6 +103,11 @@ namespace Yubay_Drone_team
             int Sid;
             bool tryParseSid = Int32.TryParse(querryString, out Sid);
 
+            if (!tryParseSid)
+            {
+                return;
+            }
+
             AccountModel model = new AccountModel();
             ConnectionDB ConnectionDB = new ConnectionDB();
             
