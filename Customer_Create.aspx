@@ -94,18 +94,22 @@
         <div class="titleAreaMargin" style="text-align: center;">
             <asp:Label ID="CreateCustomer" CssClass="title" runat="server" Text="新增客戶資料"></asp:Label>
         </div>
-
-        <div style="border-bottom:1px solid black; margin-bottom:30px;"></div>
-
+    <div style="text-align:center">
+        <asp:Label style="color:red;" ID="Label2" runat="server" Text="*為必填"></asp:Label>
+    </div>
+        <div style="border-bottom:1px solid black; margin-bottom:30px;"></div>  
         <div class="d-flex justify-content-between inputmarin">
+             <p style="color:red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Number">姓名</label>
             <asp:TextBox ID="Text_Name" CssClass="inputsize" runat="server"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
+            <p style="color:red; display:inline">*</p>          
             <label for="ContentPlaceHolder1_Text_Manufacturer">地址</label>
             <asp:TextBox ID="Text_Address" CssClass="inputsize" runat="server"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
+             <p style="color:red; display:inline">*</p>
             <label for="ContentPlaceHolder1_Text_Weight">電話</label>
             <asp:TextBox ID="Text_Phone" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
         </div>
@@ -127,5 +131,5 @@
             <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" />
         </div>
         <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>
-
+    </div>
 </asp:Content>

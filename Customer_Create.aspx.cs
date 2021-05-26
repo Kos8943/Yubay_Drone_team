@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
@@ -24,8 +20,6 @@ namespace Yubay_Drone_team
 
             //修改客戶資料管理
             ConnectionDB connectionDB = new ConnectionDB();
-
-
             DataTable data = connectionDB.ReadSingleCustomer_Detail(Convert.ToInt32(querryString));
 
             this.Text_Name.Text = data.Rows[0]["Name"].ToString();

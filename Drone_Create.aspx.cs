@@ -127,9 +127,7 @@ namespace Yubay_Drone_team
                     ConnectionDB.Drone_Detail_Update(model, Sid);
 
                     this.Label1.Text = "修改成功!";
-
                     this.Label1.Visible = true;
-
                 }
 
 

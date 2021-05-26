@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Windows.Input;
 using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
 using Yubay_Drone_team.Models;
