@@ -43,7 +43,7 @@ namespace Yubay_Drone_team
                 Response.Write("<script>alert('此ID無資料')</script>");
                 return;
             }
-
+          
             //從資料庫抓值修改無人機資料
             if (int.TryParse(querryString, out number))
             {                           //取得這個資料表的資料列集合 //0為第一筆資料
@@ -69,7 +69,7 @@ namespace Yubay_Drone_team
             Main.TableTitle = string.Empty;
 
         }
-
+      
         //新增按鈕事件
         protected void Btn_Create_Click(object sender, EventArgs e)
         {

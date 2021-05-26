@@ -92,6 +92,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%--用Div作為輸出欄位,span為標題--%>
 
+   
+
     <div class="FormArea">
         <div class="titleAreaMargin" style="text-align: center;">
             <asp:Label ID="CreateDrone" CssClass="title" runat="server" Text="新增無人機"></asp:Label>
@@ -103,17 +105,20 @@
         <div class="d-flex justify-content-between inputmarin">
             <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Number">編號</label>
-            <asp:TextBox ID="Text_Number" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
+            <asp:TextBox ID="Text_Number" CssClass="inputsize" runat="server" MaxLength="25"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Manufacturer">製造商</label>
-            <asp:TextBox ID="Text_Manufacturer" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
+            <asp:TextBox ID="Text_Manufacturer" CssClass="inputsize" runat="server" MaxLength="25"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Weight">最大起飛重量(kg)</label>
-            <asp:TextBox ID="Text_Weight" TextMode="Number" CssClass="inputsize" runat="server" MaxLength="3"></asp:TextBox>
+            <asp:TextBox ID="Text_Weight" TextMode="Number" CssClass="inputsize" runat="server" min="1"
+                max="99999" MaxLength="5"
+                  onKeyDown="if(this.value.length==5 && event.keyCode!=8) return false;"
+                onkeyup="if(event.keyCode !=37 && event.keyCode != 39)value=value.replace(/\D/g,'')"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Status">使用狀態</label>
