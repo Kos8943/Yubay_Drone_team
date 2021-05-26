@@ -118,7 +118,6 @@
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Status">農作物</label>
             <asp:TextBox ID="Text_Crop" runat="server"></asp:TextBox>
-
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_Text_Deactive">土地面積</label>
