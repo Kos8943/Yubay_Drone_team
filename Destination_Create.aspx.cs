@@ -50,6 +50,12 @@ namespace Yubay_Drone_team
                 {
                     //把值放進相應欄位
                     DataTable dt = connectionDB.ReadSingleDestination(Sid);
+
+                    if(dt.Rows.Count == 0)
+                    {
+                        Response.Redirect("Destination.aspx");
+                    }
+
                     DateTime DesDate =  (DateTime)dt.Rows[0]["Date"];
                     string pesticide = (!string.IsNullOrWhiteSpace(dt.Rows[0]["Pesticide"].ToString())) ? dt.Rows[0]["Pesticide"].ToString() : "-";
 

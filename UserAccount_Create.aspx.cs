@@ -53,6 +53,11 @@ namespace Yubay_Drone_team
                     ConnectionDB ConnectionDB = new ConnectionDB();
                     DataTable dt = ConnectionDB.ReadSingleUserAccount(Sid);
 
+                    if(dt.Rows.Count == 0)
+                    {
+                        Response.Redirect("User_Account.aspx");
+                    }
+
                     //切換新增/修改的PlaceHolder
                     this.PlaceHolderCreateMode.Visible = false;
                     this.PlaceHolderUpdateMode.Visible = true;
