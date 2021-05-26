@@ -127,8 +127,9 @@
             <asp:TextBox ID="Text_Farm_Address" runat="server"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-center buttonArea">
-            <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
-            <asp:Button ID="Btn_Cancel" runat="server" Text="取消" OnClick="Btn_Cancel_Click" />
+            <asp:Button ID="Btn_Create" CssClass="Btn_Create btn"  runat="server" Text="建立" OnClick="Btn_Create_Click" />
+             <a href="Customer_Detail.aspx" onclick="return confirm('是否取消新增/修改畫面，並轉跳至無人機管理畫面');" 
+              type="button" class="btn">取消</a> 
         </div>
         <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>
     </div>
