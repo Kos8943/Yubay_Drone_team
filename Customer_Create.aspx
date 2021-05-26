@@ -110,8 +110,10 @@
         </div>
         <div class="d-flex justify-content-between inputmarin">
              <p style="color:red; display:inline">*</p>
-            <label for="ContentPlaceHolder1_Text_Weight">電話</label>
-            <asp:TextBox ID="Text_Phone" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
+            <label for="ContentPlaceHolder1_Text_Weight">電話</label>      
+            <asp:TextBox ID="Text_Phone" CssClass="inputsize" runat="server" MaxLength="10" 
+                onkeyup="value=value.replace(/[^\d]/g,'')"
+                onKeyDown="if(this.value.length==10 && event.keyCode!=8) return false;"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Status">農作物</label>
