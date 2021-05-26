@@ -100,8 +100,6 @@
             <asp:Label style="color: red;"  ID ="Label2" runat="server" Text="*為必填"></asp:Label>
         </div>
         <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
-        
-       
         <div class="d-flex justify-content-between inputmarin">
             <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_Number">編號</label>
@@ -124,7 +122,6 @@
                 <asp:ListItem Text="停用" Value="停用"></asp:ListItem>
                 <asp:ListItem Text="故障" Value="故障"></asp:ListItem>
             </asp:DropDownList>
-
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_Text_Deactive">停用原因</label>
@@ -138,10 +135,9 @@
         <div class="d-flex justify-content-center buttonArea">
             <asp:Button ID="Btn_Create" CssClass="Btn_Create btn "  runat="server" Text="建立" OnClick="Btn_Create_Click" />
            <a href="Drone_Detail.aspx" onclick="return confirm('是否取消新增/修改畫面，並轉跳至無人機管理畫面');" 
-               class="btn ">取消</a> 
+              type="button" class="btn">取消</a> 
         </div>
-        <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>
-        
+        <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>    
         <%--<asp:Literal ID="Literal1" runat="server" Text="新增成功!"  Visible="false"></asp:Literal>--%>
     </div>
 
