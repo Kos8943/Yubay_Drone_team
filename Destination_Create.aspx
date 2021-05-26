@@ -68,8 +68,13 @@
             margin-left: 35px;
         }
 
-        .dropdownListWidth{
-            width:180px;
+        .dropdownListWidth {
+            width: 180px;
+        }
+
+        input[type='number']::-webkit-inner-spin-button {
+            -webkit-appearance: none !important;
+            -moz-appearance:textfield;
         }
 
 
@@ -99,13 +104,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="FormArea">
         <div class="container-fluid">
-             <div class="titleAreaMargin" style="text-align: center;">
-                        <asp:Label ID="UserAccountTittle" CssClass="title" runat="server" Text="新增無人機出勤紀錄"></asp:Label>
-                    </div>
-             <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
+            <div class="titleAreaMargin" style="text-align: center;">
+                <asp:Label ID="UserAccountTittle" CssClass="title" runat="server" Text="新增無人機出勤紀錄"></asp:Label>
+            </div>
+            <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
             <div class="row">
                 <div class="col-6">
-                   
+
 
                     <%--<div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>--%>
 
@@ -117,17 +122,17 @@
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Staff">出勤人員</label>
-                        <asp:TextBox ID="Text_Staff" CssClass="inputsize" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Staff" CssClass="inputsize" runat="server" MaxLength="50"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_DropDownList_Drone">使用無人機</label>
-                        <asp:DropDownList runat="server" id="DropDownList_Drone" class="dropdownListWidth"></asp:DropDownList>
+                        <asp:DropDownList runat="server" ID="DropDownList_Drone" class="dropdownListWidth"></asp:DropDownList>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Battery">攜帶電池數量</label>
-                        <asp:TextBox ID="Text_Battery" CssClass="inputsize" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Battery" CssClass="inputsize" runat="server" MaxLength="255"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
@@ -141,22 +146,22 @@
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_DropDownList_Customer_Name">客戶姓名</label>
-                        <asp:DropDownList runat="server" id="DropDownList_Customer_Name" class="dropdownListWidth ddlCustomerName"></asp:DropDownList>
+                        <asp:DropDownList runat="server" ID="DropDownList_Customer_Name" class="dropdownListWidth ddlCustomerName"></asp:DropDownList>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Phone">客戶電話</label>
-                        <asp:TextBox ID="Text_Phone" CssClass="inputsize costomerPhone" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Phone" CssClass="inputsize costomerPhone" runat="server" MaxLength="10" TextMode="Number"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Address">客戶地址</label>
-                        <asp:TextBox ID="Text_Address" CssClass="inputsize costomerAddress" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Address" CssClass="inputsize costomerAddress" runat="server" MaxLength="100"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Pesticide">使用農藥</label>
-                        <asp:TextBox ID="Text_Pesticide" CssClass="inputsize" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="Text_Pesticide" CssClass="inputsize" runat="server" MaxLength="100"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
@@ -164,7 +169,7 @@
                         <asp:TextBox ID="Text_Pesticide_Date" CssClass="inputsize" runat="server" type="date"></asp:TextBox>
                     </div>
 
-                    
+
                 </div>
 
             </div>
