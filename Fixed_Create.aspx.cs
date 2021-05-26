@@ -44,7 +44,9 @@ namespace Yubay_Drone_team
                     DateTime stopDate = (DateTime)dt.Rows[0]["StopDate"];
                     DateTime sendDate = (DateTime)dt.Rows[0]["SendDate"];
 
+                    string oldDrone_ID = dt.Rows[0]["Drone_ID"].ToString();
 
+                    this.DropDownList_Drone.Items.Insert(0, new ListItem(oldDrone_ID, oldDrone_ID));
                     this.DropDownList_Drone.SelectedValue = dt.Rows[0]["Drone_ID"].ToString();
                     this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
                     this.Text_StopDate.Text = stopDate.ToString("yyyy-MM-dd");
