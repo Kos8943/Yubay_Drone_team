@@ -169,7 +169,7 @@ namespace Yubay_Drone_team.Managers
 
             //使用的SQL語法
 
-            string queryString = $@"UPDATE Drone_Detail SET Drone_ID = @Drone_ID, Deleter=@Deleter, DeleteDate= @DeleteDate , IsDelete = 'true' Where Sid = @Sid";
+            string queryString = $@"UPDATE Drone_Detail SET Deleter=@Deleter, DeleteDate= @DeleteDate , IsDelete = 'true' Where Sid = @Sid";
 
 
 
@@ -178,7 +178,6 @@ namespace Yubay_Drone_team.Managers
                 {
                    new SqlParameter("@Sid", Model.Sid),
                    new SqlParameter("@Deleter", Model.Deleter),
-                   new SqlParameter("@Drone_ID", $"{Model.Drone_ID}_Deleted_{Model.Sid}"),
                    new SqlParameter("@DeleteDate",DateTime.Now)
                 };
 
@@ -668,7 +667,7 @@ namespace Yubay_Drone_team.Managers
 
         public DataTable ReadAllCustomerName()
         {
-            string queryString = $@" SELECT [Name], Sid FROM Customer;";
+            string queryString = $@" SELECT [Name], Sid FROM Customer WHERE (IsDelete IS NULL OR IsDelete = 'false');";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
 
@@ -829,7 +828,7 @@ namespace Yubay_Drone_team.Managers
                 {
                    new SqlParameter("@Sid", Model.Sid),
                    new SqlParameter("@Deleter", Model.Deleter),
-                   new SqlParameter("@Name", $"{Model.Name}_Deleted_{Model.Sid}"),
+                   new SqlParameter("@Name", Model.Name),
                    new SqlParameter("@DeleteDate", DateTime.Now)
                 };
 

@@ -56,16 +56,22 @@ namespace Yubay_Drone_team
                         Response.Redirect("Destination.aspx");
                     }
 
+                    string oldDrone_ID = dt.Rows[0]["Drone_ID"].ToString();
+                    string oldCustomerName = dt.Rows[0]["Customer_Name"].ToString();
+                    string oldCustomerSid = dt.Rows[0]["Customer_Sid"].ToString();
+
+                    this.DropDownList_Drone.Items.Insert(0, new ListItem(oldDrone_ID, oldDrone_ID));
+                    this.DropDownList_Customer_Name.Items.Insert(1, new ListItem(oldCustomerName, oldCustomerSid));
+
                     DateTime DesDate =  (DateTime)dt.Rows[0]["Date"];
-                    string pesticide = (!string.IsNullOrWhiteSpace(dt.Rows[0]["Pesticide"].ToString())) ? dt.Rows[0]["Pesticide"].ToString() : "-";
 
 
                     this.Text_Date.Text = DesDate.ToString("yyyy-MM-dd");
                     this.Text_Staff.Text = dt.Rows[0]["Staff"].ToString();
-                    this.DropDownList_Drone.SelectedValue = dt.Rows[0]["Drone_ID"].ToString();
+                    this.DropDownList_Drone.SelectedValue = "0";
                     this.Text_Battery.Text = dt.Rows[0]["Battery_Count"].ToString();
                     this.Text_Remarks.Text = dt.Rows[0]["Remarks"].ToString();
-                    this.DropDownList_Customer_Name.SelectedValue = dt.Rows[0]["Customer_Sid"].ToString();
+                    this.DropDownList_Customer_Name.SelectedValue = "1";
                     this.Text_Phone.Text = dt.Rows[0]["Customer_Phone"].ToString();
                     this.Text_Address.Text = dt.Rows[0]["Customer_Address"].ToString();
                     this.Text_Pesticide.Text = dt.Rows[0]["Pesticide"].ToString();
