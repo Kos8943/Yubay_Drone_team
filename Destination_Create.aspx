@@ -151,7 +151,8 @@
 
                     <div class="d-flex justify-content-between inputmarin">
                         <label for="ContentPlaceHolder1_Text_Phone">客戶電話</label>
-                        <asp:TextBox ID="Text_Phone" CssClass="inputsize costomerPhone" runat="server" MaxLength="10" TextMode="Number"></asp:TextBox>
+                        <asp:TextBox ID="Text_Phone" CssClass="inputsize costomerPhone" runat="server" onkeyup="value=value.replace(/[^\d]/g,'')"
+                onKeyDown="if(this.value.length==10 && event.keyCode!=8) return false;" MaxLength="10"></asp:TextBox>
                     </div>
 
                     <div class="d-flex justify-content-between inputmarin">
@@ -198,5 +199,6 @@
                 $(".costomerAddress").val(responseData["Address"]);
             });
         });
+
     </script>
 </asp:Content>
