@@ -3,59 +3,98 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Models;
 
 namespace Yubay_Drone_team.Managers
 {
-    public class AccountManager
+    public class AccountManager : CreateHelper
     {
 
         public AccountModel GetAccount(string Account)
         {
-            string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
+            //string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
             string queryString =
                 $@" SELECT * FROM UserAccount
                     WHERE Account = @Account
                 ";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            List<SqlParameter> parameters = new List<SqlParameter>()
+
+                {
+                   new SqlParameter("@Account", Account)
+                };
+
+            var dt = this.GetDataTable(queryString, parameters);
+
+            AccountModel model = new AccountModel();
+
+            if (dt.Rows.Count > 0)
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@Account", Account);
 
-                try
+                if (!Convert.IsDBNull(dt.Rows[0]["Sid"]))
                 {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    AccountModel model = null;
-
-                    while (reader.Read())
-                    {
-                        model = new AccountModel();
-                        model.Sid = (int)reader["Sid"];
-                        model.Account = (string)reader["Account"];
-                        model.Password = (string)reader["Password"];
-                        model.AccountLevel = (int)reader["AccountLevel"];
-                        model.UserName = (string)reader["UserName"];
-                    }
-
-                    reader.Close();
-
-                    return model;
+                    model.Sid = (int)dt.Rows[0]["Sid"];
                 }
-                catch (Exception ex)
+
+                if (!Convert.IsDBNull(dt.Rows[0]["Account"]))
                 {
-                    throw;
+                    model.Account = (string)dt.Rows[0]["Account"];
+                }
+
+                if (!Convert.IsDBNull(dt.Rows[0]["Password"]))
+                {
+                    model.Password = (string)dt.Rows[0]["Password"];
+                }
+
+                if (!Convert.IsDBNull(dt.Rows[0]["AccountLevel"]))
+                {
+                    model.AccountLevel = (int)dt.Rows[0]["AccountLevel"];
+                }
+
+                if (!Convert.IsDBNull(dt.Rows[0]["UserName"]))
+                {
+                    model.UserName = (string)dt.Rows[0]["UserName"];
                 }
             }
+            return model;
 
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    SqlCommand command = new SqlCommand(queryString, connection);
+            //    command.Parameters.AddWithValue("@Account", Account);
 
+            //    try
+            //    {
+            //        connection.Open();
+            //        SqlDataReader reader = command.ExecuteReader();
 
-            //AccountModel model = null;
-            //return model;
+            //        AccountModel model = null;
 
+            //        while (reader.Read())
+            //        {
+            //            model = new AccountModel();
+            //            model.Sid = (int)reader["Sid"];
+            //            model.Account = (string)reader["Account"];
+            //            model.Password = (string)reader["Password"];
+            //            model.AccountLevel = (int)reader["AccountLevel"];
+            //            model.UserName = (string)reader["UserName"];
+            //        }
+
+            //        reader.Close();
+
+            //        return model;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        throw;
+            //    }
         }
+
+
+
+        //AccountModel model = null;
+        //return model;
 
     }
 }
