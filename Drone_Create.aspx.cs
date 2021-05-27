@@ -12,7 +12,8 @@ namespace Yubay_Drone_team
         protected void Page_init(object sender, EventArgs e)
         {
             //抓取負責人員並放進下拉選單
-            DataTable dt = ConnectionDB.DropDownListRead();
+            ConnectionDB DBbase = new ConnectionDB();
+            DataTable dt = DBbase.DropDownListRead();
             DropDownList_Operator.DataSource = dt;
             DropDownList_Operator.DataTextField = "UserName";
             this.DropDownList_Operator.DataValueField = "UserName";
@@ -20,7 +21,7 @@ namespace Yubay_Drone_team
 
             string querryString = Request.QueryString["Sid"]; //取得網址上的內容並存成字串
 
-            int number;
+            int number = 0;
            
             //判斷ID是否為正確的型別
             if (querryString != null && !int.TryParse(querryString, out number))
@@ -29,8 +30,18 @@ namespace Yubay_Drone_team
                 return;
             }
 
-            //從資料庫抓資料顯示在畫面上
-            DataTable data = ConnectionDB.Select_DroneDetail(querryString);
+
+            DataTable data;
+            if (number != 0)
+            {
+                //從資料庫抓資料顯示在畫面上 
+                data = DBbase.Select_DroneDetail(querryString);
+            }
+            else
+            {
+                data = null;
+            }
+           
 
             //如果沒資料就跳回新增模式
             if (data == null)
