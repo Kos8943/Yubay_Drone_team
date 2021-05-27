@@ -103,18 +103,18 @@
         </div>
         <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
         <div class="d-flex justify-content-between inputmarin">
-            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_DropDownList_Drone">無人機編號</label>
+            <p style="color: red; display: inline">*</p>
             <asp:DropDownList ID="DropDownList_Drone" class="dropdownListWidth" runat="server"></asp:DropDownList>
         </div>
         <div class="d-flex justify-content-between inputmarin">
-            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_FixChange">更換部件</label>
+            <p style="color: red; display: inline">*</p>
             <asp:TextBox ID="Text_FixChange" CssClass="inputsize" runat="server" MaxLength="50"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
-            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_StopDate">故障日期</label>
+            <p style="color: red; display: inline">*</p>
             <asp:TextBox ID="Text_StopDate" CssClass="inputsize" runat="server" type="date"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
@@ -122,13 +122,13 @@
             <asp:TextBox ID="Text_SendDate" CssClass="inputsize" runat="server" type="date"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
-            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_FixVendor">維修廠商</label>
+            <p style="color: red; display: inline">*</p>
             <asp:TextBox ID="Text_FixVendor" CssClass="inputsize" runat="server" MaxLength="50"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
-            <p style="color: red; display: inline">*</p>
             <label for="ContentPlaceHolder1_Text_StopReason">故障原因</label>
+            <p style="color: red; display: inline">*</p>
             <asp:TextBox ID="Text_StopReason" CssClass="inputsize" runat="server" MaxLength="255"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">

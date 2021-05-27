@@ -145,12 +145,21 @@ namespace Yubay_Drone_team
                 this.ltMsg.Visible = true;
                 return;
             }
+            ////判定SendDate是否為空值
+            //if (!string.IsNullOrEmpty(Text_SendDate.Text))
+            //{
+            //    DateTime sendDate = Convert.ToString(Text_SendDate.Text);
+            //    model.SendDate = sendDate;
+            //}
+            //else
+            //{
+
+            //}
 
             //抓取不須判定的值
-            DateTime sendDate = Convert.ToDateTime(this.Text_SendDate.Text);
-            string remarks = this.Text_Remarks.Text;
-
+            string sendDate = this.Text_SendDate.Text;
             model.SendDate = sendDate;
+            string remarks = this.Text_Remarks.Text;
             model.Remarks = remarks;
 
             //檢查SID值是否正確

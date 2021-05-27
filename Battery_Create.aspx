@@ -98,29 +98,33 @@
         <div class="titleAreaMargin" style="text-align: center;">
             <asp:Label ID="BatteryTittle" CssClass="title" runat="server" Text="新增電池管理"></asp:Label>
         </div>
-    <div style="text-align: center">
-        <asp:Label Style="color: red;" ID="Label2" runat="server" Text="*為必填"></asp:Label>
-    </div>
-    <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
+        <div style="text-align: center">
+            <asp:Label Style="color: red;" ID="Label2" runat="server" Text="*為必填"></asp:Label>
+        </div>
+        <div style="border-bottom: 1px solid black; margin-bottom: 30px;"></div>
 
-    <div class="d-flex justify-content-between inputmarin">
-        <p style="color: red; display: inline">*</p>
-        <label for="ContentPlaceHolder1_Text_Battery_ID">電池編號</label>
-        <asp:TextBox ID="Text_Battery_ID" CssClass="inputsize" runat="server" MaxLength="50"></asp:TextBox>
-    </div>
-    <div class="d-flex justify-content-between inputmarin">
-        <p style="color: red; display: inline">*</p>
-        <label for="ContentPlaceHolder1_Text_Status">使用狀況</label>
-        <asp:TextBox ID="Text_Status" CssClass="inputsize" runat="server" MaxLength="10"></asp:TextBox>
-    </div>
-    <div class="d-flex justify-content-between inputmarin">
-        <label for="ContentPlaceHolder1_Text_StopReason">故障原因</label>
-        <asp:TextBox ID="Text_StopReason" CssClass="inputsize" runat="server" MaxLength="50"></asp:TextBox>
-    </div>
-    <div class="d-flex justify-content-center buttonArea">
-        <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
-        <asp:Button ID="Btm_Cancel" runat="server" Text="取消" OnClick="Btm_Cancel_Click" />
-    </div>
-    <asp:Label ID="ltMsg" runat="server" Text="新增成功" CssClass="errMsg" Visible="false"></asp:Label>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_Text_Battery_ID">電池編號</label>
+            <p style="color: red; display: inline">*</p>
+            <asp:TextBox ID="Text_Battery_ID" CssClass="inputsize" runat="server" MaxLength="50"></asp:TextBox>
+        </div>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_DropDownList_Status">使用狀態</label>
+            <p style="color: red; display: inline">*</p>
+            <asp:DropDownList ID="DropDownList_Status" CssClass="inputsize" runat="server">
+                <asp:ListItem Text="啟用" Value="啟用"></asp:ListItem>
+                <asp:ListItem Text="停用" Value="停用"></asp:ListItem>
+                <asp:ListItem Text="故障" Value="故障"></asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div class="d-flex justify-content-between inputmarin">
+            <label for="ContentPlaceHolder1_Text_StopReason">故障原因</label>
+            <asp:TextBox ID="Text_StopReason" CssClass="inputsize" runat="server" MaxLength="50"></asp:TextBox>
+        </div>
+        <div class="d-flex justify-content-center buttonArea">
+            <asp:Button ID="Btn_Create" CssClass="Btn_Create" runat="server" Text="建立" OnClick="Btn_Create_Click" />
+            <asp:Button ID="Btm_Cancel" runat="server" Text="取消" OnClick="Btm_Cancel_Click" />
+        </div>
+        <asp:Label ID="ltMsg" runat="server" Text="新增成功" CssClass="errMsg" Visible="false"></asp:Label>
     </div>
 </asp:Content>

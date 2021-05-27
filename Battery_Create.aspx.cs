@@ -37,7 +37,7 @@ namespace Yubay_Drone_team
 
 
                     this.Text_Battery_ID.Text = dt.Rows[0]["Battery_ID"].ToString();
-                    this.Text_Status.Text = dt.Rows[0]["status"].ToString();
+                    this.DropDownList_Status.SelectedValue = dt.Rows[0]["status"].ToString();
                     this.Text_StopReason.Text = dt.Rows[0]["stopReason"].ToString();
 
                     this.BatteryTittle.Text = "修改無人機維修紀錄";
@@ -66,9 +66,9 @@ namespace Yubay_Drone_team
 
             //設定欄位變數
             string battery_ID = this.Text_Battery_ID.Text;
-            string status = this.Text_Status.Text;
+            string status = this.DropDownList_Status.SelectedValue;
 
-            
+
             //判定battery_ID是否為空值
             if (!string.IsNullOrEmpty(battery_ID))
             {

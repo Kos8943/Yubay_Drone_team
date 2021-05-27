@@ -17,7 +17,7 @@ namespace Yubay_Drone_team.Models
 
         public DateTime StopDate { get; set; }
 
-        public DateTime SendDate { get; set; }
+        public string SendDate { get; set; }
 
         public string FixVendor { get; set; }
 
