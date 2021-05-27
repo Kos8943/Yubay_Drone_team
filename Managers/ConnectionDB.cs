@@ -31,7 +31,6 @@ namespace Yubay_Drone_team.Managers
                    new SqlParameter("@Status",Model.Status),
                    new SqlParameter("@StopReason", Model.StopReason),
                    new SqlParameter("@Operator", Model.Operator)
-
                 };
 
             this.ExecuteNonQuery(queryString, parameters);

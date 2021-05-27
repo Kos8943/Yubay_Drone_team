@@ -48,7 +48,7 @@
                             <td><%# Eval("Drone_ID") %></td>
                             <td><%# Eval("FixChange") %></td>
                             <td><%#Convert.ToDateTime(Eval("StopDate")).ToShortDateString() %></td>
-                            <td><%# Eval("SendDate") %></td>
+                            <td><%# Eval("SendDate","{0:yyyy-MM-dd}") %></td>
                             <td><%# Eval("FixVendor") %></td>
                             <td><%# Eval("StopReason") %></td>
                             <td><%# Eval("Remarks") %></td>
