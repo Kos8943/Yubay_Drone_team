@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.UI.WebControls;
 using Yubay_Drone_team.Helpers;
 using Yubay_Drone_team.Managers;
-using Yubay_Drone_team.Models;
 
 namespace Yubay_Drone_team
 {
@@ -62,33 +61,27 @@ namespace Yubay_Drone_team
         {
             //抓取按鈕CommandName的值
             string cmdName = e.CommandName;
-
             //抓取按鈕CommandArgument的值,
-            //因CommandArgument的值為Sid及Drone_ID組成故用Split(',')做切割
-            DroneMedel Model = new DroneMedel();
+            string cmdArguSid = e.CommandArgument.ToString();
+
             ConnectionDB DBbase = new ConnectionDB();
-            Model.Sid = Convert.ToInt32(e.CommandArgument.ToString().Split(',')[0].Trim());
 
 
             if ("DeleItem" == cmdName)
             {
-                Model.Drone_ID = e.CommandArgument.ToString().Split(',')[1].Trim();
                 //取得session
                 LoginInfo loginInfo = HttpContext.Current.Session["IsLogined"] as LoginInfo;
                 //取得session的使用者名稱
-                string username = loginInfo.UserName;
-
-                //取得的使用者名稱代入Deleter
-                Model.Deleter = username.ToString();
+                string UserName = loginInfo.UserName;
 
                 //把值放進Method進行刪除
-                DBbase.DelectDroneDetail(Model);
-        
+                DBbase.DelectDroneDetail(Convert.ToInt32(cmdArguSid), UserName);
+
             }
             if ("UpDateItem" == cmdName)
             {
                 //準備轉跳至修改無人機管理頁面,並將SID值用URL帶過去
-                string targetUrl = "~/Drone_Create.aspx?Sid=" + Model.Sid;
+                string targetUrl = "~/Drone_Create.aspx?Sid=" + cmdArguSid;
 
                 Response.Redirect(targetUrl);
             }

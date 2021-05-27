@@ -164,7 +164,7 @@ namespace Yubay_Drone_team.Managers
         #endregion
 
         #region 刪除無人機資料的Method
-        public void DelectDroneDetail(DroneMedel Model)
+        public void DelectDroneDetail(int Sid, string UserName)
         {
 
             //使用的SQL語法
@@ -176,9 +176,9 @@ namespace Yubay_Drone_team.Managers
             List<SqlParameter> parameters = new List<SqlParameter>()
 
                 {
-                   new SqlParameter("@Sid", Model.Sid),
-                   new SqlParameter("@Deleter", Model.Deleter),
-                   new SqlParameter("@DeleteDate",DateTime.Now)
+                   new SqlParameter("@Sid", Sid),
+                   new SqlParameter("@Deleter", $"{UserName}"),
+                   new SqlParameter("@DeleteDate", DateTime.Now)
                 };
 
             this.ExecuteNonQuery(queryString, parameters);
