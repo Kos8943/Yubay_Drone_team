@@ -42,15 +42,13 @@ namespace Yubay_Drone_team
                     //把值放進相應欄位
                     DataTable dt = connectionDB.ReadSingleFixed(Sid);
                     DateTime stopDate = (DateTime)dt.Rows[0]["StopDate"];
-                    DateTime sendDate = (DateTime)dt.Rows[0]["SendDate"];
-
                     string oldDrone_ID = dt.Rows[0]["Drone_ID"].ToString();
 
                     this.DropDownList_Drone.Items.Insert(0, new ListItem(oldDrone_ID, oldDrone_ID));
                     this.DropDownList_Drone.SelectedValue = dt.Rows[0]["Drone_ID"].ToString();
                     this.Text_FixChange.Text = dt.Rows[0]["FixChange"].ToString();
                     this.Text_StopDate.Text = stopDate.ToString("yyyy-MM-dd");
-                    this.Text_SendDate.Text = sendDate.ToString("yyyy-MM-dd");
+                    this.Text_SendDate.Text = dt.Rows[0]["SendDate"].ToString();
                     this.Text_FixVendor.Text = dt.Rows[0]["FixVendor"].ToString();
                     this.Text_StopReason.Text = dt.Rows[0]["StopReason"].ToString();
                     this.Text_Remarks.Text = dt.Rows[0]["Remarks"].ToString();
