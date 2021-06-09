@@ -30,6 +30,8 @@ namespace Yubay_Drone_team
             this.Text_Farm_Address.Text = data.Rows[0]["Farm_Address"].ToString();
             this.CreateCustomer.Text = "修改客戶資料";
             this.Btn_Create.Text = "修改";
+            this.Text_Name.Enabled = false;
+            this.Text_Name.BackColor = System.Drawing.Color.LightGray;
 
         }
         protected void Page_Load(object sender, EventArgs e)
