@@ -30,7 +30,7 @@ namespace Yubay_Drone_team.Helpers
         /// <summary> 嘗試登入 </summary>
         /// <param name="account"></param>
         /// <param name="pwd"></param>
-        /// 
+    
         public static bool TryLogin(string account, string pwd)
         {
             if (LoginHelper.HasLogined())

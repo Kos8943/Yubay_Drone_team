@@ -129,7 +129,7 @@
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_Text_Deactive">停用原因</label>
-            <asp:TextBox ID="Text_Deactive" CssClass="inputsize" runat="server" MaxLength="20"></asp:TextBox>
+            <asp:TextBox ID="Text_Deactive" CssClass="inputsize" runat="server" MaxLength="25"></asp:TextBox>
         </div>
         <div class="d-flex justify-content-between inputmarin">
             <label for="ContentPlaceHolder1_DropDownList_Operator">負責人員</label>
@@ -141,7 +141,7 @@
            <a href="Drone_Detail.aspx" onclick="return confirm('是否取消新增/修改畫面，並轉跳至無人機管理畫面');" 
               type="button" class="btn">取消</a> 
         </div>
-        <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>    
+        <asp:Label ID="Label1" runat="server" Text="新增成功!" CssClass="errMsg" Visible="false"></asp:Label>  
         <%--<asp:Literal ID="Literal1" runat="server" Text="新增成功!"  Visible="false"></asp:Literal>--%>
     </div>
 

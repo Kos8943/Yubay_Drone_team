@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using Yubay_Drone_team.Models;
 using Yubay_Drone_team.Helpers;
 
@@ -56,38 +54,7 @@ namespace Yubay_Drone_team.Managers
 
             return dt;
 
-            //string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=Yubay_Drone; Integrated Security=true";
-            //建立連線
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    SqlCommand command = new SqlCommand(queryString, connection);
-            //    command.Parameters.AddWithValue("@Sid", Drone_ID);
-
-            //    try
-            //    {
-            //        //開始連線
-            //        connection.Open();
-
-            //        //從資料庫中讀取資料
-            //        SqlDataReader reader = command.ExecuteReader();
-
-            //        //在記憶體中創新的空表
-            //        DataTable dt = new DataTable();
-
-            //        //把值塞進空表
-            //        dt.Load(reader);
-
-            //        reader.Close();
-
-            //        //回傳dt
-            //        return dt;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine(ex.Message);
-            //        return null;
-            //    }
-            //}
+      
 
         }
         #endregion
@@ -217,40 +184,7 @@ namespace Yubay_Drone_team.Managers
 
             return dt;
 
-            //建立連線
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    //轉譯成SQL看得懂的語法
-            //    SqlCommand command = new SqlCommand(queryString, connection);
-            //    command.Parameters.AddWithValue("@Sid", sid);
-
-            //    try
-            //    {
-            //        //開始連線
-            //        connection.Open();
-
-            //        //從資料庫中讀取資料
-            //        SqlDataReader reader = command.ExecuteReader();
-
-            //        //在記憶體中創新的空表
-            //        DataTable dt = new DataTable();
-
-            //        //把值塞進空表
-            //        dt.Load(reader);
-
-            //        reader.Close();
-
-            //        //回傳dt
-            //        return dt;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine(ex.Message);
-            //        return null;
-            //    }
-
-
-            //}
+         
         }
         #endregion
 
@@ -326,42 +260,7 @@ namespace Yubay_Drone_team.Managers
 
             return dt;
 
-            //建立連線
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    //轉譯成SQL看得懂的語法
-            //    SqlCommand command = new SqlCommand(queryString, connection);
-
-
-            //    try
-            //    {
-            //        //開始連線
-            //        connection.Open();
-
-            //        //從資料庫中讀取資料
-            //        SqlDataReader reader = command.ExecuteReader();
-
-            //        //在記憶體中創新的空表
-            //        DataTable dt = new DataTable();
-
-            //        //把值塞進空表
-            //        dt.Load(reader);
-
-
-            //        //關閉資料庫連線
-            //        reader.Close();
-
-            //        //回傳dt
-            //        return dt;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine(ex.Message);
-            //        return null;
-            //    }
-
-
-            //}
+      
         }
         #endregion
 

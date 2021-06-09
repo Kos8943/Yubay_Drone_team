@@ -28,7 +28,6 @@ namespace Yubay_Drone_team
             this.Text_Crop.Text = data.Rows[0]["Crop"].ToString();
             this.Text_Area.Text = data.Rows[0]["Area"].ToString();
             this.Text_Farm_Address.Text = data.Rows[0]["Farm_Address"].ToString();
-
             this.CreateCustomer.Text = "修改客戶資料";
             this.Btn_Create.Text = "修改";
 
@@ -63,14 +62,14 @@ namespace Yubay_Drone_team
           
 
             //if判斷式是否重複或修改是否成功
-            if (this.Text_Name.Text != string.Empty && this.Text_Address.Text != string.Empty && this.Text_Phone.Text != string.Empty)
+            if (!string.IsNullOrWhiteSpace(this.Text_Name.Text)  && !string.IsNullOrWhiteSpace(this.Text_Address.Text)  && !string.IsNullOrWhiteSpace(this.Text_Phone.Text))
             {
 
                 if (string.IsNullOrEmpty(querryString))
                 {
                     ConnectionDB.CreateCustomer(model);
-                    this.Label1.Visible = true;
                     this.Label1.Text = "新增成功";
+                    this.Label1.Visible = true;
                 }
                 else
                 {
@@ -101,7 +100,6 @@ namespace Yubay_Drone_team
             }
 
         }
-
         //轉跳取消頁面
         protected void Btn_Cancel_Click(object sender, EventArgs e)
         {
