@@ -35,7 +35,7 @@ namespace Yubay_Drone_team
                     //把值放進相應欄位
                     DataTable dt = connectionDB.ReadSingleBattery(Sid);
 
-
+                    this.Text_Battery_ID.Enabled = false;
                     this.Text_Battery_ID.Text = dt.Rows[0]["Battery_ID"].ToString();
                     this.DropDownList_Status.SelectedValue = dt.Rows[0]["status"].ToString();
                     this.Text_StopReason.Text = dt.Rows[0]["stopReason"].ToString();
